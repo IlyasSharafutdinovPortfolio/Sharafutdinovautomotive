@@ -113,60 +113,92 @@ body.menu-open .logo-btn .logo-inner{
 .side:hover{color:var(--pink)}
 
 /* contact section */
-.contact{background:var(--black);color:var(--white);display:flex;flex-direction:column;justify-content:space-between;padding:clamp(100px,12vh,120px) max(7vw,28px) calc(env(safe-area-inset-bottom,0px) + 30px)}
-.contact-grid{display:grid;grid-template-columns:1fr 1.05fr;gap:clamp(32px,6vw,96px);align-items:center;width:100%;margin-bottom:60px}
+.contact{
+  background:var(--black);
+  color:var(--white);
+  display:flex;
+  flex-direction:column;
+  justify-content:center;
+  align-items:center;
+  padding:90px max(7vw,28px) calc(env(safe-area-inset-bottom,0px) + 20px);
+  position:relative;
+}
+.contact-grid{
+  display:grid;
+  grid-template-columns:1fr 1.05fr;
+  gap:clamp(24px,5vw,80px);
+  align-items:center;
+  width:100%;
+  margin-bottom:24px;
+}
 .contact-grid>*{position:relative;z-index:1}
 .contact h2{font-family:var(--display);font-style:italic;font-weight:800;text-transform:uppercase;font-size:clamp(3.2rem,8vw,7rem);line-height:.92}
 .contact .lead{margin-top:20px;max-width:36ch;font-size:1.1rem;line-height:1.55;color:rgba(255,255,255,.65)}
-.info{margin-top:42px;display:grid;gap:20px}
+.info{margin-top:32px;display:grid;gap:16px}
 .info div{padding-left:16px;border-left:3px solid var(--lav)}
 .info div:nth-child(2){border-color:var(--pink)}
 .info dt{font-size:.9rem;color:rgba(255,255,255,.5)}
-.info dd{font-family:var(--display);font-size:1.6rem;font-weight:700;letter-spacing:.02em}
+.info dd{font-family:var(--display);font-size:1.5rem;font-weight:700;letter-spacing:.02em}
 .info a{text-decoration:none}.info a:hover{color:var(--pink)}
 
-form{background:#0f0f0f;color:var(--white);padding:clamp(28px,3.6vw,48px);display:grid;gap:18px}
-form h3{font-family:var(--display);font-style:italic;font-weight:800;text-transform:uppercase;font-size:2.2rem;line-height:1}
-label{display:grid;gap:6px;font-size:.9rem;color:rgba(255,255,255,.65)}
-input,select,textarea{font:inherit;font-size:1.05rem;color:var(--white);background:rgba(255,255,255,.06);border:0;border-bottom:2px solid rgba(255,255,255,.25);padding:11px 12px;border-radius:0;transition:border-color .2s,background .2s}
+form{
+  background:#0f0f0f;
+  color:var(--white);
+  padding:clamp(20px,2.8vw,36px);
+  display:grid;
+  gap:14px;
+}
+form h3{font-family:var(--display);font-style:italic;font-weight:800;text-transform:uppercase;font-size:2rem;line-height:1}
+label{display:grid;gap:4px;font-size:.85rem;color:rgba(255,255,255,.65)}
+input,select,textarea{font:inherit;font-size:1rem;color:var(--white);background:rgba(255,255,255,.06);border:0;border-bottom:2px solid rgba(255,255,255,.25);padding:9px 10px;border-radius:0;transition:border-color .2s,background .2s}
 select option{color:#000}
-textarea{resize:vertical;min-height:84px}
+textarea{resize:vertical;min-height:70px}
 input:focus,select:focus,textarea:focus{outline:none;border-color:var(--pink);background:rgba(244,163,201,.08)}
 
-.legal-agree{display:flex;align-items:flex-start;gap:10px;font-size:.8rem;color:rgba(255,255,255,.5);margin-top:4px}
-.legal-agree input[type="checkbox"]{accent-color:var(--pink);margin-top:3px;cursor:pointer}
+.legal-agree{display:flex;align-items:flex-start;gap:10px;font-size:.78rem;color:rgba(255,255,255,.5);margin-top:2px}
+.legal-agree input[type="checkbox"]{accent-color:var(--pink);margin-top:2px;cursor:pointer}
 .legal-agree a{color:var(--white);text-decoration:underline}
 
-button.send{--cut:14px;position:relative;margin-top:6px;font-family:var(--display);font-weight:800;font-style:italic;text-transform:uppercase;font-size:1.3rem;letter-spacing:.06em;
-  padding:16px 30px;border:0;background:var(--lav);color:var(--black);cursor:pointer;transition:background .25s,letter-spacing .25s}
+button.send{--cut:14px;position:relative;margin-top:4px;font-family:var(--display);font-weight:800;font-style:italic;text-transform:uppercase;font-size:1.2rem;letter-spacing:.06em;
+  padding:14px 24px;border:0;background:var(--lav);color:var(--black);cursor:pointer;transition:background .25s,letter-spacing .25s}
 button.send:hover{background:var(--pink);letter-spacing:.12em}
 .ok{display:none;color:var(--pink);font-weight:600}
 form.sent .ok{display:block}
 form.sent button.send{opacity:.5;pointer-events:none}
 
 /* Footer Section */
-footer.site-footer{width:100%;border-top:1px solid rgba(255,255,255,0.1);padding-top:24px;display:flex;flex-direction:column;gap:18px;font-size:.85rem;color:rgba(255,255,255,.5)}
-.footer-top{display:flex;justify-content:space-between;align-items:flex-start;flex-wrap:wrap;gap:20px}
+footer.site-footer{
+  width:100%;
+  border-top:1px solid rgba(255,255,255,0.1);
+  padding-top:16px;
+  display:flex;
+  flex-direction:column;
+  gap:12px;
+  font-size:.82rem;
+  color:rgba(255,255,255,.5);
+}
+.footer-top{display:flex;justify-content:space-between;align-items:flex-start;flex-wrap:wrap;gap:16px}
 .footer-contacts{display:flex;gap:24px;flex-wrap:wrap}
 .footer-contacts div dt{font-size:0.75rem;text-transform:uppercase;letter-spacing:0.05em;color:rgba(255,255,255,.35);margin-bottom:2px}
 .footer-contacts div dd{font-weight:500;color:var(--white)}
 .footer-contacts a{text-decoration:none;transition:color .2s}
 .footer-contacts a:hover{color:var(--pink)}
-.footer-links{display:flex;gap:20px;flex-wrap:wrap}
+.footer-links{display:flex;gap:16px;flex-wrap:wrap}
 .footer-links a{color:rgba(255,255,255,.6);text-decoration:none;transition:color .2s}
 .footer-links a:hover{color:var(--pink)}
-.footer-bottom{display:flex;justify-content:space-between;align-items:center;font-size:0.8rem;color:rgba(255,255,255,.3)}
+.footer-bottom{display:flex;justify-content:space-between;align-items:center;font-size:0.78rem;color:rgba(255,255,255,.3)}
 
 @media (max-width:860px){
   html{scroll-snap-type:none}
-  .contact-grid{grid-template-columns:1fr;align-items:start;margin-bottom:40px}
+  .contact{padding-top:100px;justify-content:flex-start}
+  .contact-grid{grid-template-columns:1fr;align-items:start;margin-bottom:30px}
   .brand{right:16px;font-size:1.1rem}.brand::before{width:18px;margin-right:8px}
   .burger{left:16px}
   .logo-btn{top:calc(env(safe-area-inset-top,0px) + 12px);height:55px}
   .logo-front img{max-height:55px}
   .logo-back{font-size:1.4rem}
-  .footer-top{flex-direction:column;gap:16px}
-  .footer-contacts{flex-direction:column;gap:12px}
+  .footer-top{flex-direction:column;gap:14px}
+  .footer-contacts{flex-direction:column;gap:10px}
 }
 </style>
 </head>
