@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-<title>Sharafutdinov</title>
+<title>Sharafutdinov | Hypercars</title>
 
 <!-- SEO & Search Engine Indexing -->
 <meta name="description" content="Sharafutdinov — Exclusive limited series hypercars. Request access for private viewings and reservations.">
@@ -82,7 +82,6 @@ body.menu-open .menu{clip-path:polygon(0 0,130% 0,100% 100%,0 100%);visibility:v
   transition:transform 0.5s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
-/* Horizontal Y-axis flip */
 .logo-btn:hover .logo-inner,
 body.menu-open .logo-btn .logo-inner{
   transform:rotateY(180deg);
@@ -116,8 +115,41 @@ body.menu-open .logo-btn .logo-inner{
   text-shadow:0 2px 8px rgba(0,0,0,0.8);
 }
 
-.brand{position:fixed;z-index:15;top:calc(env(safe-area-inset-top,0px) + 30px);right:28px;font-family:var(--display);font-weight:700;font-size:1.3rem;letter-spacing:.14em;text-transform:uppercase}
-.brand::before{content:"";display:inline-block;width:34px;height:2px;background:var(--pink);vertical-align:middle;margin-right:12px}
+/* Top Header & Language Switcher */
+.header-right {
+  position:fixed;
+  z-index:15;
+  top:calc(env(safe-area-inset-top,0px) + 26px);
+  right:28px;
+  display:flex;
+  align-items:center;
+  gap:16px;
+}
+.brand{font-family:var(--display);font-weight:700;font-size:1.3rem;letter-spacing:.14em;text-transform:uppercase}
+.brand::before{content:"";display:inline-block;width:24px;height:2px;background:var(--pink);vertical-align:middle;margin-right:10px}
+
+.lang-switch {
+  display:flex;
+  gap:6px;
+  font-size:0.8rem;
+  font-weight:600;
+  letter-spacing:0.05em;
+  background:rgba(255,255,255,0.06);
+  padding:4px 8px;
+  border-radius:4px;
+}
+.lang-btn {
+  background:none;
+  border:none;
+  color:rgba(255,255,255,0.4);
+  cursor:pointer;
+  padding:2px 4px;
+  transition:color 0.2s;
+  font-family:inherit;
+}
+.lang-btn:hover, .lang-btn.active {
+  color:var(--pink);
+}
 
 /* hero */
 .hero{display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;padding:120px 24px 80px;overflow:hidden;
@@ -209,9 +241,10 @@ footer.site-footer{
 .footer-bottom{display:flex;justify-content:space-between;align-items:center;font-size:0.78rem;color:rgba(255,255,255,.3)}
 
 @media (max-width:860px){
+  .header-right{top:calc(env(safe-area-inset-top,0px) + 16px);right:16px;gap:8px}
+  .brand{font-size:1.1rem}.brand::before{width:14px;margin-right:6px}
   .contact{padding-top:80px;justify-content:flex-start}
   .contact-grid{grid-template-columns:1fr;align-items:start;margin-bottom:30px}
-  .brand{right:16px;font-size:1.1rem}.brand::before{width:18px;margin-right:8px}
   .burger{left:16px}
   .logo-btn{top:calc(env(safe-area-inset-top,0px) + 12px);height:40px}
   .logo-front img{max-height:40px}
@@ -239,52 +272,65 @@ footer.site-footer{
 
 <div class="menu" id="menu">
   <nav>
-    <a href="#home">Home</a>
-    <a href="#about">The car</a>
-    <a href="#contact">Contact</a>
-    <a href="#request">Request access</a>
+    <a href="#home" data-key="nav_home">Home</a>
+    <a href="#about" data-key="nav_car">The car</a>
+    <a href="#contact" data-key="nav_contact">Contact</a>
+    <a href="#request" data-key="nav_request">Request access</a>
   </nav>
   <small>Sharafutdinovauto@gmail.com &nbsp;|&nbsp; +1 000 000 0000</small>
 </div>
 
-<div class="brand">Sharafutdinov</div>
+<!-- Header Right: Brand & Language Switcher -->
+<div class="header-right">
+  <div class="lang-switch">
+    <button class="lang-btn active" onclick="setLang('en')">EN</button>
+    <button class="lang-btn" onclick="setLang('de')">DE</button>
+    <button class="lang-btn" onclick="setLang('it')">IT</button>
+  </div>
+  <div class="brand">Sharafutdinov</div>
+</div>
 
 <section class="slide hero" id="home">
-  <div class="photo" id="about"><span>Place for the car photo</span></div>
+  <div class="photo" id="about"><span data-key="photo_placeholder">Place for the car photo</span></div>
   <h1 class="reveal">2028...</h1>
-  <span class="side l" style="pointer-events:none">Limited series hypercar</span>
-  <a class="side r" href="#contact">Request access</a>
+  <span class="side l" style="pointer-events:none" data-key="hero_tagline">Limited series hypercar</span>
+  <a class="side r" href="#contact" data-key="hero_btn">Request access</a>
 </section>
 
 <section class="slide contact" id="contact">
   <div class="contact-grid">
     <div>
-      <h2>Be first<br>in line</h2>
-      <p class="lead">Tell us about yourself and we will get back to you with details about the car and how to reserve your place.</p>
+      <h2 data-key="contact_title">Be first<br>in line</h2>
+      <p class="lead" data-key="contact_lead">Tell us about yourself and we will get back to you with details about the car and how to reserve your place.</p>
       <dl class="info">
-        <div><dt>Email</dt><dd><a href="mailto:Sharafutdinovauto@gmail.com">Sharafutdinovauto@gmail.com</a></dd></div>
-        <div><dt>Phone</dt><dd><a href="tel:+10000000000">+1 000 000 0000</a></dd></div>
-        <div><dt>Studio</dt><dd>00 Street Name, City, Country</dd></div>
+        <div><dt data-key="info_email">Email</dt><dd><a href="mailto:Sharafutdinovauto@gmail.com">Sharafutdinovauto@gmail.com</a></dd></div>
+        <div><dt data-key="info_phone">Phone</dt><dd><a href="tel:+10000000000">+1 000 000 0000</a></dd></div>
+        <div><dt data-key="info_studio">Studio</dt><dd>00 Street Name, City, Country</dd></div>
       </dl>
     </div>
     <form id="request" novalidate>
-      <h3>Request access</h3>
-      <label>Full name<input type="text" name="name" autocomplete="name" required></label>
-      <label>Email<input type="email" name="email" autocomplete="email" required></label>
-      <label>Phone<input type="tel" name="phone" autocomplete="tel"></label>
-      <label>I am interested in
-        <select name="topic"><option>Reserving a car</option><option>Private viewing</option><option>Press and partnerships</option><option>Something else</option></select>
+      <h3 data-key="form_title">Request access</h3>
+      <label><span data-key="form_name">Full name</span><input type="text" name="name" autocomplete="name" required></label>
+      <label><span data-key="form_email">Email</span><input type="email" name="email" autocomplete="email" required></label>
+      <label><span data-key="form_phone">Phone</span><input type="tel" name="phone" autocomplete="tel"></label>
+      <label><span data-key="form_topic">I am interested in</span>
+        <select name="topic" id="topicSelect">
+          <option value="reserve">Reserving a car</option>
+          <option value="viewing">Private viewing</option>
+          <option value="press">Press and partnerships</option>
+          <option value="other">Something else</option>
+        </select>
       </label>
-      <label>Message<textarea name="message"></textarea></label>
+      <label><span data-key="form_msg">Message</span><textarea name="message"></textarea></label>
 
       <!-- LEGAL CONSENT -->
       <div class="legal-agree">
         <input type="checkbox" id="consent" required>
-        <label for="consent">I agree to the <a href="/privacy-policy" target="_blank">Privacy Policy</a> and <a href="/terms" target="_blank">Terms & Conditions</a>.</label>
+        <label for="consent"><span data-key="legal_agree">I agree to the</span> <a href="/privacy-policy" target="_blank" data-key="privacy">Privacy Policy</a> <span data-key="and">and</span> <a href="/terms" target="_blank" data-key="terms">Terms & Conditions</a>.</label>
       </div>
 
-      <button class="send chamfer" type="submit">Send request</button>
-      <p class="ok" role="status">Thank you. We will be in touch soon.</p>
+      <button class="send chamfer" type="submit" data-key="form_send">Send request</button>
+      <p class="ok" role="status" data-key="form_ok">Thank you. We will be in touch soon.</p>
     </form>
   </div>
 
@@ -293,33 +339,92 @@ footer.site-footer{
     <div class="footer-top">
       <dl class="footer-contacts">
         <div>
-          <dt>Email</dt>
+          <dt data-key="info_email">Email</dt>
           <dd><a href="mailto:Sharafutdinovauto@gmail.com">Sharafutdinovauto@gmail.com</a></dd>
         </div>
         <div>
-          <dt>Phone</dt>
+          <dt data-key="info_phone">Phone</dt>
           <dd><a href="tel:+10000000000">+1 000 000 0000</a></dd>
         </div>
         <div>
-          <dt>Studio</dt>
+          <dt data-key="info_studio">Studio</dt>
           <dd>00 Street Name, City, Country</dd>
         </div>
       </dl>
 
       <nav class="footer-links">
-        <a href="/privacy-policy">Privacy Policy</a>
-        <a href="/terms">Terms & Conditions</a>
-        <a href="/cookies">Cookie Policy</a>
+        <a href="/privacy-policy" data-key="privacy">Privacy Policy</a>
+        <a href="/terms" data-key="terms">Terms & Conditions</a>
+        <a href="/cookies" data-key="cookies">Cookie Policy</a>
       </nav>
     </div>
 
     <div class="footer-bottom">
-      <span>© 2026 Sharafutdinov Hypercars. All rights reserved.</span>
+      <span>© 2026 Sharafutdinov Hypercars. <span data-key="rights">All rights reserved.</span></span>
     </div>
   </footer>
 </section>
 
 <script>
+// --- MULTI-LANGUAGE SYSTEM ---
+const translations = {
+  en: {
+    nav_home: "Home", nav_car: "The car", nav_contact: "Contact", nav_request: "Request access",
+    photo_placeholder: "Place for the car photo", hero_tagline: "Limited series hypercar", hero_btn: "Request access",
+    contact_title: "Be first<br>in line", contact_lead: "Tell us about yourself and we will get back to you with details about the car and how to reserve your place.",
+    info_email: "Email", info_phone: "Phone", info_studio: "Studio",
+    form_title: "Request access", form_name: "Full name", form_email: "Email", form_phone: "Phone",
+    form_topic: "I am interested in", form_msg: "Message", legal_agree: "I agree to the",
+    privacy: "Privacy Policy", and: "and", terms: "Terms & Conditions", cookies: "Cookie Policy",
+    form_send: "Send request", form_ok: "Thank you. We will be in touch soon.", rights: "All rights reserved.",
+    opt_reserve: "Reserving a car", opt_viewing: "Private viewing", opt_press: "Press and partnerships", opt_other: "Something else"
+  },
+  de: {
+    nav_home: "Startseite", nav_car: "Das Fahrzeug", nav_contact: "Kontakt", nav_request: "Zugang anfordern",
+    photo_placeholder: "Platz für das Fahrzeugfoto", hero_tagline: "Limitierter Hypercar", hero_btn: "Zugang anfordern",
+    contact_title: "Seien Sie<br>die Ersten", contact_lead: "Erzählen Sie uns von sich, und wir melden uns mit Details zum Fahrzeug und zur Reservierung.",
+    info_email: "E-Mail", info_phone: "Telefon", info_studio: "Studio",
+    form_title: "Zugang anfordern", form_name: "Vollständiger Name", form_email: "E-Mail", form_phone: "Telefon",
+    form_topic: "Ich interessiere mich für", form_msg: "Nachricht", legal_agree: "Ich stimme den",
+    privacy: "Datenschutzbestimmungen", and: "und", terms: "AGB", cookies: "Cookie-Richtlinie",
+    form_send: "Anfrage senden", form_ok: "Vielen Dank. Wir melden uns Kürze.", rights: "Alle Rechte vorbehalten.",
+    opt_reserve: "Fahrzeug reservieren", opt_viewing: "Private Besichtigung", opt_press: "Presse & Partnerschaften", opt_other: "Sonstiges"
+  },
+  it: {
+    nav_home: "Home", nav_car: "L'autovettura", nav_contact: "Contatti", nav_request: "Richiedi accesso",
+    photo_placeholder: "Spazio per la foto della vettura", hero_tagline: "Hypercar a tiratura limitata", hero_btn: "Richiedi accesso",
+    contact_title: "Sii il primo<br>in lista", contact_lead: "Raccontaci di te e ti ricontatteremo con tutti i dettagli sulla vettura e su come riservare il tuo posto.",
+    info_email: "Email", info_phone: "Telefono", info_studio: "Studio",
+    form_title: "Richiedi accesso", form_name: "Nome e cognome", form_email: "Email", form_phone: "Telefono",
+    form_topic: "Sono interessato a", form_msg: "Messaggio", legal_agree: "Accetto la",
+    privacy: "Informativa sulla Privacy", and: "e i", terms: "Termini e Condizioni", cookies: "Informativa sui Cookie",
+    form_send: "Invia richiesta", form_ok: "Grazie. Ti contatteremo a breve.", rights: "Tutti i diritti riservati.",
+    opt_reserve: "Prenotare un'auto", opt_viewing: "Visione privata", opt_press: "Stampa e partnership", opt_other: "Altro"
+  }
+};
+
+function setLang(lang) {
+  document.querySelectorAll('.lang-btn').forEach(btn => btn.classList.toggle('active', btn.textContent.toLowerCase() === lang));
+  
+  // Translate text content
+  document.querySelectorAll('[data-key]').forEach(el => {
+    const key = el.getAttribute('data-key');
+    if (translations[lang] && translations[lang][key]) {
+      el.innerHTML = translations[lang][key];
+    }
+  });
+
+  // Translate dropdown options
+  const select = document.getElementById('topicSelect');
+  if(select) {
+    select.options[0].text = translations[lang].opt_reserve;
+    select.options[1].text = translations[lang].opt_viewing;
+    select.options[2].text = translations[lang].opt_press;
+    select.options[3].text = translations[lang].opt_other;
+  }
+}
+
+// --- MENU TOGGLE ---
 const b=document.getElementById('burger');
 const logoBtn=document.getElementById('logoBtn');
 
