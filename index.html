@@ -38,7 +38,7 @@ body.menu-open .menu{clip-path:polygon(0 0,130% 0,100% 100%,0 100%);visibility:v
 .menu nav a:hover{color:var(--white);transform:translateX(18px) skewX(-6deg)}
 .menu small{position:relative;margin-top:36px;font-size:1rem;color:rgba(0,0,0,.7)}
 
-/* Interactive Logo / Menu Button - аккуратный премиум размер */
+/* Interactive Logo / Menu Button */
 .logo-btn{
   position:fixed;
   z-index:25;
@@ -50,31 +50,58 @@ body.menu-open .menu{clip-path:polygon(0 0,130% 0,100% 100%,0 100%);visibility:v
   cursor:pointer;
   padding:0;
   perspective:600px;
-  height:48px; /* Уменьшили контейнер с 80px до 48px */
+  height:48px;
   min-width:110px;
   display:flex;
   align-items:center;
   justify-content:center;
 }
 
+.logo-inner{
+  position:relative;
+  width:100%;
+  height:100%;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  transform-style:preserve-3d;
+  transition:transform 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* Поворот по оси Y */
+.logo-btn:hover .logo-inner,
+body.menu-open .logo-btn .logo-inner{
+  transform:rotateY(180deg);
+}
+
+.logo-front, .logo-back{
+  position:absolute;
+  backface-visibility:hidden;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  inset:0;
+}
+
 .logo-front img{
-  max-height:48px; /* Уменьшили высоту логотипа */
+  max-height:48px;
   width:auto;
   display:block;
   filter:drop-shadow(0 2px 6px rgba(0,0,0,0.4));
 }
 
 .logo-back{
-  transform:rotateX(180deg);
+  transform:rotateY(180deg);
   font-family:var(--display);
   font-style:italic;
   font-weight:800;
-  font-size:1.3rem; /* Сделали шрифт MENU пропорциональным (было 1.8rem) */
+  font-size:1.3rem;
   letter-spacing:0.12em;
   color:var(--pink);
   text-transform:uppercase;
   text-shadow:0 2px 8px rgba(0,0,0,0.8);
 }
+
 .brand{position:fixed;z-index:15;top:calc(env(safe-area-inset-top,0px) + 30px);right:28px;font-family:var(--display);font-weight:700;font-size:1.3rem;letter-spacing:.14em;text-transform:uppercase}
 .brand::before{content:"";display:inline-block;width:34px;height:2px;background:var(--pink);vertical-align:middle;margin-right:12px}
 
@@ -173,9 +200,9 @@ footer.site-footer{
   .contact-grid{grid-template-columns:1fr;align-items:start;margin-bottom:30px}
   .brand{right:16px;font-size:1.1rem}.brand::before{width:18px;margin-right:8px}
   .burger{left:16px}
-  .logo-btn{top:calc(env(safe-area-inset-top,0px) + 12px);height:55px}
-  .logo-front img{max-height:55px}
-  .logo-back{font-size:1.4rem}
+  .logo-btn{top:calc(env(safe-area-inset-top,0px) + 12px);height:40px}
+  .logo-front img{max-height:40px}
+  .logo-back{font-size:1.1rem}
   .footer-top{flex-direction:column;gap:14px}
   .footer-contacts{flex-direction:column;gap:10px}
 }
