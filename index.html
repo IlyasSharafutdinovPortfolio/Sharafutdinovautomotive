@@ -38,7 +38,7 @@ body.menu-open .menu{clip-path:polygon(0 0,130% 0,100% 100%,0 100%);visibility:v
 .menu nav a:hover{color:var(--white);transform:translateX(18px) skewX(-6deg)}
 .menu small{position:relative;margin-top:36px;font-size:1rem;color:rgba(0,0,0,.7)}
 
-/* Top Header elements */
+/* Header & Logo */
 .logo-center{position:fixed;z-index:15;top:calc(env(safe-area-inset-top,0px) + 20px);left:50%;transform:translateX(-50%);display:flex;align-items:center;justify-content:center}
 .logo-center img{max-height:45px;width:auto;display:block}
 .logo-placeholder{padding:8px 16px;border:1px dashed rgba(255,255,255,0.3);font-size:0.8rem;letter-spacing:0.1em;text-transform:uppercase;color:rgba(255,255,255,0.5)}
@@ -48,8 +48,7 @@ body.menu-open .menu{clip-path:polygon(0 0,130% 0,100% 100%,0 100%);visibility:v
 
 /* hero */
 .hero{display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;padding:110px 24px 90px;overflow:hidden;
-  background:
-   radial-gradient(60% 45% at 50% 46%,rgba(185,164,232,.2),transparent 70%),var(--black)}
+  background:radial-gradient(60% 45% at 50% 46%,rgba(185,164,232,.2),transparent 70%),var(--black)}
 .photo{position:relative;width:min(1000px,90vw);aspect-ratio:16/8;display:flex;align-items:center;justify-content:center;background:#0c0c0c;overflow:hidden}
 .photo span{font-size:.95rem;color:rgba(255,255,255,.35)}
 .photo img{width:100%;height:100%;object-fit:cover;display:block}
@@ -60,10 +59,10 @@ body.menu-open .menu{clip-path:polygon(0 0,130% 0,100% 100%,0 100%);visibility:v
 .side.l{left:max(5vw,24px)}.side.r{right:max(5vw,24px)}
 .side:hover{color:var(--pink)}
 
-/* contact */
-.contact{background:var(--black);color:var(--white);display:grid;grid-template-columns:1fr 1.05fr;gap:clamp(32px,6vw,96px);align-items:center;overflow:hidden;
-  padding:clamp(100px,14vh,140px) max(7vw,28px) calc(env(safe-area-inset-bottom,0px) + 80px)}
-.contact>*{position:relative;z-index:1}
+/* contact section */
+.contact{background:var(--black);color:var(--white);display:flex;flex-direction:column;justify-content:space-between;padding:clamp(100px,12vh,120px) max(7vw,28px) calc(env(safe-area-inset-bottom,0px) + 30px)}
+.contact-grid{display:grid;grid-template-columns:1fr 1.05fr;gap:clamp(32px,6vw,96px);align-items:center;width:100%;margin-bottom:60px}
+.contact-grid>*{position:relative;z-index:1}
 .contact h2{font-family:var(--display);font-style:italic;font-weight:800;text-transform:uppercase;font-size:clamp(3.2rem,8vw,7rem);line-height:.92}
 .contact .lead{margin-top:20px;max-width:36ch;font-size:1.1rem;line-height:1.55;color:rgba(255,255,255,.65)}
 .info{margin-top:42px;display:grid;gap:20px}
@@ -72,6 +71,7 @@ body.menu-open .menu{clip-path:polygon(0 0,130% 0,100% 100%,0 100%);visibility:v
 .info dt{font-size:.9rem;color:rgba(255,255,255,.5)}
 .info dd{font-family:var(--display);font-size:1.6rem;font-weight:700;letter-spacing:.02em}
 .info a{text-decoration:none}.info a:hover{color:var(--pink)}
+
 form{background:#0f0f0f;color:var(--white);padding:clamp(28px,3.6vw,48px);display:grid;gap:18px}
 form h3{font-family:var(--display);font-style:italic;font-weight:800;text-transform:uppercase;font-size:2.2rem;line-height:1}
 label{display:grid;gap:6px;font-size:.9rem;color:rgba(255,255,255,.65)}
@@ -91,20 +91,28 @@ button.send:hover{background:var(--pink);letter-spacing:.12em}
 form.sent .ok{display:block}
 form.sent button.send{opacity:.5;pointer-events:none}
 
-/* Footer & Legal */
-.foot{position:absolute;left:max(7vw,28px);right:max(7vw,28px);bottom:calc(env(safe-area-inset-bottom,0px) + 18px);display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:12px;font-size:.82rem;color:rgba(255,255,255,.4)}
-.foot-links{display:flex;gap:16px}
-.foot-links a{color:rgba(255,255,255,.5);text-decoration:none;transition:color .2s}
-.foot-links a:hover{color:var(--pink)}
+/* Footer Section */
+footer.site-footer{width:100%;border-top:1px solid rgba(255,255,255,0.1);padding-top:24px;display:flex;flex-direction:column;gap:18px;font-size:.85rem;color:rgba(255,255,255,.5)}
+.footer-top{display:flex;justify-content:space-between;align-items:flex-start;flex-wrap:wrap;gap:20px}
+.footer-contacts{display:flex;gap:24px;flex-wrap:wrap}
+.footer-contacts div dt{font-size:0.75rem;text-transform:uppercase;letter-spacing:0.05em;color:rgba(255,255,255,.35);margin-bottom:2px}
+.footer-contacts div dd{font-weight:500;color:var(--white)}
+.footer-contacts a{text-decoration:none;transition:color .2s}
+.footer-contacts a:hover{color:var(--pink)}
+.footer-links{display:flex;gap:20px;flex-wrap:wrap}
+.footer-links a{color:rgba(255,255,255,.6);text-decoration:none;transition:color .2s}
+.footer-links a:hover{color:var(--pink)}
+.footer-bottom{display:flex;justify-content:space-between;align-items:center;font-size:0.8rem;color:rgba(255,255,255,.3)}
 
 @media (max-width:860px){
   html{scroll-snap-type:none}
-  .contact{grid-template-columns:1fr;align-items:start;padding-bottom:120px}
+  .contact-grid{grid-template-columns:1fr;align-items:start;margin-bottom:40px}
   .brand{right:16px;font-size:1.1rem}.brand::before{width:18px;margin-right:8px}
   .burger{left:16px}
   .logo-center{top:calc(env(safe-area-inset-top,0px) + 16px)}
   .logo-center img{max-height:35px}
-  .foot{flex-direction:column;align-items:flex-start;gap:8px}
+  .footer-top{flex-direction:column;gap:16px}
+  .footer-contacts{flex-direction:column;gap:12px}
 }
 </style>
 </head>
@@ -116,6 +124,7 @@ form.sent button.send{opacity:.5;pointer-events:none}
 <div class="logo-center">
   <img src="IMG_9323.png" alt="Sharafutdinov Logo">
 </div>
+
 <div class="menu" id="menu">
   <nav>
     <a href="#home">Home</a>
@@ -136,43 +145,66 @@ form.sent button.send{opacity:.5;pointer-events:none}
 </section>
 
 <section class="slide contact" id="contact">
-  <div>
-    <h2>Be first<br>in line</h2>
-    <p class="lead">Tell us about yourself and we will get back to you with details about the car and how to reserve your place.</p>
-    <dl class="info">
-      <div><dt>Email</dt><dd><a href="mailto:Sharafutdinovauto@gmail.com">Sharafutdinovauto@gmail.com</a></dd></div>
-      <div><dt>Phone</dt><dd><a href="tel:+10000000000">+1 000 000 0000</a></dd></div>
-      <div><dt>Studio</dt><dd>00 Street Name, City, Country</dd></div>
-    </dl>
-  </div>
-  <form id="request" novalidate>
-    <h3>Request access</h3>
-    <label>Full name<input type="text" name="name" autocomplete="name" required></label>
-    <label>Email<input type="email" name="email" autocomplete="email" required></label>
-    <label>Phone<input type="tel" name="phone" autocomplete="tel"></label>
-    <label>I am interested in
-      <select name="topic"><option>Reserving a car</option><option>Private viewing</option><option>Press and partnerships</option><option>Something else</option></select>
-    </label>
-    <label>Message<textarea name="message"></textarea></label>
+  <div class="contact-grid">
+    <div>
+      <h2>Be first<br>in line</h2>
+      <p class="lead">Tell us about yourself and we will get back to you with details about the car and how to reserve your place.</p>
+      <dl class="info">
+        <div><dt>Email</dt><dd><a href="mailto:Sharafutdinovauto@gmail.com">Sharafutdinovauto@gmail.com</a></dd></div>
+        <div><dt>Phone</dt><dd><a href="tel:+10000000000">+1 000 000 0000</a></dd></div>
+        <div><dt>Studio</dt><dd>00 Street Name, City, Country</dd></div>
+      </dl>
+    </div>
+    <form id="request" novalidate>
+      <h3>Request access</h3>
+      <label>Full name<input type="text" name="name" autocomplete="name" required></label>
+      <label>Email<input type="email" name="email" autocomplete="email" required></label>
+      <label>Phone<input type="tel" name="phone" autocomplete="tel"></label>
+      <label>I am interested in
+        <select name="topic"><option>Reserving a car</option><option>Private viewing</option><option>Press and partnerships</option><option>Something else</option></select>
+      </label>
+      <label>Message<textarea name="message"></textarea></label>
 
-    <!-- LEGAL CONSENT -->
-    <div class="legal-agree">
-      <input type="checkbox" id="consent" required>
-      <label for="consent">I agree to the <a href="/privacy-policy" target="_blank">Privacy Policy</a> and <a href="/terms" target="_blank">Terms & Conditions</a>.</label>
+      <!-- LEGAL CONSENT -->
+      <div class="legal-agree">
+        <input type="checkbox" id="consent" required>
+        <label for="consent">I agree to the <a href="/privacy-policy" target="_blank">Privacy Policy</a> and <a href="/terms" target="_blank">Terms & Conditions</a>.</label>
+      </div>
+
+      <button class="send chamfer" type="submit">Send request</button>
+      <p class="ok" role="status">Thank you. We will be in touch soon.</p>
+    </form>
+  </div>
+
+  <!-- FOOTER AT THE VERY BOTTOM -->
+  <footer class="site-footer">
+    <div class="footer-top">
+      <dl class="footer-contacts">
+        <div>
+          <dt>Email</dt>
+          <dd><a href="mailto:Sharafutdinovauto@gmail.com">Sharafutdinovauto@gmail.com</a></dd>
+        </div>
+        <div>
+          <dt>Phone</dt>
+          <dd><a href="tel:+10000000000">+1 000 000 0000</a></dd>
+        </div>
+        <div>
+          <dt>Studio</dt>
+          <dd>00 Street Name, City, Country</dd>
+        </div>
+      </dl>
+
+      <nav class="footer-links">
+        <a href="/privacy-policy">Privacy Policy</a>
+        <a href="/terms">Terms & Conditions</a>
+        <a href="/cookies">Cookie Policy</a>
+      </nav>
     </div>
 
-    <button class="send chamfer" type="submit">Send request</button>
-    <p class="ok" role="status">Thank you. We will be in touch soon.</p>
-  </form>
-
-  <div class="foot">
-    <span>© 2026 Sharafutdinov. All rights reserved.</span>
-    <div class="foot-links">
-      <a href="/privacy-policy">Privacy Policy</a>
-      <a href="/terms">Terms & Conditions</a>
-      <a href="/cookies">Cookie Policy</a>
+    <div class="footer-bottom">
+      <span>© 2026 Sharafutdinov Hypercars. All rights reserved.</span>
     </div>
-  </div>
+  </footer>
 </section>
 
 <script>
