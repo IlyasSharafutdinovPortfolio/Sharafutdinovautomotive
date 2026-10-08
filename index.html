@@ -38,10 +38,63 @@ body.menu-open .menu{clip-path:polygon(0 0,130% 0,100% 100%,0 100%);visibility:v
 .menu nav a:hover{color:var(--white);transform:translateX(18px) skewX(-6deg)}
 .menu small{position:relative;margin-top:36px;font-size:1rem;color:rgba(0,0,0,.7)}
 
-/* Header & Logo */
-.logo-center{position:fixed;z-index:15;top:calc(env(safe-area-inset-top,0px) + 20px);left:50%;transform:translateX(-50%);display:flex;align-items:center;justify-content:center}
-.logo-center img{max-height:45px;width:auto;display:block}
-.logo-placeholder{padding:8px 16px;border:1px dashed rgba(255,255,255,0.3);font-size:0.8rem;letter-spacing:0.1em;text-transform:uppercase;color:rgba(255,255,255,0.5)}
+/* Interactive Logo / Menu Button */
+.logo-btn{
+  position:fixed;
+  z-index:25;
+  top:calc(env(safe-area-inset-top,0px) + 15px);
+  left:50%;
+  transform:translateX(-50%);
+  background:transparent;
+  border:none;
+  cursor:pointer;
+  padding:0;
+  perspective:600px;
+  height:80px;
+  min-width:140px;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+}
+.logo-inner{
+  position:relative;
+  width:100%;
+  height:100%;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  transform-style:preserve-3d;
+  transition:transform 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+}
+.logo-btn:hover .logo-inner,
+body.menu-open .logo-btn .logo-inner{
+  transform:rotateX(180deg);
+}
+.logo-front, .logo-back{
+  position:absolute;
+  backface-visibility:hidden;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  inset:0;
+}
+.logo-front img{
+  max-height:80px;
+  width:auto;
+  display:block;
+  filter:drop-shadow(0 2px 8px rgba(0,0,0,0.5));
+}
+.logo-back{
+  transform:rotateX(180deg);
+  font-family:var(--display);
+  font-style:italic;
+  font-weight:800;
+  font-size:1.8rem;
+  letter-spacing:0.12em;
+  color:var(--pink);
+  text-transform:uppercase;
+  text-shadow:0 2px 10px rgba(0,0,0,0.8);
+}
 
 .brand{position:fixed;z-index:15;top:calc(env(safe-area-inset-top,0px) + 30px);right:28px;font-family:var(--display);font-weight:700;font-size:1.3rem;letter-spacing:.14em;text-transform:uppercase}
 .brand::before{content:"";display:inline-block;width:34px;height:2px;background:var(--pink);vertical-align:middle;margin-right:12px}
@@ -109,8 +162,9 @@ footer.site-footer{width:100%;border-top:1px solid rgba(255,255,255,0.1);padding
   .contact-grid{grid-template-columns:1fr;align-items:start;margin-bottom:40px}
   .brand{right:16px;font-size:1.1rem}.brand::before{width:18px;margin-right:8px}
   .burger{left:16px}
-  .logo-center{top:calc(env(safe-area-inset-top,0px) + 16px)}
-  .logo-center img{max-height:35px}
+  .logo-btn{top:calc(env(safe-area-inset-top,0px) + 12px);height:55px}
+  .logo-front img{max-height:55px}
+  .logo-back{font-size:1.4rem}
   .footer-top{flex-direction:column;gap:16px}
   .footer-contacts{flex-direction:column;gap:12px}
 }
@@ -120,10 +174,17 @@ footer.site-footer{width:100%;border-top:1px solid rgba(255,255,255,0.1);padding
 
 <button class="burger chamfer" id="burger" aria-label="Open menu" aria-expanded="false" aria-controls="menu"><span></span><span></span><span></span></button>
 
-<!-- LOGO IN TOP CENTER -->
-<div class="logo-center">
-  <img src="IMG_9323.png" alt="Sharafutdinov Logo">
-</div>
+<!-- INTERACTIVE LOGO / MENU BUTTON -->
+<button class="logo-btn" id="logoBtn" aria-label="Toggle menu">
+  <div class="logo-inner">
+    <div class="logo-front">
+      <img src="IMG_9323.png" alt="Sharafutdinov Logo">
+    </div>
+    <div class="logo-back">
+      MENU
+    </div>
+  </div>
+</button>
 
 <div class="menu" id="menu">
   <nav>
@@ -209,8 +270,17 @@ footer.site-footer{width:100%;border-top:1px solid rgba(255,255,255,0.1);padding
 
 <script>
 const b=document.getElementById('burger');
-function toggle(o){document.body.classList.toggle('menu-open',o);b.setAttribute('aria-expanded',o);b.setAttribute('aria-label',o?'Close menu':'Open menu')}
+const logoBtn=document.getElementById('logoBtn');
+
+function toggle(o){
+  document.body.classList.toggle('menu-open',o);
+  b.setAttribute('aria-expanded',o);
+  b.setAttribute('aria-label',o?'Close menu':'Open menu');
+}
+
 b.addEventListener('click',()=>toggle(!document.body.classList.contains('menu-open')));
+logoBtn.addEventListener('click',()=>toggle(!document.body.classList.contains('menu-open')));
+
 document.querySelectorAll('.menu a').forEach(a=>a.addEventListener('click',()=>toggle(false)));
 document.addEventListener('keydown',e=>{if(e.key==='Escape')toggle(false)});
 document.getElementById('request').addEventListener('submit',e=>{
