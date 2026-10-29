@@ -555,4 +555,395 @@ footer.site-footer {
   font-size: 0.72rem;
   color: var(--gray-muted);
 }
-.footer-top { display
+.footer-top { display: flex; justify-content: space-between; align-items: flex-start; flex-wrap: wrap; gap: 16px; }
+.footer-contacts { display: flex; gap: 28px; flex-wrap: wrap; }
+.footer-contacts div dt { font-size: 0.65rem; text-transform: uppercase; letter-spacing: 0.15em; color: rgba(255,255,255,0.35); margin-bottom: 2px; }
+.footer-contacts div dd { font-weight: 500; color: var(--white); }
+.footer-contacts a { text-decoration: none; transition: color 0.3s; }
+.footer-contacts a:hover { color: var(--lavender); }
+.footer-links { display: flex; gap: 18px; flex-wrap: wrap; }
+.footer-links button { background: none; border: none; padding: 0; font: inherit; color: var(--gray-muted); cursor: pointer; transition: color 0.3s; }
+.footer-links button:hover { color: var(--lavender); }
+.footer-bottom { display: flex; justify-content: space-between; align-items: center; font-size: 0.7rem; color: rgba(255,255,255,0.3); }
+
+/* MODAL LEGAL WINDOW */
+.modal-backdrop {
+  position: fixed;
+  inset: 0;
+  z-index: 100;
+  background: rgba(5, 5, 7, 0.92);
+  backdrop-filter: blur(12px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 20px;
+  opacity: 0;
+  visibility: hidden;
+  transition: all 0.3s ease;
+}
+.modal-backdrop.open { opacity: 1; visibility: visible; }
+.modal-box {
+  background: var(--card-bg);
+  border: 1px solid var(--border-lavender);
+  max-width: 680px;
+  width: 100%;
+  max-height: 80vh;
+  display: flex;
+  flex-direction: column;
+  box-shadow: 0 20px 60px rgba(0,0,0,0.9);
+}
+.modal-header {
+  padding: 20px 28px;
+  border-bottom: 1px solid var(--border-lavender);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.modal-header h3 {
+  font-family: var(--font-title);
+  font-weight: 700;
+  font-size: 1.3rem;
+  text-transform: uppercase;
+  color: var(--lavender);
+}
+.modal-close {
+  background: none;
+  border: none;
+  color: var(--gray-muted);
+  font-size: 1.8rem;
+  cursor: pointer;
+  line-height: 1;
+  transition: color 0.2s;
+}
+.modal-close:hover { color: var(--lavender); }
+.modal-body {
+  padding: 28px;
+  overflow-y: auto;
+  font-size: 0.88rem;
+  line-height: 1.7;
+  color: var(--gray-muted);
+}
+.modal-body h4 {
+  color: var(--white);
+  margin: 18px 0 8px;
+  font-family: var(--font-title);
+  font-size: 1rem;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+}
+
+@media (max-width: 860px) {
+  html { scroll-snap-type: none; }
+  .slide { height: auto; min-height: 100vh; }
+  .header-right { top: calc(env(safe-area-inset-top, 0px) + 18px); right: 18px; gap: 10px; }
+  .brand { font-size: 0.8rem; }
+  .burger { left: 18px; }
+  .contact-grid { grid-template-columns: 1fr; gap: 32px; }
+  .footer-top { flex-direction: column; gap: 16px; }
+  .tech-spec-bar { display: none; }
+}
+</style>
+</head>
+<body class="locked">
+
+<button class="burger chamfer" id="burger" aria-label="Open menu" aria-expanded="false" aria-controls="menu">
+  <span></span><span></span><span></span>
+</button>
+
+<!-- INTERACTIVE LOGO -->
+<button class="logo-btn" id="logoBtn" aria-label="Toggle menu">
+  <div class="logo-inner">
+    <div class="logo-front">
+      <img src="IMG_9323.png" alt="Sharafutdinov Automotive Logo">
+    </div>
+    <div class="logo-back">
+      MENU
+    </div>
+  </div>
+</button>
+
+<div class="menu" id="menu">
+  <nav>
+    <a href="#home" data-key="nav_home">Home</a>
+    <a href="#about" data-key="nav_car">The Hypercar</a>
+    <a href="#contact" data-key="nav_contact">Atelier Contact</a>
+    <a href="#request" data-key="nav_request">Request Allocation</a>
+  </nav>
+  <small>BRICKELL, MIAMI, FL &nbsp;|&nbsp; SHARAFUTDINOVAUTO@GMAIL.COM</small>
+</div>
+
+<!-- HEADER RIGHT -->
+<div class="header-right">
+  <div class="lang-switch">
+    <button class="lang-btn active" onclick="setLang('en')">EN</button>
+    <button class="lang-btn" onclick="setLang('de')">DE</button>
+    <button class="lang-btn" onclick="setLang('it')">IT</button>
+  </div>
+  <div class="brand">Sharafutdinov</div>
+</div>
+
+<section class="slide hero" id="home">
+  <div class="hero-subtitle">Bespoke OEM &nbsp;•&nbsp; Brickell, Miami</div>
+  <div class="photo" id="about">
+    <span data-key="photo_placeholder">QT12GT Hypercar Silhouette</span>
+    <div class="tech-spec-bar">
+      <div><strong>2000+ HP</strong> V12 Quad-Turbo</div>
+      <div><strong>500 KM/H</strong> Target Speed</div>
+      <div><strong>C_d 0.378</strong> OpenFOAM CFD</div>
+      <div><strong>100 Units</strong> Bespoke Allocation</div>
+    </div>
+  </div>
+
+  <!-- VIP ACCESS CODE FORM -->
+  <form class="code-access-form" id="codeForm">
+    <div class="code-input-wrap chamfer">
+      <input type="password" id="accessCodeInput" class="code-input" placeholder="ENTER ACCESS CODE" autocomplete="off" required>
+      <button type="submit" class="code-btn chamfer">Unlock</button>
+    </div>
+    <span class="code-error-msg" id="codeError">ACCESS DENIED &nbsp;•&nbsp; INVALID PASSCODE</span>
+  </form>
+
+  <span class="side l" style="pointer-events:none" data-key="hero_tagline">Limited Series Hypercar</span>
+  <a class="side r" href="#contact" data-key="hero_btn">Request Access</a>
+</section>
+
+<section class="slide contact" id="contact">
+  <div class="contact-grid">
+    <div>
+      <h2 data-key="contact_title">Private<br>Allocation</h2>
+      <p class="lead" data-key="contact_lead">Inquire for private client previews, engineering documentation, and bespoke allocations at our Brickell HQ.</p>
+      <dl class="info">
+        <div><dt data-key="info_email">Direct Inquiry</dt><dd><a href="mailto:Sharafutdinovauto@gmail.com">Sharafutdinovauto@gmail.com</a></dd></div>
+        <div><dt data-key="info_studio">Executive Atelier</dt><dd>Brickell, Miami, FL, USA</dd></div>
+      </dl>
+    </div>
+    
+    <form id="request" novalidate>
+      <h3 data-key="form_title">Request Access</h3>
+      <label><span data-key="form_name">Full Name</span><input type="text" name="name" autocomplete="name" required></label>
+      <label><span data-key="form_email">Email Address</span><input type="email" name="email" autocomplete="email" required></label>
+      <label><span data-key="form_topic">Inquiry Nature</span>
+        <select name="topic" id="topicSelect">
+          <option value="reserve">Reserving QT12GT Allocation</option>
+          <option value="viewing">Private Viewing (Brickell / Riyadh)</option>
+          <option value="press">Investor & Institutional Relations</option>
+          <option value="other">Bespoke Technical Inquiry</option>
+        </select>
+      </label>
+      <label><span data-key="form_msg">Private Note</span><textarea name="message"></textarea></label>
+
+      <!-- LEGAL CONSENT -->
+      <div class="legal-agree">
+        <input type="checkbox" id="consent" required>
+        <label for="consent"><span data-key="legal_agree">I agree to the</span> <a onclick="openModal('privacy')" data-key="privacy">Privacy Policy</a> <span data-key="and">and</span> <a onclick="openModal('terms')" data-key="terms">Terms & Conditions</a>.</label>
+      </div>
+
+      <button class="send chamfer" type="submit" data-key="form_send">Submit Request</button>
+      <p class="ok" role="status" data-key="form_ok">Thank you. Our executive office will be in touch shortly.</p>
+    </form>
+  </div>
+
+  <!-- FOOTER -->
+  <footer class="site-footer">
+    <div class="footer-top">
+      <dl class="footer-contacts">
+        <div>
+          <dt data-key="info_email">Email</dt>
+          <dd><a href="mailto:Sharafutdinovauto@gmail.com">Sharafutdinovauto@gmail.com</a></dd>
+        </div>
+        <div>
+          <dt data-key="info_studio">Atelier</dt>
+          <dd>Brickell, Miami, FL, USA</dd>
+        </div>
+      </dl>
+
+      <nav class="footer-links">
+        <button type="button" onclick="openModal('privacy')" data-key="privacy">Privacy Policy</button>
+        <button type="button" onclick="openModal('terms')" data-key="terms">Terms & Conditions</button>
+        <button type="button" onclick="openModal('cookies')" data-key="cookies">Cookie Policy</button>
+      </nav>
+    </div>
+
+    <div class="footer-bottom">
+      <span>Sharafutdinov Automotive Inc. © 2026 &nbsp;|&nbsp; <span data-key="rights">All rights reserved.</span></span>
+    </div>
+  </footer>
+</section>
+
+<!-- LEGAL MODAL -->
+<div class="modal-backdrop" id="modalBackdrop" onclick="closeModal(event)">
+  <div class="modal-box chamfer" onclick="event.stopPropagation()">
+    <div class="modal-header">
+      <h3 id="modalTitle">Privacy Policy</h3>
+      <button class="modal-close" onclick="closeModal()">&times;</button>
+    </div>
+    <div class="modal-body" id="modalBody"></div>
+  </div>
+</div>
+
+<script>
+let currentLang = 'en';
+
+const ALLOWED_CODES = [
+  "7777", "1001", "1002", "1003", "1004", "1005", "1006", "1007", "1008", "1009",
+  "1010", "1011", "1012", "1013", "1014", "1015", "1016", "1017", "1018", "1019",
+  "1020", "1021", "1022", "1023", "1024", "1025", "1026", "1027", "1028", "1029", "1030"
+];
+
+const codeForm = document.getElementById('codeForm');
+const accessCodeInput = document.getElementById('accessCodeInput');
+const codeError = document.getElementById('codeError');
+
+function unlockSite() {
+  document.body.classList.remove('locked');
+  document.body.classList.add('unlocked-site');
+  sessionStorage.setItem('site_access_granted', 'true');
+}
+
+if (sessionStorage.getItem('site_access_granted') === 'true') {
+  unlockSite();
+}
+
+codeForm.addEventListener('submit', (e) => {
+  e.preventDefault();
+  const enteredCode = accessCodeInput.value.trim();
+
+  if (ALLOWED_CODES.includes(enteredCode)) {
+    unlockSite();
+    codeError.classList.remove('visible');
+    accessCodeInput.classList.remove('error');
+  } else {
+    accessCodeInput.classList.add('error');
+    codeError.classList.add('visible');
+    setTimeout(() => {
+      accessCodeInput.classList.remove('error');
+    }, 400);
+  }
+});
+
+const translations = {
+  en: {
+    nav_home: "Home", nav_car: "The Hypercar", nav_contact: "Atelier Contact", nav_request: "Request Allocation",
+    photo_placeholder: "QT12GT Hypercar Silhouette", hero_tagline: "Limited Series Hypercar", hero_btn: "Request Access",
+    contact_title: "Private<br>Allocation", contact_lead: "Inquire for private client previews, engineering documentation, and bespoke allocations at our Brickell HQ.",
+    info_email: "Direct Inquiry", info_studio: "Executive Atelier",
+    form_title: "Request Access", form_name: "Full Name", form_email: "Email Address",
+    form_topic: "Inquiry Nature", form_msg: "Private Note", legal_agree: "I agree to the",
+    privacy: "Privacy Policy", and: "and", terms: "Terms & Conditions", cookies: "Cookie Policy",
+    form_send: "Submit Request", form_ok: "Thank you. Our executive office will be in touch shortly.", rights: "All rights reserved.",
+    opt_reserve: "Reserving QT12GT Allocation", opt_viewing: "Private Viewing (Brickell / Riyadh)", opt_press: "Investor & Institutional Relations", opt_other: "Bespoke Technical Inquiry"
+  },
+  de: {
+    nav_home: "Startseite", nav_car: "Das Hypercar", nav_contact: "Atelier Kontakt", nav_request: "Zuteilung Anfordern",
+    photo_placeholder: "QT12GT Hypercar Silhouette", hero_tagline: "Limitierter Hypercar", hero_btn: "Zugang Anfordern",
+    contact_title: "Private<br>Zuteilung", contact_lead: "Fordern Sie vertrauliche Einblicke, technische Dokumentationen und exklusive Zuteilungen an.",
+    info_email: "Direkter Kontakt", info_studio: "Executive Atelier",
+    form_title: "Zugang Anfordern", form_name: "Vollständiger Name", form_email: "E-Mail-Adresse",
+    form_topic: "Anfragegrund", form_msg: "Vertrauliche Nachricht", legal_agree: "Ich stimme den",
+    privacy: "Datenschutzbestimmungen", and: "und", terms: "AGB", cookies: "Cookie-Richtlinie",
+    form_send: "Anfrage Senden", form_ok: "Vielen Dank. Unser Büro wird sich in Kürze melden.", rights: "Alle Rechte vorbehalten.",
+    opt_reserve: "QT12GT Reservierung", opt_viewing: "Private Besichtigung", opt_press: "Investor Relations", opt_other: "Technische Anfrage"
+  },
+  it: {
+    nav_home: "Home", nav_car: "L'Hypercar", nav_contact: "Contatto Atelier", nav_request: "Richiedi Assegnazione",
+    photo_placeholder: "QT12GT Hypercar Silhouette", hero_tagline: "Hypercar Serie Limitata", hero_btn: "Richiedi Accesso",
+    contact_title: "Assegnazione<br>Privata", contact_lead: "Richiedi anteprime private per i clienti, documentazione tecnica e assegnazioni su misura.",
+    info_email: "Inchiesta Diretta", info_studio: "Executive Atelier",
+    form_title: "Richiedi Accesso", form_name: "Nome e Cognome", form_email: "Indirizzo Email",
+    form_topic: "Natura della Richiesta", form_msg: "Nota Privata", legal_agree: "Accetto la",
+    privacy: "Informativa Privacy", and: "e i", terms: "Termini e Condizioni", cookies: "Cookie Policy",
+    form_send: "Invia Richiesta", form_ok: "Grazie. Il nostro ufficio si metterà in contatto.", rights: "Tutti i diritti riservati.",
+    opt_reserve: "Riserva QT12GT", opt_viewing: "Visione Privata", opt_press: "Relazioni con gli Investitori", opt_other: "Inchiesta Tecnica"
+  }
+};
+
+const legalDocs = {
+  privacy: {
+    en: {
+      title: "Privacy Policy",
+      body: `<h4>1. Information Collection</h4><p>Sharafutdinov Automotive Inc. collects client information solely through encrypted access forms.</p><h4>2. Data Usage</h4><p>All data remains strictly confidential for bespoke allocations and private viewings in Brickell/Riyadh.</p>`
+    }
+  },
+  terms: {
+    en: {
+      title: "Terms & Conditions",
+      body: `<h4>1. Intellectual Property</h4><p>All engineering models, CFD data, and trademarks belong to Sharafutdinov Automotive Inc.</p>`
+    }
+  },
+  cookies: {
+    en: {
+      title: "Cookie Policy",
+      body: `<h4>1. Essential Storage</h4><p>Essential cookies strictly preserve VIP passcode unlock state and language preferences.</p>`
+    }
+  }
+};
+
+function setLang(lang) {
+  currentLang = lang;
+  document.querySelectorAll('.lang-btn').forEach(btn => btn.classList.toggle('active', btn.textContent.toLowerCase() === lang));
+  
+  document.querySelectorAll('[data-key]').forEach(el => {
+    const key = el.getAttribute('data-key');
+    if (translations[lang] && translations[lang][key]) {
+      el.innerHTML = translations[lang][key];
+    }
+  });
+
+  const select = document.getElementById('topicSelect');
+  if(select && translations[lang]) {
+    select.options[0].text = translations[lang].opt_reserve;
+    select.options[1].text = translations[lang].opt_viewing;
+    select.options[2].text = translations[lang].opt_press;
+    select.options[3].text = translations[lang].opt_other;
+  }
+}
+
+function openModal(docType) {
+  const backdrop = document.getElementById('modalBackdrop');
+  const title = document.getElementById('modalTitle');
+  const body = document.getElementById('modalBody');
+
+  const doc = legalDocs[docType]?.[currentLang] || legalDocs[docType]?.['en'];
+  if (doc) {
+    title.innerHTML = doc.title;
+    body.innerHTML = doc.body;
+    backdrop.classList.add('open');
+  }
+}
+
+function closeModal(event) {
+  if (!event || event.target.id === 'modalBackdrop' || event.target.classList.contains('modal-close')) {
+    document.getElementById('modalBackdrop').classList.remove('open');
+  }
+}
+
+document.addEventListener('keydown', e => { if (e.key === 'Escape') closeModal(); });
+
+const b = document.getElementById('burger');
+const logoBtn = document.getElementById('logoBtn');
+
+function toggle(o){
+  document.body.classList.toggle('menu-open', o);
+  b.setAttribute('aria-expanded', o);
+  b.setAttribute('aria-label', o ? 'Close menu' : 'Open menu');
+}
+
+b.addEventListener('click', () => toggle(!document.body.classList.contains('menu-open')));
+logoBtn.addEventListener('click', () => toggle(!document.body.classList.contains('menu-open')));
+
+document.querySelectorAll('.menu a').forEach(a => a.addEventListener('click', () => toggle(false)));
+
+document.getElementById('request').addEventListener('submit', e => {
+  e.preventDefault();
+  const f = e.target;
+  const consent = document.getElementById('consent');
+  if(!f.name.value.trim() || !/\S+@\S+\.\S+/.test(f.email.value)) {
+    (f.name.value.trim() ? f.email : f.name).focus();
+    return;
+  }
+  if(!consent.checked) { consent.focus(); return; }
+  f.classList.add('sent');
+});
+</script>
+</body>
+</html>
