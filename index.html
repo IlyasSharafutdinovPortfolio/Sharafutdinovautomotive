@@ -3,54 +3,75 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-<title>Sharafutdinov</title>
+<title>Sharafutdinov Automotive | Brickell, Miami</title>
 
 <!-- SEO & Search Engine Indexing -->
-<meta name="description" content="Sharafutdinov — Exclusive limited series hypercars. Request access for private viewings and reservations.">
+<meta name="description" content="Sharafutdinov Automotive — Bespoke Limited Series Hypercars engineered in Brickell, Miami. Request private atelier access.">
 <meta name="robots" content="index, follow">
 
-<!-- OpenGraph (Social media preview) -->
-<meta property="og:title" content="Sharafutdinov | Limited Series Hypercar">
-<meta property="og:description" content="Exclusive limited series hypercars. Request access for private viewings and reservations.">
+<!-- OpenGraph -->
+<meta property="og:title" content="Sharafutdinov Automotive | Bespoke Hypercars">
+<meta property="og:description" content="2000+ HP V12 Quad-Turbo Hypercars. Private viewing and allocation requests.">
 <meta property="og:type" content="website">
 <meta property="og:url" content="https://sharafutdinov.com">
 
 <link rel="preconnect" href="https://fonts.googleapis.com">
-<link href="https://fonts.googleapis.com/css2?family=Saira+Condensed:ital,wght@0,500;0,700;0,800;1,800&family=Barlow:wght@400;500;600&display=swap" rel="stylesheet">
-<style>
-:root{--black:#000;--white:#fff;--lav:#b9a4e8;--pink:#f4a3c9;--ink:#141018;
-  --display:'Saira Condensed','Arial Narrow',Arial,sans-serif;--body:'Barlow','Helvetica Neue',Arial,sans-serif;
-  --cut:18px;box-sizing:border-box}
-*,*::before,*::after{box-sizing:inherit;margin:0}
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@500;700;800;900&family=Montserrat:wght@300;400;500;600;700&display=swap" rel="stylesheet">
 
-/* ПРЫГАЮЩИЙ СКРОЛЛ ПО СЕКЦИЯМ (включается только при разблокировке) */
+<style>
+:root {
+  --black: #050507;
+  --card-bg: #0b0c0e;
+  /* РОЗОВО-ЛАВАНДОВАЯ ГАММА ПОД ЦВЕТ ЛОГО */
+  --lavender: #b9a4e8;
+  --plum-pink: #d488b8;
+  --accent-glow: rgba(185, 164, 232, 0.3);
+  --border-lavender: rgba(185, 164, 232, 0.25);
+  
+  --chrome: #e2e8f0;
+  --titanium: #1e2229;
+  --white: #ffffff;
+  --gray-muted: rgba(255, 255, 255, 0.55);
+  --font-title: 'Cinzel', serif;
+  --font-body: 'Montserrat', sans-serif;
+  --cut: 16px;
+  box-sizing: border-box;
+}
+
+*, *::before, *::after { box-sizing: inherit; margin: 0; padding: 0; }
+
 html {
   scroll-snap-type: y mandatory;
   scroll-behavior: smooth;
   scroll-padding-top: env(safe-area-inset-top, 0px);
+  background: var(--black);
 }
-@media (prefers-reduced-motion:reduce){
-  html{scroll-behavior:auto; scroll-snap-type:none}
-  *{animation:none!important;transition:none!important}
-}
-body{font-family:var(--body);background:var(--black);color:var(--white);-webkit-font-smoothing:antialiased}
-a{color:inherit}
-:focus-visible{outline:2px solid var(--pink);outline-offset:3px}
 
-/* РЕЖИМ БЛОКИРОВКИ ДО ВВОДА КОДА */
-body.locked {
-  overflow: hidden !important;
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; scroll-snap-type: none; }
+  * { animation: none !important; transition: none !important; }
 }
-body.locked .contact {
-  display: none !important;
+
+body {
+  font-family: var(--font-body);
+  background: var(--black);
+  color: var(--white);
+  -webkit-font-smoothing: antialiased;
+  background-image: radial-gradient(circle at 50% 0%, rgba(185, 164, 232, 0.08) 0%, transparent 60%);
 }
+
+a { color: inherit; }
+:focus-visible { outline: 1px solid var(--lavender); outline-offset: 4px; }
+
+/* RESTRAIN SCROLL UNTIL CODE UNLOCKED */
+body.locked { overflow: hidden !important; }
+body.locked .contact,
 body.locked .burger,
 body.locked .logo-btn,
-body.locked .side.r {
-  display: none !important; /* Прячем меню и кнопку перехода до ввода кода */
-}
+body.locked .side.r { display: none !important; }
 
-/* Настройки для каждого слайда */
+/* SLIDE STRUCTURE */
 .slide {
   height: 100vh;
   min-height: 100svh;
@@ -60,702 +81,478 @@ body.locked .side.r {
   box-sizing: border-box;
 }
 
-.chamfer{clip-path:polygon(0 0,calc(100% - var(--cut)) 0,100% var(--cut),100% 100%,var(--cut) 100%,0 calc(100% - var(--cut)))}
-
-/* burger */
-.burger{position:fixed;z-index:30;top:calc(env(safe-area-inset-top,0px) + 20px);left:20px;width:58px;height:50px;border:0;cursor:pointer;
-  background:var(--lav);--cut:12px;display:flex;flex-direction:column;justify-content:center;align-items:flex-start;gap:6px;padding-left:15px;transition:background .25s}
-.burger span{display:block;height:2px;background:var(--black);transition:transform .3s,opacity .2s,width .3s}
-.burger span:nth-child(1){width:28px}.burger span:nth-child(2){width:18px}.burger span:nth-child(3){width:28px}
-.burger:hover{background:var(--pink)}
-body.menu-open .burger{background:var(--black)}
-body.menu-open .burger span{background:var(--pink)}
-body.menu-open .burger span:nth-child(1){transform:translateY(8px) rotate(45deg)}
-body.menu-open .burger span:nth-child(2){opacity:0}
-body.menu-open .burger span:nth-child(3){transform:translateY(-8px) rotate(-45deg)}
-.menu{position:fixed;inset:0;z-index:20;background:var(--lav);color:var(--black);display:flex;flex-direction:column;justify-content:center;
-  padding:0 max(8vw,28px);clip-path:polygon(0 0,0 0,0 100%,0 100%);visibility:hidden;transition:clip-path .65s cubic-bezier(.7,0,.2,1),visibility 0s .65s}
-body.menu-open .menu{clip-path:polygon(0 0,130% 0,100% 100%,0 100%);visibility:visible;transition:clip-path .65s cubic-bezier(.7,0,.2,1)}
-.menu nav{position:relative;display:flex;flex-direction:column;gap:2px}
-.menu nav a{font-family:var(--display);font-style:italic;font-weight:800;text-transform:uppercase;font-size:clamp(3rem,9vw,6.4rem);line-height:1;text-decoration:none;width:max-content;transition:color .2s,transform .25s}
-.menu nav a:hover{color:var(--white);transform:translateX(18px) skewX(-6deg)}
-.menu small{position:relative;margin-top:36px;font-size:1rem;color:rgba(0,0,0,.7)}
-
-/* Interactive Logo / Menu Button */
-.logo-btn{
-  position:fixed;
-  z-index:25;
-  top:calc(env(safe-area-inset-top,0px) + 20px);
-  left:50%;
-  transform:translateX(-50%);
-  background:transparent;
-  border:none;
-  cursor:pointer;
-  padding:0;
-  perspective:600px;
-  height:48px;
-  min-width:110px;
-  display:flex;
-  align-items:center;
-  justify-content:center;
+.chamfer {
+  clip-path: polygon(0 0, calc(100% - var(--cut)) 0, 100% var(--cut), 100% 100%, var(--cut) 100%, 0 calc(100% - var(--cut)));
 }
 
-.logo-inner{
-  position:relative;
-  width:100%;
-  height:100%;
-  display:flex;
-  align-items:center;
-  justify-content:center;
-  transform-style:preserve-3d;
-  transition:transform 0.5s cubic-bezier(0.4, 0, 0.2, 1);
-}
-
-.logo-btn:hover .logo-inner,
-body.menu-open .logo-btn .logo-inner{
-  transform:rotateY(180deg);
-}
-
-.logo-front, .logo-back{
-  position:absolute;
-  backface-visibility:hidden;
-  display:flex;
-  align-items:center;
-  justify-content:center;
-  inset:0;
-}
-
-.logo-front img{
-  max-height:48px;
-  width:auto;
-  display:block;
-  filter:drop-shadow(0 2px 6px rgba(0,0,0,0.4));
-}
-
-.logo-back{
-  transform:rotateY(180deg);
-  font-family:var(--display);
-  font-style:italic;
-  font-weight:800;
-  font-size:1.3rem;
-  letter-spacing:0.12em;
-  color:var(--pink);
-  text-transform:uppercase;
-  text-shadow:0 2px 8px rgba(0,0,0,0.8);
-}
-
-/* Header Right: Brand & Language Switcher */
-.header-right {
-  position:fixed;
-  z-index:15;
-  top:calc(env(safe-area-inset-top,0px) + 26px);
-  right:28px;
-  display:flex;
-  align-items:center;
-  gap:16px;
-}
-.brand{font-family:var(--display);font-weight:700;font-size:1.3rem;letter-spacing:.14em;text-transform:uppercase}
-.brand::before{content:"";display:inline-block;width:24px;height:2px;background:var(--pink);vertical-align:middle;margin-right:10px}
-
-.lang-switch {
-  display:flex;
-  gap:6px;
-  font-size:0.8rem;
-  font-weight:600;
-  letter-spacing:0.05em;
-  background:rgba(255,255,255,0.06);
-  padding:4px 8px;
-  border-radius:4px;
-}
-.lang-btn {
-  background:none;
-  border:none;
-  color:rgba(255,255,255,0.4);
-  cursor:pointer;
-  padding:2px 4px;
-  transition:color 0.2s;
-  font-family:inherit;
-}
-.lang-btn:hover, .lang-btn.active {
-  color:var(--pink);
-}
-
-/* hero slide */
-.hero{
-  display:flex;
-  flex-direction:column;
-  align-items:center;
-  justify-content:center;
-  text-align:center;
-  padding:100px 24px 60px;
-  overflow:hidden;
-  background:radial-gradient(60% 45% at 50% 46%,rgba(185,164,232,.2),transparent 70%),var(--black);
-}
-.photo{position:relative;width:min(1000px,90vw);aspect-ratio:16/8;display:flex;align-items:center;justify-content:center;background:#0c0c0c;overflow:hidden}
-.photo span{font-size:.95rem;color:rgba(255,255,255,.35)}
-.photo img{width:100%;height:100%;object-fit:cover;display:block}
-
-/* СТИЛИ ФОРМЫ ВВОДА КОДА */
-.code-access-form {
-  margin-top: 28px;
+/* NAVIGATION BURGER */
+.burger {
+  position: fixed;
+  z-index: 30;
+  top: calc(env(safe-area-inset-top, 0px) + 24px);
+  left: 28px;
+  width: 52px;
+  height: 44px;
+  border: 1px solid var(--border-lavender);
+  cursor: pointer;
+  background: rgba(5, 5, 7, 0.85);
+  backdrop-filter: blur(12px);
+  --cut: 10px;
   display: flex;
   flex-direction: column;
+  justify-content: center;
   align-items: center;
-  gap: 8px;
-  position: relative;
-  z-index: 5;
-}
-.code-input-wrap {
-  display: flex;
-  align-items: center;
-  gap: 10px;
-}
-.code-input {
-  font-family: var(--display);
-  font-style: italic;
-  font-weight: 800;
-  font-size: 1.3rem;
-  letter-spacing: 0.15em;
-  text-align: center;
-  background: rgba(255,255,255,0.05);
-  border: none;
-  border-bottom: 2px solid rgba(255,255,255,0.3);
-  color: var(--white);
-  padding: 8px 14px;
-  width: 190px;
-  text-transform: uppercase;
-  transition: border-color 0.25s, color 0.25s;
-}
-.code-input:focus {
-  outline: none;
-  border-color: var(--pink);
-  background: rgba(244,163,201,0.08);
-}
-.code-input.error {
-  border-color: #ff4d4d;
-  color: #ff4d4d;
-  animation: shake 0.4s ease-in-out;
-}
-@keyframes shake {
-  0%, 100% { transform: translateX(0); }
-  20%, 60% { transform: translateX(-8px); }
-  40%, 80% { transform: translateX(8px); }
-}
-.code-btn {
-  --cut: 10px;
-  font-family: var(--display);
-  font-weight: 800;
-  font-style: italic;
-  text-transform: uppercase;
-  font-size: 1rem;
-  letter-spacing: 0.08em;
-  padding: 8px 18px;
-  border: 0;
-  background: var(--lav);
-  color: var(--black);
-  cursor: pointer;
-  transition: background 0.25s;
-}
-.code-btn:hover {
-  background: var(--pink);
-}
-.code-error-msg {
-  font-size: 0.8rem;
-  color: #ff4d4d;
-  letter-spacing: 0.05em;
-  font-weight: 500;
-  min-height: 1.2em;
-  visibility: hidden;
-}
-.code-error-msg.visible {
-  visibility: visible;
+  gap: 5px;
+  transition: all 0.3s ease;
 }
 
-/* Скрываем поле ввода после успешной разблокировки */
-body.unlocked-site .code-access-form {
-  display: none;
+.burger span {
+  display: block;
+  height: 1.5px;
+  background: var(--lavender);
+  transition: transform 0.3s, opacity 0.2s, width 0.3s;
+}
+.burger span:nth-child(1) { width: 24px; }
+.burger span:nth-child(2) { width: 16px; }
+.burger span:nth-child(3) { width: 24px; }
+
+.burger:hover {
+  border-color: var(--plum-pink);
+  box-shadow: 0 0 15px var(--accent-glow);
 }
 
-.side{position:absolute;bottom:26px;font-size:.95rem;color:rgba(255,255,255,.65);text-decoration:none}
-.side.l{left:max(5vw,24px)}.side.r{right:max(5vw,24px)}
-.side:hover{color:var(--pink)}
+body.menu-open .burger { background: var(--black); border-color: var(--lavender); }
+body.menu-open .burger span:nth-child(1) { transform: translateY(6.5px) rotate(45deg); width: 22px; }
+body.menu-open .burger span:nth-child(2) { opacity: 0; }
+body.menu-open .burger span:nth-child(3) { transform: translateY(-6.5px) rotate(-45deg); width: 22px; }
 
-/* contact slide */
-.contact{
-  background:var(--black);
-  color:var(--white);
-  display:flex;
-  flex-direction:column;
-  justify-content:space-between;
-  align-items:center;
-  padding:85px max(7vw,28px) 20px;
-  overflow-y:auto;
-}
-.contact-grid{
-  display:grid;
-  grid-template-columns:1fr 1.05fr;
-  gap:clamp(20px,4vw,60px);
-  align-items:center;
-  width:100%;
-  margin-bottom:20px;
-}
-.contact-grid>*{position:relative;z-index:1}
-.contact h2{font-family:var(--display);font-style:italic;font-weight:800;text-transform:uppercase;font-size:clamp(3rem,7vw,6rem);line-height:.92}
-.contact .lead{margin-top:16px;max-width:36ch;font-size:1rem;line-height:1.5;color:rgba(255,255,255,.65)}
-.info{margin-top:24px;display:grid;gap:14px}
-.info div{padding-left:16px;border-left:3px solid var(--lav)}
-.info div:nth-child(2){border-color:var(--pink)}
-.info dt{font-size:.85rem;color:rgba(255,255,255,.5)}
-.info dd{font-family:var(--display);font-size:1.4rem;font-weight:700;letter-spacing:.02em}
-.info a{text-decoration:none}.info a:hover{color:var(--pink)}
-
-form{
-  background:#0f0f0f;
-  color:var(--white);
-  padding:clamp(18px,2.5vw,30px);
-  display:grid;
-  gap:12px;
-}
-form h3{font-family:var(--display);font-style:italic;font-weight:800;text-transform:uppercase;font-size:1.8rem;line-height:1}
-label{display:grid;gap:4px;font-size:.82rem;color:rgba(255,255,255,.65)}
-input,select,textarea{font:inherit;font-size:.95rem;color:var(--white);background:rgba(255,255,255,.06);border:0;border-bottom:2px solid rgba(255,255,255,.25);padding:8px 10px;border-radius:0;transition:border-color .2s,background .2s}
-select option{color:#000}
-textarea{resize:vertical;min-height:60px}
-input:focus,select:focus,textarea:focus{outline:none;border-color:var(--pink);background:rgba(244,163,201,.08)}
-
-.legal-agree{display:flex;align-items:flex-start;gap:8px;font-size:.75rem;color:rgba(255,255,255,.5);margin-top:2px}
-.legal-agree input[type="checkbox"]{accent-color:var(--pink);margin-top:2px;cursor:pointer}
-.legal-agree a{color:var(--white);text-decoration:underline;cursor:pointer}
-
-button.send{--cut:14px;position:relative;margin-top:4px;font-family:var(--display);font-weight:800;font-style:italic;text-transform:uppercase;font-size:1.1rem;letter-spacing:.06em;
-  padding:12px 20px;border:0;background:var(--lav);color:var(--black);cursor:pointer;transition:background .25s,letter-spacing .25s}
-button.send:hover{background:var(--pink);letter-spacing:.12em}
-.ok{display:none;color:var(--pink);font-weight:600}
-form.sent .ok{display:block}
-form.sent button.send{opacity:.5;pointer-events:none}
-
-/* Footer Section */
-footer.site-footer{
-  width:100%;
-  border-top:1px solid rgba(255,255,255,0.1);
-  padding-top:12px;
-  display:flex;
-  flex-direction:column;
-  gap:8px;
-  font-size:.78rem;
-  color:rgba(255,255,255,.5);
-}
-.footer-top{display:flex;justify-content:space-between;align-items:flex-start;flex-wrap:wrap;gap:12px}
-.footer-contacts{display:flex;gap:20px;flex-wrap:wrap}
-.footer-contacts div dt{font-size:0.7rem;text-transform:uppercase;letter-spacing:0.05em;color:rgba(255,255,255,.35);margin-bottom:2px}
-.footer-contacts div dd{font-weight:500;color:var(--white)}
-.footer-contacts a{text-decoration:none;transition:color .2s}
-.footer-contacts a:hover{color:var(--pink)}
-.footer-links{display:flex;gap:14px;flex-wrap:wrap}
-.footer-links button{background:none;border:none;padding:0;font:inherit;color:rgba(255,255,255,.6);cursor:pointer;transition:color .2s}
-.footer-links button:hover{color:var(--pink)}
-.footer-bottom{display:flex;justify-content:space-between;align-items:center;font-size:0.75rem;color:rgba(255,255,255,.3)}
-
-/* MODAL LEGAL WINDOW */
-.modal-backdrop {
+/* FULLSCREEN NAVIGATION MENU */
+.menu {
   position: fixed;
   inset: 0;
-  z-index: 100;
-  background: rgba(0,0,0,0.85);
-  backdrop-filter: blur(8px);
+  z-index: 20;
+  background: rgba(5, 5, 7, 0.96);
+  backdrop-filter: blur(25px);
+  color: var(--white);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding: 0 max(10vw, 32px);
+  clip-path: polygon(0 0, 0 0, 0 100%, 0 100%);
+  visibility: hidden;
+  transition: clip-path 0.7s cubic-bezier(0.7, 0, 0.2, 1), visibility 0s 0.7s;
+  border-right: 1px solid var(--border-lavender);
+}
+
+body.menu-open .menu {
+  clip-path: polygon(0 0, 100% 0, 100% 100%, 0 100%);
+  visibility: visible;
+  transition: clip-path 0.7s cubic-bezier(0.7, 0, 0.2, 1);
+}
+
+.menu nav { display: flex; flex-direction: column; gap: 12px; }
+.menu nav a {
+  font-family: var(--font-title);
+  font-weight: 700;
+  text-transform: uppercase;
+  font-size: clamp(2.2rem, 6vw, 4.8rem);
+  letter-spacing: 0.08em;
+  line-height: 1.1;
+  text-decoration: none;
+  color: var(--white);
+  transition: color 0.3s, transform 0.3s;
+  width: max-content;
+}
+.menu nav a:hover {
+  color: var(--lavender);
+  transform: translateX(16px);
+  text-shadow: 0 0 20px var(--accent-glow);
+}
+.menu small {
+  margin-top: 48px;
+  font-size: 0.85rem;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  color: var(--gray-muted);
+}
+
+/* INTERACTIVE LOGO */
+.logo-btn {
+  position: fixed;
+  z-index: 25;
+  top: calc(env(safe-area-inset-top, 0px) + 20px);
+  left: 50%;
+  transform: translateX(-50%);
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  perspective: 600px;
+  height: 48px;
+  min-width: 140px;
+}
+
+.logo-inner {
+  position: relative;
+  width: 100%;
+  height: 100%;
   display: flex;
   align-items: center;
   justify-content: center;
-  padding: 20px;
-  opacity: 0;
-  visibility: hidden;
-  transition: opacity 0.3s, visibility 0.3s;
+  transform-style: preserve-3d;
+  transition: transform 0.6s cubic-bezier(0.4, 0, 0.2, 1);
 }
-.modal-backdrop.open {
-  opacity: 1;
-  visibility: visible;
-}
-.modal-box {
-  background: #111;
-  border: 1px solid rgba(255,255,255,0.15);
-  max-width: 680px;
-  width: 100%;
-  max-height: 80vh;
+
+.logo-btn:hover .logo-inner,
+body.menu-open .logo-btn .logo-inner { transform: rotateY(180deg); }
+
+.logo-front, .logo-back {
+  position: absolute;
+  backface-visibility: hidden;
   display: flex;
-  flex-direction: column;
-  box-shadow: 0 10px 40px rgba(0,0,0,0.8);
-  position: relative;
-}
-.modal-header {
-  padding: 20px 24px;
-  border-bottom: 1px solid rgba(255,255,255,0.1);
-  display: flex;
-  justify-content: space-between;
   align-items: center;
+  justify-content: center;
+  inset: 0;
 }
-.modal-header h3 {
-  font-family: var(--display);
-  font-style: italic;
+
+.logo-front img {
+  max-height: 44px;
+  width: auto;
+  filter: drop-shadow(0 2px 10px rgba(0,0,0,0.8));
+}
+
+.logo-back {
+  transform: rotateY(180deg);
+  font-family: var(--font-title);
   font-weight: 800;
-  font-size: 1.8rem;
-  text-transform: uppercase;
-  color: var(--pink);
+  font-size: 1.1rem;
+  letter-spacing: 0.25em;
+  color: var(--plum-pink);
+  text-shadow: 0 0 12px var(--accent-glow);
 }
-.modal-close {
+
+/* HEADER RIGHT */
+.header-right {
+  position: fixed;
+  z-index: 15;
+  top: calc(env(safe-area-inset-top, 0px) + 26px);
+  right: 28px;
+  display: flex;
+  align-items: center;
+  gap: 20px;
+}
+
+.brand {
+  font-family: var(--font-title);
+  font-weight: 700;
+  font-size: 0.95rem;
+  letter-spacing: 0.25em;
+  text-transform: uppercase;
+  color: var(--white);
+}
+.brand::before {
+  content: "";
+  display: inline-block;
+  width: 18px;
+  height: 1px;
+  background: var(--lavender);
+  vertical-align: middle;
+  margin-right: 12px;
+}
+
+.lang-switch {
+  display: flex;
+  gap: 4px;
+  font-size: 0.72rem;
+  font-weight: 600;
+  letter-spacing: 0.1em;
+  background: rgba(255, 255, 255, 0.04);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  padding: 3px 6px;
+  border-radius: 2px;
+}
+.lang-btn {
   background: none;
   border: none;
-  color: rgba(255,255,255,0.6);
-  font-size: 1.8rem;
+  color: rgba(255, 255, 255, 0.4);
   cursor: pointer;
-  line-height: 1;
-  transition: color 0.2s;
+  padding: 2px 6px;
+  transition: all 0.2s;
+  font-family: var(--font-body);
 }
-.modal-close:hover { color: var(--pink); }
-.modal-body {
-  padding: 24px;
-  overflow-y: auto;
-  font-size: 0.95rem;
-  line-height: 1.6;
-  color: rgba(255,255,255,0.75);
+.lang-btn:hover, .lang-btn.active { color: var(--lavender); }
+
+/* HERO SLIDE */
+.hero {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  padding: 100px 24px 60px;
+  overflow: hidden;
+  background: radial-gradient(70% 50% at 50% 50%, rgba(185, 164, 232, 0.07) 0%, rgba(5,5,7,0.95) 70%), var(--black);
 }
-.modal-body h4 {
-  color: var(--white);
-  margin: 16px 0 8px;
-  font-family: var(--display);
-  font-size: 1.2rem;
+
+.hero-subtitle {
+  font-family: var(--font-title);
+  font-size: 0.8rem;
+  letter-spacing: 0.35em;
+  text-transform: uppercase;
+  color: var(--lavender);
+  margin-bottom: 14px;
+}
+
+.photo {
+  position: relative;
+  width: min(1050px, 92vw);
+  aspect-ratio: 16/8;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: rgba(11, 12, 14, 0.6);
+  border: 1px solid var(--border-lavender);
+  box-shadow: inset 0 0 50px rgba(0,0,0,0.8), 0 10px 40px rgba(0,0,0,0.5);
+  overflow: hidden;
+}
+
+.photo span {
+  font-family: var(--font-title);
+  font-size: 0.85rem;
+  letter-spacing: 0.2em;
+  color: var(--gray-muted);
   text-transform: uppercase;
 }
-.modal-body p { margin-bottom: 12px; }
+.photo img { width: 100%; height: 100%; object-fit: cover; display: block; }
 
-@media (max-width:860px){
-  html{scroll-snap-type:none}
-  .slide{height:auto; min-height:100vh}
-  .header-right{top:calc(env(safe-area-inset-top,0px) + 16px);right:16px;gap:8px}
-  .brand{font-size:1.1rem}.brand::before{width:14px;margin-right:6px}
-  .burger{left:16px}
-  .logo-btn{top:calc(env(safe-area-inset-top,0px) + 12px);height:40px}
-  .logo-front img{max-height:40px}
-  .logo-back{font-size:1.1rem}
-  .footer-top{flex-direction:column;gap:14px}
-  .footer-contacts{flex-direction:column;gap:10px}
+/* TECH BADGES OVER PHOTO */
+.tech-spec-bar {
+  position: absolute;
+  bottom: 0;
+  inset-x: 0;
+  background: rgba(5, 5, 7, 0.85);
+  backdrop-filter: blur(10px);
+  border-top: 1px solid var(--border-lavender);
+  display: flex;
+  justify-content: space-around;
+  padding: 10px 16px;
+  font-size: 0.72rem;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  color: var(--gray-muted);
 }
-</style>
-</head>
-<body class="locked">
+.tech-spec-bar strong { color: var(--lavender); font-family: var(--font-title); }
 
-<button class="burger chamfer" id="burger" aria-label="Open menu" aria-expanded="false" aria-controls="menu"><span></span><span></span><span></span></button>
-
-<!-- INTERACTIVE LOGO / MENU BUTTON -->
-<button class="logo-btn" id="logoBtn" aria-label="Toggle menu">
-  <div class="logo-inner">
-    <div class="logo-front">
-      <img src="IMG_9323.png" alt="Sharafutdinov Logo">
-    </div>
-    <div class="logo-back">
-      MENU
-    </div>
-  </div>
-</button>
-
-<div class="menu" id="menu">
-  <nav>
-    <a href="#home" data-key="nav_home">Home</a>
-    <a href="#about" data-key="nav_car">The car</a>
-    <a href="#contact" data-key="nav_contact">Contact</a>
-    <a href="#request" data-key="nav_request">Request access</a>
-  </nav>
-  <small>Sharafutdinovauto@gmail.com</small>
-</div>
-
-<!-- Header Right: Brand & Language Switcher -->
-<div class="header-right">
-  <div class="lang-switch">
-    <button class="lang-btn active" onclick="setLang('en')">EN</button>
-    <button class="lang-btn" onclick="setLang('de')">DE</button>
-    <button class="lang-btn" onclick="setLang('it')">IT</button>
-  </div>
-  <div class="brand">Sharafutdinov</div>
-</div>
-
-<section class="slide hero" id="home">
-  <div class="photo" id="about"><span data-key="photo_placeholder">Place for the car photo</span></div>
-
-  <!-- Поле ввода кода под картинкой -->
-  <form class="code-access-form" id="codeForm">
-    <div class="code-input-wrap">
-      <input type="password" id="accessCodeInput" class="code-input" placeholder="ENTER CODE" autocomplete="off" required>
-      <button type="submit" class="code-btn chamfer">Enter</button>
-    </div>
-    <span class="code-error-msg" id="codeError">ACCESS DENIED</span>
-  </form>
-
-  <span class="side l" style="pointer-events:none" data-key="hero_tagline">Limited series hypercar</span>
-  <a class="side r" href="#contact" data-key="hero_btn">Request access</a>
-</section>
-
-<section class="slide contact" id="contact">
-  <div class="contact-grid">
-    <div>
-      <h2 data-key="contact_title">Be first<br>in line</h2>
-      <p class="lead" data-key="contact_lead">Tell us about yourself and we will get back to you with details about the car and how to reserve your place.</p>
-      <dl class="info">
-        <div><dt data-key="info_email">Email</dt><dd><a href="mailto:Sharafutdinovauto@gmail.com">Sharafutdinovauto@gmail.com</a></dd></div>
-        <div><dt data-key="info_studio">Studio</dt><dd>Miami, Florida, USA</dd></div>
-      </dl>
-    </div>
-    <form id="request" novalidate>
-      <h3 data-key="form_title">Request access</h3>
-      <label><span data-key="form_name">Full name</span><input type="text" name="name" autocomplete="name" required></label>
-      <label><span data-key="form_email">Email</span><input type="email" name="email" autocomplete="email" required></label>
-      <label><span data-key="form_topic">I am interested in</span>
-        <select name="topic" id="topicSelect">
-          <option value="reserve">Reserving a car</option>
-          <option value="viewing">Private viewing</option>
-          <option value="press">Press and partnerships</option>
-          <option value="other">Something else</option>
-        </select>
-      </label>
-      <label><span data-key="form_msg">Message</span><textarea name="message"></textarea></label>
-
-      <!-- LEGAL CONSENT -->
-      <div class="legal-agree">
-        <input type="checkbox" id="consent" required>
-        <label for="consent"><span data-key="legal_agree">I agree to the</span> <a onclick="openModal('privacy')" data-key="privacy">Privacy Policy</a> <span data-key="and">and</span> <a onclick="openModal('terms')" data-key="terms">Terms & Conditions</a>.</label>
-      </div>
-
-      <button class="send chamfer" type="submit" data-key="form_send">Send request</button>
-      <p class="ok" role="status" data-key="form_ok">Thank you. We will be in touch soon.</p>
-    </form>
-  </div>
-
-  <!-- FOOTER AT THE VERY BOTTOM -->
-  <footer class="site-footer">
-    <div class="footer-top">
-      <dl class="footer-contacts">
-        <div>
-          <dt data-key="info_email">Email</dt>
-          <dd><a href="mailto:Sharafutdinovauto@gmail.com">Sharafutdinovauto@gmail.com</a></dd>
-        </div>
-        <div>
-          <dt data-key="info_studio">Studio</dt>
-          <dd>Miami, Florida, USA</dd>
-        </div>
-      </dl>
-
-      <nav class="footer-links">
-        <button type="button" onclick="openModal('privacy')" data-key="privacy">Privacy Policy</button>
-        <button type="button" onclick="openModal('terms')" data-key="terms">Terms & Conditions</button>
-        <button type="button" onclick="openModal('cookies')" data-key="cookies">Cookie Policy</button>
-      </nav>
-    </div>
-
-    <div class="footer-bottom">
-      <span>Sharafutdinov Automotive © 2026 &nbsp;|&nbsp; <span data-key="rights">All rights reserved.</span></span>
-    </div>
-  </footer>
-</section>
-
-<!-- LEGAL MODAL WINDOW -->
-<div class="modal-backdrop" id="modalBackdrop" onclick="closeModal(event)">
-  <div class="modal-box chamfer" onclick="event.stopPropagation()">
-    <div class="modal-header">
-      <h3 id="modalTitle">Privacy Policy</h3>
-      <button class="modal-close" onclick="closeModal()">&times;</button>
-    </div>
-    <div class="modal-body" id="modalBody">
-      <!-- Dynamic Content -->
-    </div>
-  </div>
-</div>
-
-<script>
-let currentLang = 'en';
-
-// --- СПИСОК РАЗРЕШЕННЫХ КОДОВ (31 шт) ---
-const ALLOWED_CODES = [
-  "7777", "1001", "1002", "1003", "1004", "1005", "1006", "1007", "1008", "1009",
-  "1010", "1011", "1012", "1013", "1014", "1015", "1016", "1017", "1018", "1019",
-  "1020", "1021", "1022", "1023", "1024", "1025", "1026", "1027", "1028", "1029", "1030"
-];
-
-const codeForm = document.getElementById('codeForm');
-const accessCodeInput = document.getElementById('accessCodeInput');
-const codeError = document.getElementById('codeError');
-
-function unlockSite() {
-  document.body.classList.remove('locked');
-  document.body.classList.add('unlocked-site');
-  sessionStorage.setItem('site_access_granted', 'true');
+/* PRIVATE ACCESS CODE FORM */
+.code-access-form {
+  margin-top: 32px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 10px;
+  position: relative;
+  z-index: 5;
 }
 
-// Проверка сохраненного доступа в сессии браузера
-if (sessionStorage.getItem('site_access_granted') === 'true') {
-  unlockSite();
+.code-input-wrap {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  background: rgba(11, 12, 14, 0.8);
+  border: 1px solid var(--border-lavender);
+  padding: 6px 8px 6px 16px;
 }
 
-codeForm.addEventListener('submit', (e) => {
-  e.preventDefault();
-  const enteredCode = accessCodeInput.value.trim();
+.code-input {
+  font-family: var(--font-title);
+  font-weight: 700;
+  font-size: 1.1rem;
+  letter-spacing: 0.25em;
+  text-align: center;
+  background: transparent;
+  border: none;
+  color: var(--lavender);
+  width: 170px;
+  text-transform: uppercase;
+}
+.code-input::placeholder { color: rgba(255,255,255,0.25); font-weight: 400; font-size: 0.85rem; letter-spacing: 0.15em; }
+.code-input:focus { outline: none; }
+.code-input.error { color: #ff4d4d; animation: shake 0.4s ease-in-out; }
 
-  if (ALLOWED_CODES.includes(enteredCode)) {
-    unlockSite();
-    codeError.classList.remove('visible');
-    accessCodeInput.classList.remove('error');
-  } else {
-    accessCodeInput.classList.add('error');
-    codeError.classList.add('visible');
-    setTimeout(() => {
-      accessCodeInput.classList.remove('error');
-    }, 400);
-  }
-});
-
-// --- MULTI-LANGUAGE SYSTEM & LEGAL TEXTS ---
-const translations = {
-  en: {
-    nav_home: "Home", nav_car: "The car", nav_contact: "Contact", nav_request: "Request access",
-    photo_placeholder: "Place for the car photo", hero_tagline: "Limited series hypercar", hero_btn: "Request access",
-    contact_title: "Be first<br>in line", contact_lead: "Tell us about yourself and we will get back to you with details about the car and how to reserve your place.",
-    info_email: "Email", info_studio: "Studio",
-    form_title: "Request access", form_name: "Full name", form_email: "Email",
-    form_topic: "I am interested in", form_msg: "Message", legal_agree: "I agree to the",
-    privacy: "Privacy Policy", and: "and", terms: "Terms & Conditions", cookies: "Cookie Policy",
-    form_send: "Send request", form_ok: "Thank you. We will be in touch soon.", rights: "All rights reserved.",
-    opt_reserve: "Reserving a car", opt_viewing: "Private viewing", opt_press: "Press and partnerships", opt_other: "Something else"
-  },
-  de: {
-    nav_home: "Startseite", nav_car: "Das Fahrzeug", nav_contact: "Kontakt", nav_request: "Zugang anfordern",
-    photo_placeholder: "Platz für das Fahrzeugfoto", hero_tagline: "Limitierter Hypercar", hero_btn: "Zugang anfordern",
-    contact_title: "Seien Sie<br>die Ersten", contact_lead: "Erzählen Sie uns von sich, und wir melden uns mit Details zum Fahrzeug und zur Reservierung.",
-    info_email: "E-Mail", info_studio: "Studio",
-    form_title: "Zugang anfordern", form_name: "Vollständiger Name", form_email: "E-Mail",
-    form_topic: "Ich interessiere mich für", form_msg: "Nachricht", legal_agree: "Ich stimme den",
-    privacy: "Datenschutzbestimmungen", and: "und", terms: "AGB", cookies: "Cookie-Richtlinie",
-    form_send: "Anfrage senden", form_ok: "Vielen Dank. Wir melden uns Kürze.", rights: "Alle Rechte vorbehalten.",
-    opt_reserve: "Fahrzeug reservieren", opt_viewing: "Private Besichtigung", opt_press: "Presse & Partnerschaften", opt_other: "Sonstiges"
-  },
-  it: {
-    nav_home: "Home", nav_car: "L'autovettura", nav_contact: "Contatti", nav_request: "Richiedi accesso",
-    photo_placeholder: "Spazio per la foto della vettura", hero_tagline: "Hypercar a tiratura limitata", hero_btn: "Richiedi accesso",
-    contact_title: "Sii il primo<br>in lista", contact_lead: "Raccontaci di te e ti ricontatteremo con tutti i dettagli sulla vettura e su come riservare il tuo posto.",
-    info_email: "Email", info_studio: "Studio",
-    form_title: "Richiedi accesso", form_name: "Nome e cognome", form_email: "Email",
-    form_topic: "Sono interessato a", form_msg: "Messaggio", legal_agree: "Accetto la",
-    privacy: "Informativa sulla Privacy", and: "e i", terms: "Termini e Condizioni", cookies: "Informativa sui Cookie",
-    form_send: "Invia richiesta", form_ok: "Grazie. Ti contatteremo a breve.", rights: "Tutti i diritti riservati.",
-    opt_reserve: "Prenotare un'auto", opt_viewing: "Visione privata", opt_press: "Stampa e partnership", opt_other: "Altro"
-  }
-};
-
-const legalDocs = {
-  privacy: {
-    en: {
-      title: "Privacy Policy",
-      body: `<h4>1. Information Collection</h4><p>Sharafutdinov collects personal information including name and email address solely when provided voluntarily through our access request form.</p><h4>2. Data Usage</h4><p>Your details are strictly used to process your inquiry regarding vehicle reservations, private viewings, or press partnerships. We do not sell or share your data with third parties.</p><h4>3. Data Security</h4><p>We employ industry-standard encryption and safety measures to protect your personal information against unauthorized access.</p>`
-    },
-    de: {
-      title: "Datenschutzbestimmungen",
-      body: `<h4>1. Datenerfassung</h4><p>Sharafutdinov erfasst persönliche Daten wie Name und E-Mail-Adresse ausschließlich, wenn Sie diese freiwillig über unser Anfrageformular angeben.</p><h4>2. Datenverwendung</h4><p>Ihre Daten werden ausschließlich zur Bearbeitung Ihrer Anfrage bezüglich Fahrzeugreservierungen, privaten Besichtigungen oder Pressepartnerschaften verwendet.</p><h4>3. Datensicherheit</h4><p>Wir verwenden moderne Verschlüsselungstechnologien, um Ihre Daten vor unbefugtem Zugriff zu schützen.</p>`
-    },
-    it: {
-      title: "Informativa sulla Privacy",
-      body: `<h4>1. Raccolta dei Dati</h4><p>Sharafutdinov raccoglie informazioni personali quali nome ed email solo quando fornite volontariamente tramite il nostro modulo di richiesta.</p><h4>2. Utilizzo dei Dati</h4><p>I tuoi dati vengono utilizzati esclusivamente per gestire le tue richieste di prenotazione, visioni private o partnership di stampa.</p><h4>3. Sicurezza</h4><p>Applichiamo rigorosi standard di sicurezza per proteggere le tue informazioni personali da accessi non autorizzati.</p>`
-    }
-  },
-  terms: {
-    en: {
-      title: "Terms & Conditions",
-      body: `<h4>1. Intellectual Property</h4><p>All designs, trademarks, car specifications, and imagery displayed on Sharafutdinov.com are the exclusive property of Sharafutdinov Hypercars.</p><h4>2. Reservation Requests</h4><p>Submitting a request form does not guarantee vehicle allocation. Reservations are subject to private review and confirmation by our team.</p><h4>3. Amendments</h4><p>We reserve the right to modify site content and legal terms at any time without prior notice.</p>`
-    },
-    de: {
-      title: "Allgemeine Geschäftsbedingungen",
-      body: `<h4>1. Geistiges Eigentum</h4><p>Alle Designs, Marken und Fahrzeugspezifikationen auf Sharafutdinov.com sind exklusives Eigentum von Sharafutdinov Hypercars.</p><h4>2. Reservierungsanfragen</h4><p>Das Absenden des Anfrageformulars garantiert keine Zuteilung eines Fahrzeugs. Reservierungen unterliegen der Prüfung durch unser Team.</p><h4>3. Änderungen</h4><p>Wir behalten uns das Recht vor, Inhalte und Bedingungen jederzeit anzupassen.</p>`
-    },
-    it: {
-      title: "Termini e Condizioni",
-      body: `<h4>1. Proprietà Intellettuale</h4><p>Tutti i marchi, design e specifiche presenti su Sharafutdinov.com sono di proprietà esclusiva di Sharafutdinov Hypercars.</p><h4>2. Richieste di Prenotazione</h4><p>L'invio del modulo non garantisce l'assegnazione della vettura. Le prenotazioni sono soggette a conferme private dal nostro team.</p><h4>3. Modifiche</h4><p>Ci riserviamo il diritto di modificare i contenuti in qualsiasi momento.</p>`
-    }
-  },
-  cookies: {
-    en: {
-      title: "Cookie Policy",
-      body: `<h4>1. What Are Cookies</h4><p>Cookies are small text files stored on your device to enhance navigation and website functionality.</p><h4>2. Essential Cookies</h4><p>We use essential cookies strictly required for language selection and form submissions.</p><h4>3. Managing Cookies</h4><p>You can adjust your browser settings to block cookies, though some site functions may be limited.</p>`
-    },
-    de: {
-      title: "Cookie-Richtlinie",
-      body: `<h4>1. Was sind Cookies</h4><p>Cookies sind kleine Textdateien, die auf Ihrem Gerät gespeichert werden, um die Funktionalität der Website zu verbessern.</p><h4>2. Notwendige Cookies</h4><p>Wir verwenden essentielle Cookies zur Aufrechterhaltung der Sprachauswahl und Formularfunktionen.</p><h4>3. Verwaltung</h4><p>Sie können Cookies über Ihre Browsereinstellungen jederzeit deaktivieren.</p>`
-    },
-    it: {
-      title: "Informativa sui Cookie",
-      body: `<h4>1. Cosa sono i Cookie</h4><p>I cookie sono piccoli file di testo salvati sul tuo dispositivo per migliorare la navigazione.</p><h4>2. Cookie Essenziali</h4><p>Utilizziamo cookie essenziali per la selezione della lingua e le funzionalità del modulo.</p><h4>3. Gestione</h4><p>Puoi disabilitare i cookie nelle impostazioni del tuo browser.</p>`
-    }
-  }
-};
-
-function setLang(lang) {
-  currentLang = lang;
-  document.querySelectorAll('.lang-btn').forEach(btn => btn.classList.toggle('active', btn.textContent.toLowerCase() === lang));
-  
-  // Translate text content
-  document.querySelectorAll('[data-key]').forEach(el => {
-    const key = el.getAttribute('data-key');
-    if (translations[lang] && translations[lang][key]) {
-      el.innerHTML = translations[lang][key];
-    }
-  });
-
-  // Translate dropdown options
-  const select = document.getElementById('topicSelect');
-  if(select) {
-    select.options[0].text = translations[lang].opt_reserve;
-    select.options[1].text = translations[lang].opt_viewing;
-    select.options[2].text = translations[lang].opt_press;
-    select.options[3].text = translations[lang].opt_other;
-  }
+@keyframes shake {
+  0%, 100% { transform: translateX(0); }
+  20%, 60% { transform: translateX(-6px); }
+  40%, 80% { transform: translateX(6px); }
 }
 
-// --- MODAL SYSTEM ---
-function openModal(docType) {
-  const backdrop = document.getElementById('modalBackdrop');
-  const title = document.getElementById('modalTitle');
-  const body = document.getElementById('modalBody');
-
-  if (legalDocs[docType] && legalDocs[docType][currentLang]) {
-    title.innerHTML = legalDocs[docType][currentLang].title;
-    body.innerHTML = legalDocs[docType][currentLang].body;
-    backdrop.classList.add('open');
-  }
+.code-btn {
+  --cut: 8px;
+  font-family: var(--font-title);
+  font-weight: 700;
+  text-transform: uppercase;
+  font-size: 0.8rem;
+  letter-spacing: 0.2em;
+  padding: 10px 22px;
+  border: 1px solid var(--lavender);
+  background: var(--lavender);
+  color: var(--black);
+  cursor: pointer;
+  transition: all 0.3s;
+}
+.code-btn:hover {
+  background: transparent;
+  color: var(--lavender);
+  box-shadow: 0 0 15px var(--accent-glow);
 }
 
-function closeModal(event) {
-  if (!event || event.target.id === 'modalBackdrop' || event.target.classList.contains('modal-close')) {
-    document.getElementById('modalBackdrop').classList.remove('open');
-  }
+.code-error-msg {
+  font-size: 0.72rem;
+  color: #ff4d4d;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  min-height: 1.2em;
+  visibility: hidden;
+}
+.code-error-msg.visible { visibility: visible; }
+
+body.unlocked-site .code-access-form { display: none; }
+
+.side {
+  position: absolute;
+  bottom: 24px;
+  font-size: 0.75rem;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--gray-muted);
+  text-decoration: none;
+  transition: color 0.3s;
+}
+.side.l { left: max(5vw, 28px); }
+.side.r { right: max(5vw, 28px); }
+.side:hover { color: var(--lavender); }
+
+/* CONTACT & ATELIER REQUEST SLIDE */
+.contact {
+  background: var(--black);
+  color: var(--white);
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
+  padding: 95px max(7vw, 28px) 24px;
+  overflow-y: auto;
+  background-image: radial-gradient(circle at 80% 80%, rgba(185, 164, 232, 0.05) 0%, transparent 50%);
 }
 
-document.addEventListener('keydown', e => { if (e.key === 'Escape') closeModal(); });
-
-// --- MENU TOGGLE ---
-const b=document.getElementById('burger');
-const logoBtn=document.getElementById('logoBtn');
-
-function toggle(o){
-  document.body.classList.toggle('menu-open',o);
-  b.setAttribute('aria-expanded',o);
-  b.setAttribute('aria-label',o?'Close menu':'Open menu');
+.contact-grid {
+  display: grid;
+  grid-template-columns: 1fr 1.05fr;
+  gap: clamp(30px, 5vw, 70px);
+  align-items: start;
+  width: 100%;
+  max-width: 1200px;
+  margin-bottom: 24px;
 }
 
-b.addEventListener('click',()=>toggle(!document.body.classList.contains('menu-open')));
-logoBtn.addEventListener('click',()=>toggle(!document.body.classList.contains('menu-open')));
+.contact h2 {
+  font-family: var(--font-title);
+  font-weight: 800;
+  text-transform: uppercase;
+  font-size: clamp(2.5rem, 5.5vw, 4.5rem);
+  line-height: 1.05;
+  letter-spacing: 0.04em;
+  color: var(--white);
+}
 
-document.querySelectorAll('.menu a').forEach(a=>a.addEventListener('click',()=>toggle(false)));
-document.getElementById('request').addEventListener('submit',e=>{
-  e.preventDefault();const f=e.target;
-  const consent = document.getElementById('consent');
-  if(!f.name.value.trim()||!/\S+@\S+\.\S+/.test(f.email.value)){(f.name.value.trim()?f.email:f.name).focus();return}
-  if(!consent.checked){consent.focus();return}
-  f.classList.add('sent');
-});
-</script>
-</body>
-</html>
+.contact .lead {
+  margin-top: 20px;
+  max-width: 38ch;
+  font-size: 0.92rem;
+  line-height: 1.7;
+  color: var(--gray-muted);
+}
+
+.info { margin-top: 32px; display: grid; gap: 18px; }
+.info div { padding-left: 18px; border-left: 2px solid var(--lavender); }
+.info dt { font-size: 0.72rem; text-transform: uppercase; letter-spacing: 0.2em; color: var(--gray-muted); margin-bottom: 4px; }
+.info dd { font-family: var(--font-title); font-size: 1.15rem; font-weight: 700; letter-spacing: 0.05em; color: var(--white); }
+.info a { text-decoration: none; transition: color 0.3s; }
+.info a:hover { color: var(--lavender); }
+
+/* FORM STYLE */
+form#request {
+  background: rgba(11, 12, 14, 0.7);
+  border: 1px solid var(--border-lavender);
+  padding: clamp(24px, 3vw, 36px);
+  display: grid;
+  gap: 16px;
+  box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+}
+
+form h3 {
+  font-family: var(--font-title);
+  font-weight: 700;
+  text-transform: uppercase;
+  font-size: 1.4rem;
+  letter-spacing: 0.1em;
+  color: var(--lavender);
+  margin-bottom: 4px;
+}
+
+label { display: grid; gap: 6px; font-size: 0.75rem; letter-spacing: 0.12em; text-transform: uppercase; color: var(--gray-muted); }
+
+input, select, textarea {
+  font-family: var(--font-body);
+  font-size: 0.9rem;
+  color: var(--white);
+  background: rgba(255, 255, 255, 0.03);
+  border: 0;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+  padding: 10px 12px;
+  border-radius: 0;
+  transition: all 0.3s;
+}
+select option { background: var(--black); color: var(--white); }
+textarea { resize: vertical; min-height: 70px; }
+input:focus, select:focus, textarea:focus {
+  outline: none;
+  border-color: var(--lavender);
+  background: rgba(185, 164, 232, 0.05);
+}
+
+.legal-agree { display: flex; align-items: flex-start; gap: 10px; font-size: 0.72rem; color: var(--gray-muted); margin-top: 4px; }
+.legal-agree input[type="checkbox"] { accent-color: var(--lavender); margin-top: 2px; cursor: pointer; }
+.legal-agree a { color: var(--lavender); text-decoration: underline; cursor: pointer; }
+
+button.send {
+  --cut: 10px;
+  margin-top: 8px;
+  font-family: var(--font-title);
+  font-weight: 700;
+  text-transform: uppercase;
+  font-size: 0.85rem;
+  letter-spacing: 0.2em;
+  padding: 14px 24px;
+  border: 1px solid var(--lavender);
+  background: var(--lavender);
+  color: var(--black);
+  cursor: pointer;
+  transition: all 0.3s;
+}
+button.send:hover { background: transparent; color: var(--lavender); box-shadow: 0 0 20px var(--accent-glow); }
+.ok { display: none; color: var(--lavender); font-size: 0.85rem; font-family: var(--font-title); letter-spacing: 0.1em; }
+form.sent .ok { display: block; }
+form.sent button.send { opacity: 0.4; pointer-events: none; }
+
+/* FOOTER */
+footer.site-footer {
+  width: 100%;
+  max-width: 1200px;
+  border-top: 1px solid var(--border-lavender);
+  padding-top: 18px;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  font-size: 0.72rem;
+  color: var(--gray-muted);
+}
+.footer-top { display
