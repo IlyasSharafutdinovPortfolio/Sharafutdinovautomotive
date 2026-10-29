@@ -5,8 +5,8 @@
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <title>Sharafutdinov Automotive</title>
 
-<!-- SEO & Search Engine Indexing -->
-<meta name="description" content="Sharafutdinov Automotive — Bespoke Limited Series Hypercars. Private viewing and allocation requests.">
+<!-- SEO & Indexing -->
+<meta name="description" content="Sharafutdinov Automotive — Limited series bespoke hypercars. Private viewing and allocation requests.">
 <meta name="robots" content="index, follow">
 
 <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -15,8 +15,8 @@
 
 <style>
 :root {
-  /* СВЕТЛАЯ СТУДИЙНАЯ ГАММА (как у Koenigsegg) */
-  --bg-main: #f4f5f7;
+  /* ИДЕАЛЬНО НЕЙТРАЛЬНЫЙ СТУДИЙНЫЙ ФОН БЕЗ СИНЕВЫ (чистый серый / титан) */
+  --bg-main: #eef0f3;
   --bg-card: #ffffff;
   --bg-dark: #090a0c;
   
@@ -24,10 +24,10 @@
   --text-muted: #646a78;
   --text-light: #f4f5f7;
   
-  /* ЦВЕТА ЛОГОТИПА */
+  /* АКЦЕНТ ПОД РОЗОВО-ЛАВАНДОВЫЙ ОВАЛ ЛОГО */
   --accent-lavender: #b9a4e8;
   --accent-plum: #d488b8;
-  --border-light: rgba(15, 17, 21, 0.12);
+  --border-light: rgba(15, 17, 21, 0.1);
   
   --font-title: 'Syne', sans-serif;
   --font-tech: 'Space Grotesk', sans-serif;
@@ -74,8 +74,8 @@ header.site-header {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  background: linear-gradient(180deg, rgba(244, 245, 247, 0.9) 0%, transparent 100%);
-  backdrop-filter: blur(8px);
+  background: linear-gradient(180deg, rgba(238, 240, 243, 0.85) 0%, transparent 100%);
+  backdrop-filter: blur(10px);
 }
 
 .brand-logo-wrap {
@@ -85,16 +85,16 @@ header.site-header {
 }
 
 .brand-logo-img {
-  height: 38px;
+  height: 40px;
   width: auto;
-  filter: drop-shadow(0 4px 12px rgba(0,0,0,0.15));
+  filter: drop-shadow(0 4px 12px rgba(0,0,0,0.12));
 }
 
 .brand-title {
   font-family: var(--font-tech);
   font-weight: 700;
-  font-size: 1.1rem;
-  letter-spacing: 0.2em;
+  font-size: 1.15rem;
+  letter-spacing: 0.22em;
   text-transform: uppercase;
   color: var(--text-primary);
 }
@@ -102,7 +102,7 @@ header.site-header {
 .header-controls {
   display: flex;
   align-items: center;
-  gap: 24px;
+  gap: 28px;
 }
 
 .lang-switch {
@@ -135,7 +135,7 @@ header.site-header {
 }
 .burger span {
   display: block;
-  width: 24px;
+  width: 26px;
   height: 2px;
   background: var(--text-primary);
   transition: transform 0.3s, opacity 0.3s;
@@ -168,14 +168,14 @@ body.menu-open .menu-drawer {
   background: none;
   border: none;
   color: var(--text-light);
-  font-size: 2rem;
+  font-size: 2.2rem;
   cursor: pointer;
 }
 
 .menu-nav {
   display: flex;
   flex-direction: column;
-  gap: 20px;
+  gap: 24px;
 }
 .menu-nav a {
   font-family: var(--font-tech);
@@ -187,17 +187,17 @@ body.menu-open .menu-drawer {
 }
 .menu-nav a:hover {
   color: var(--accent-lavender);
-  transform: translateX(12px);
+  transform: translateX(16px);
 }
 
-/* HERO SLIDE (Koenigsegg-Style Light Studio) */
+/* HERO SLIDE (Студийный нейтральный свет) */
 .hero {
   display: flex;
   flex-direction: column;
   justify-content: space-between;
   align-items: center;
   padding: 120px 40px 40px;
-  background: radial-gradient(circle at 50% 40%, #ffffff 0%, #e8ebf0 100%);
+  background: radial-gradient(circle at 50% 45%, #ffffff 0%, #e2e5ea 100%);
   text-align: center;
 }
 
@@ -215,27 +215,28 @@ body.menu-open .menu-drawer {
 .hero-title {
   font-family: var(--font-tech);
   font-weight: 700;
-  font-size: clamp(2.5rem, 6vw, 5rem);
+  font-size: clamp(2.8rem, 6.5vw, 5.5rem);
   letter-spacing: -0.02em;
   text-transform: uppercase;
-  line-height: 0.95;
+  line-height: 0.92;
   color: var(--text-primary);
 }
 
+/* ФОТО ГИПЕРКАРА В ЦЕНТРЕ (как у Pagani / Koenigsegg) */
 .hero-car-stage {
   position: relative;
-  width: min(1100px, 90vw);
+  width: min(1150px, 92vw);
   aspect-ratio: 16/8;
   display: flex;
   align-items: center;
   justify-content: center;
-  margin: 20px 0;
+  margin: 10px 0;
 }
 .hero-car-stage img {
   width: 100%;
   height: 100%;
   object-fit: contain;
-  filter: drop-shadow(0 20px 30px rgba(0,0,0,0.15));
+  filter: drop-shadow(0 25px 35px rgba(0,0,0,0.18));
 }
 
 .hero-footer {
@@ -243,9 +244,9 @@ body.menu-open .menu-drawer {
   justify-content: space-between;
   align-items: center;
   width: 100%;
-  max-width: 1100px;
+  max-width: 1150px;
   border-top: 1px solid var(--border-light);
-  padding-top: 20px;
+  padding-top: 24px;
 }
 
 .hero-spec {
@@ -258,7 +259,7 @@ body.menu-open .menu-drawer {
 }
 .hero-spec strong {
   display: block;
-  font-size: 1.2rem;
+  font-size: 1.25rem;
   font-weight: 700;
 }
 
@@ -268,7 +269,7 @@ body.menu-open .menu-drawer {
   font-size: 0.85rem;
   letter-spacing: 0.15em;
   text-transform: uppercase;
-  padding: 14px 28px;
+  padding: 16px 32px;
   background: var(--text-primary);
   color: #ffffff;
   border: none;
@@ -278,53 +279,54 @@ body.menu-open .menu-drawer {
 .btn-primary:hover {
   background: var(--accent-plum);
   color: #ffffff;
-  box-shadow: 0 8px 24px rgba(212, 136, 184, 0.3);
+  box-shadow: 0 8px 24px rgba(212, 136, 184, 0.35);
 }
 
-/* SECTION 2: ENGINEERING & PERFORMANCE */
-.features {
+/* ЭСТЕТИКА И ФИЛОСОФИЯ (без телеметрии и CFD) */
+.philosophy {
   background: #ffffff;
-  padding: 100px 40px;
+  padding: 120px 40px;
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
 }
 
-.features-grid {
+.philosophy-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
   gap: 40px;
   width: 100%;
-  max-width: 1100px;
+  max-width: 1150px;
   margin-top: 60px;
 }
 
-.feature-card {
-  padding: 32px;
+.philosophy-card {
+  padding: 40px;
   background: var(--bg-main);
   border: 1px solid var(--border-light);
 }
-.feature-card h3 {
+.philosophy-card h3 {
   font-family: var(--font-tech);
-  font-size: 1.4rem;
-  margin-bottom: 12px;
+  font-size: 1.3rem;
+  margin-bottom: 14px;
   text-transform: uppercase;
+  letter-spacing: 0.05em;
 }
-.feature-card p {
+.philosophy-card p {
   color: var(--text-muted);
   font-size: 0.95rem;
-  line-height: 1.6;
+  line-height: 1.65;
 }
 
 /* FOOTER */
 footer.site-footer {
   background: var(--bg-dark);
   color: var(--text-light);
-  padding: 60px 40px 30px;
+  padding: 80px 40px 36px;
   display: flex;
   flex-direction: column;
-  gap: 40px;
+  gap: 50px;
 }
 
 .footer-top {
@@ -332,23 +334,29 @@ footer.site-footer {
   justify-content: space-between;
   align-items: flex-start;
   flex-wrap: wrap;
-  gap: 30px;
+  gap: 40px;
+  max-width: 1150px;
+  margin: 0 auto;
+  width: 100%;
 }
 
 .footer-brand h2 {
   font-family: var(--font-tech);
-  font-size: 2rem;
+  font-size: 2.2rem;
   letter-spacing: 0.1em;
   text-transform: uppercase;
 }
 
 .footer-bottom {
   border-top: 1px solid rgba(255,255,255,0.1);
-  padding-top: 20px;
+  padding-top: 24px;
   display: flex;
   justify-content: space-between;
   font-size: 0.8rem;
   color: rgba(255,255,255,0.4);
+  max-width: 1150px;
+  margin: 0 auto;
+  width: 100%;
 }
 
 @media (max-width: 768px) {
@@ -386,11 +394,11 @@ footer.site-footer {
   </div>
   <nav class="menu-nav">
     <a href="#hero">QT12GT Hypercar</a>
-    <a href="#engineering">Engineering</a>
+    <a href="#philosophy">Philosophy</a>
     <a href="#atelier">Private Atelier</a>
     <a href="#contact">Contact</a>
   </nav>
-  <div style="font-family: var(--font-tech); font-size: 0.85rem; color: rgba(255,255,255,0.5);">
+  <div style="font-family: var(--font-tech); font-size: 0.85rem; color: rgba(255,255,255,0.4); letter-spacing: 0.1em;">
     SHARAFUTDINOV AUTOMOTIVE INC.
   </div>
 </div>
@@ -418,30 +426,30 @@ footer.site-footer {
       <strong>100 UNITS</strong>
       Worldwide Allocation
     </div>
-    <button class="btn-primary" onclick="document.getElementById('engineering').scrollIntoView({behavior:'smooth'})">
+    <button class="btn-primary" onclick="document.getElementById('philosophy').scrollIntoView({behavior:'smooth'})">
       Discover More
     </button>
   </div>
 </section>
 
-<section class="slide features" id="engineering">
+<section class="slide philosophy" id="philosophy">
   <div class="hero-header" style="text-align: center;">
-    <div class="hero-tag">Aerodynamics & Physics</div>
-    <h2 class="hero-title" style="font-size: 2.5rem;">ENGINEERED WITHOUT COMPROMISE</h2>
+    <div class="hero-tag">Automotive Artistry</div>
+    <h2 class="hero-title" style="font-size: 2.6rem;">ANALOG PERFECTION IN A DIGITAL WORLD</h2>
   </div>
 
-  <div class="features-grid">
-    <div class="feature-card">
-      <h3>AERODYNAMIC INTEGRITY</h3>
-      <p>Validated via advanced SimFlow CFD modeling, achieving an ultra-efficient drag footprint ($C_d = 0.378$) with high-speed downforce stability.</p>
+  <div class="philosophy-grid">
+    <div class="philosophy-card">
+      <h3>UNCOMPROMISED ART</h3>
+      <p>A seamless fusion of mechanical precision and bespoke craftsmanship, built for the most discerning collectors on earth.</p>
     </div>
-    <div class="feature-card">
-      <h3>THERMAL PROTECTION</h3>
-      <p>Aerospace-grade gold foil shielding integrated along the monocoque firewall and exhaust packaging to ensure maximum thermal endurance.</p>
+    <div class="philosophy-card">
+      <h3>ANALOG SOUL</h3>
+      <p>Celebrating the visceral thrill of an ultra-high-output quad-turbo V12 powertrain engineered for hypnotic acoustic expression.</p>
     </div>
-    <div class="feature-card">
-      <h3>BESPOKE CHASSIS</h3>
-      <p>Ultra-rigid carbon fiber monocoque engineered in collaboration with world-class Tier-1 motorsport suppliers.</p>
+    <div class="philosophy-card">
+      <h3>EXCLUSIVE HERITAGE</h3>
+      <p>Strictly limited to 100 bespoke allocations worldwide, ensuring eternal rarity and investment prestige.</p>
     </div>
   </div>
 </section>
@@ -450,11 +458,11 @@ footer.site-footer {
   <div class="footer-top">
     <div class="footer-brand">
       <h2>SHARAFUTDINOV</h2>
-      <p style="color: rgba(255,255,255,0.5); font-size: 0.9rem; margin-top: 8px;">The Pinnacle of Automotive Art & Engineering</p>
+      <p style="color: rgba(255,255,255,0.4); font-size: 0.9rem; margin-top: 8px;">The Pinnacle of Automotive Art & Engineering</p>
     </div>
     <div>
-      <p style="font-family: var(--font-tech); font-size: 0.85rem; color: rgba(255,255,255,0.5);">PRIVATE INQUIRIES</p>
-      <a href="mailto:Sharafutdinovauto@gmail.com" style="font-size: 1.1rem; color: #fff; text-decoration: underline;">Sharafutdinovauto@gmail.com</a>
+      <p style="font-family: var(--font-tech); font-size: 0.8rem; color: rgba(255,255,255,0.4); letter-spacing: 0.15em; text-transform: uppercase;">PRIVATE ALLOCATION INQUIRIES</p>
+      <a href="mailto:Sharafutdinovauto@gmail.com" style="font-size: 1.1rem; color: #fff; text-decoration: underline; margin-top: 4px; display: inline-block;">Sharafutdinovauto@gmail.com</a>
     </div>
   </div>
 
