@@ -5,8 +5,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <title>Sharafutdinov Automotive</title>
 
-<!-- SEO & Indexing -->
-<meta name="description" content="Sharafutdinov Automotive — Limited series bespoke hypercars. Private viewing and allocation requests.">
+<meta name="description" content="Sharafutdinov Automotive — Limited series bespoke hypercars.">
 <meta name="robots" content="index, follow">
 
 <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -15,7 +14,6 @@
 
 <style>
 :root {
-  /* ИДЕАЛЬНО НЕЙТРАЛЬНЫЙ СТУДИЙНЫЙ ФОН БЕЗ СИНЕВЫ (чистый серый / титан) */
   --bg-main: #eef0f3;
   --bg-card: #ffffff;
   --bg-dark: #090a0c;
@@ -24,10 +22,9 @@
   --text-muted: #646a78;
   --text-light: #f4f5f7;
   
-  /* АКЦЕНТ ПОД РОЗОВО-ЛАВАНДОВЫЙ ОВАЛ ЛОГО */
   --accent-lavender: #b9a4e8;
   --accent-plum: #d488b8;
-  --border-light: rgba(15, 17, 21, 0.1);
+  --border-light: rgba(15, 17, 21, 0.12);
   
   --font-title: 'Syne', sans-serif;
   --font-tech: 'Space Grotesk', sans-serif;
@@ -41,7 +38,7 @@
 html {
   scroll-snap-type: y mandatory;
   scroll-behavior: smooth;
-  scroll-padding-top: env(safe-area-inset-top, 0px);
+  height: 100%;
   background: var(--bg-main);
 }
 
@@ -50,6 +47,8 @@ body {
   background: var(--bg-main);
   color: var(--text-primary);
   -webkit-font-smoothing: antialiased;
+  height: 100%;
+  overflow-x: hidden;
 }
 
 a { color: inherit; text-decoration: none; }
@@ -62,6 +61,7 @@ a { color: inherit; text-decoration: none; }
   scroll-snap-stop: always;
   position: relative;
   box-sizing: border-box;
+  overflow: hidden;
 }
 
 /* TOP HEADER */
@@ -81,106 +81,102 @@ header.site-header {
 .brand-logo-wrap {
   display: flex;
   align-items: center;
-  gap: 16px;
+  gap: 14px;
 }
 
 .brand-logo-img {
-  height: 40px;
+  height: 38px;
   width: auto;
-  filter: drop-shadow(0 4px 12px rgba(0,0,0,0.12));
+  filter: drop-shadow(0 4px 10px rgba(0,0,0,0.12));
 }
 
 .brand-title {
   font-family: var(--font-tech);
   font-weight: 700;
-  font-size: 1.15rem;
+  font-size: 1.1rem;
   letter-spacing: 0.22em;
   text-transform: uppercase;
   color: var(--text-primary);
 }
 
-.header-controls {
-  display: flex;
-  align-items: center;
-  gap: 28px;
+/* КНОПКА МЕНЮ В ПРАВОМ ВЕРХНЕМ УГЛУ И АНИМАЦИЯ ГИПЕРКАРА */
+.menu-trigger-wrap {
+  position: relative;
+  width: 40px;
+  height: 40px;
+  overflow: hidden;
 }
 
-.lang-switch {
-  display: flex;
-  gap: 6px;
-  font-family: var(--font-tech);
-  font-size: 0.75rem;
-  font-weight: 600;
-}
-.lang-btn {
-  background: none;
-  border: none;
-  color: var(--text-muted);
-  cursor: pointer;
-  padding: 2px 4px;
-  transition: color 0.2s;
-}
-.lang-btn.active, .lang-btn:hover {
-  color: var(--text-primary);
-}
-
-.burger {
+.burger-btn, .close-btn {
+  position: absolute;
+  inset: 0;
   background: none;
   border: none;
   cursor: pointer;
   display: flex;
   flex-direction: column;
-  gap: 5px;
-  padding: 4px;
-}
-.burger span {
-  display: block;
-  width: 26px;
-  height: 2px;
-  background: var(--text-primary);
-  transition: transform 0.3s, opacity 0.3s;
+  justify-content: center;
+  align-items: center;
+  transition: transform 0.6s cubic-bezier(0.77, 0, 0.175, 1), opacity 0.4s ease, filter 0.4s ease;
 }
 
-/* MENU DRAWER */
+.burger-btn {
+  gap: 6px;
+}
+.burger-btn span {
+  display: block;
+  width: 28px;
+  height: 2px;
+  background: var(--text-primary);
+}
+
+.close-btn {
+  font-size: 2.2rem;
+  color: var(--text-light);
+  line-height: 1;
+  transform: translateX(60px);
+  opacity: 0;
+}
+
+/* Состояния анимации "улетающего гиперкара" */
+body.menu-open .burger-btn {
+  transform: translateX(-80px) skewX(-20deg);
+  opacity: 0;
+  filter: blur(4px);
+}
+
+body.menu-open .close-btn {
+  transform: translateX(0);
+  opacity: 1;
+}
+
+/* FULLSCREEN MENU DRAWER */
 .menu-drawer {
   position: fixed;
   inset: 0;
-  z-index: 100;
+  z-index: 45;
   background: var(--bg-dark);
   color: var(--text-light);
   display: flex;
   flex-direction: column;
   justify-content: space-between;
-  padding: 60px 8vw 40px;
+  padding: 120px 8vw 50px;
   transform: translateX(100%);
-  transition: transform 0.5s cubic-bezier(0.77, 0, 0.175, 1);
+  transition: transform 0.6s cubic-bezier(0.77, 0, 0.175, 1);
 }
 body.menu-open .menu-drawer {
   transform: translateX(0);
 }
 
-.menu-header {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-}
-.close-btn {
-  background: none;
-  border: none;
-  color: var(--text-light);
-  font-size: 2.2rem;
-  cursor: pointer;
-}
-
 .menu-nav {
   display: flex;
   flex-direction: column;
-  gap: 24px;
+  gap: 28px;
 }
 .menu-nav a {
   font-family: var(--font-tech);
   font-weight: 700;
-  font-size: clamp(2rem, 5vw, 4rem);
+  font-size: clamp(2.2rem, 5vw, 4.2rem);
   text-transform: uppercase;
   letter-spacing: 0.05em;
   transition: color 0.3s, transform 0.3s;
@@ -190,13 +186,41 @@ body.menu-open .menu-drawer {
   transform: translateX(16px);
 }
 
-/* HERO SLIDE (Студийный нейтральный свет) */
+.menu-footer-controls {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border-top: 1px solid rgba(255,255,255,0.12);
+  padding-top: 24px;
+}
+
+/* Переключатель языков внутри меню */
+.lang-switch {
+  display: flex;
+  gap: 12px;
+  font-family: var(--font-tech);
+  font-size: 0.9rem;
+  font-weight: 600;
+}
+.lang-btn {
+  background: none;
+  border: none;
+  color: rgba(255,255,255,0.4);
+  cursor: pointer;
+  padding: 4px 6px;
+  transition: color 0.2s;
+}
+.lang-btn.active, .lang-btn:hover {
+  color: var(--accent-lavender);
+}
+
+/* HERO SLIDE (СТРАНИЦА 1) */
 .hero {
   display: flex;
   flex-direction: column;
   justify-content: space-between;
   align-items: center;
-  padding: 120px 40px 40px;
+  padding: 110px 40px 40px;
   background: radial-gradient(circle at 50% 45%, #ffffff 0%, #e2e5ea 100%);
   text-align: center;
 }
@@ -210,7 +234,7 @@ body.menu-open .menu-drawer {
   letter-spacing: 0.3em;
   text-transform: uppercase;
   color: var(--text-muted);
-  margin-bottom: 12px;
+  margin-bottom: 10px;
 }
 .hero-title {
   font-family: var(--font-tech);
@@ -222,7 +246,7 @@ body.menu-open .menu-drawer {
   color: var(--text-primary);
 }
 
-/* ФОТО ГИПЕРКАРА В ЦЕНТРЕ (как у Pagani / Koenigsegg) */
+/* МЕСТО ПОД ФОТО ГИПЕРКАРА */
 .hero-car-stage {
   position: relative;
   width: min(1150px, 92vw);
@@ -231,45 +255,37 @@ body.menu-open .menu-drawer {
   align-items: center;
   justify-content: center;
   margin: 10px 0;
+  border: 1px dashed rgba(15, 17, 21, 0.2);
+  border-radius: 4px;
+  background: rgba(255, 255, 255, 0.4);
 }
 .hero-car-stage img {
   width: 100%;
   height: 100%;
   object-fit: contain;
-  filter: drop-shadow(0 25px 35px rgba(0,0,0,0.18));
+}
+.photo-placeholder-text {
+  font-family: var(--font-tech);
+  font-size: 0.9rem;
+  letter-spacing: 0.2em;
+  color: var(--text-muted);
+  text-transform: uppercase;
 }
 
-.hero-footer {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
+.hero-footer-btn {
+  border-top: 1px solid var(--border-light);
+  padding-top: 20px;
   width: 100%;
   max-width: 1150px;
-  border-top: 1px solid var(--border-light);
-  padding-top: 24px;
-}
-
-.hero-spec {
-  font-family: var(--font-tech);
-  font-size: 0.85rem;
-  letter-spacing: 0.15em;
-  text-transform: uppercase;
-  color: var(--text-primary);
-  text-align: left;
-}
-.hero-spec strong {
-  display: block;
-  font-size: 1.25rem;
-  font-weight: 700;
 }
 
 .btn-primary {
   font-family: var(--font-tech);
   font-weight: 600;
   font-size: 0.85rem;
-  letter-spacing: 0.15em;
+  letter-spacing: 0.18em;
   text-transform: uppercase;
-  padding: 16px 32px;
+  padding: 16px 36px;
   background: var(--text-primary);
   color: #ffffff;
   border: none;
@@ -278,72 +294,65 @@ body.menu-open .menu-drawer {
 }
 .btn-primary:hover {
   background: var(--accent-plum);
-  color: #ffffff;
   box-shadow: 0 8px 24px rgba(212, 136, 184, 0.35);
 }
 
-/* ЭСТЕТИКА И ФИЛОСОФИЯ (без телеметрии и CFD) */
-.philosophy {
+/* СТРАНИЦА 2: WORLD PREMIERE 2028 */
+.premiere-slide {
   background: #ffffff;
-  padding: 120px 40px;
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
-}
-
-.philosophy-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
-  gap: 40px;
-  width: 100%;
-  max-width: 1150px;
-  margin-top: 60px;
-}
-
-.philosophy-card {
+  text-align: center;
   padding: 40px;
-  background: var(--bg-main);
-  border: 1px solid var(--border-light);
-}
-.philosophy-card h3 {
-  font-family: var(--font-tech);
-  font-size: 1.3rem;
-  margin-bottom: 14px;
-  text-transform: uppercase;
-  letter-spacing: 0.05em;
-}
-.philosophy-card p {
-  color: var(--text-muted);
-  font-size: 0.95rem;
-  line-height: 1.65;
 }
 
-/* FOOTER */
+.premiere-title {
+  font-family: var(--font-tech);
+  font-weight: 800;
+  font-size: clamp(3rem, 8vw, 7rem);
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  color: var(--text-primary);
+  line-height: 1;
+}
+
+.premiere-year {
+  font-family: var(--font-tech);
+  font-weight: 700;
+  font-size: clamp(4rem, 12vw, 11rem);
+  letter-spacing: 0.1em;
+  color: var(--accent-plum);
+  margin-top: 10px;
+  line-height: 0.9;
+}
+
+/* FOOTER (СТРАНИЦА 3) */
 footer.site-footer {
   background: var(--bg-dark);
   color: var(--text-light);
-  padding: 80px 40px 36px;
+  padding: 90px 40px 40px;
   display: flex;
   flex-direction: column;
-  gap: 50px;
+  justify-content: space-between;
 }
 
-.footer-top {
+.footer-content {
+  max-width: 1150px;
+  margin: 0 auto;
+  width: 100%;
   display: flex;
   justify-content: space-between;
   align-items: flex-start;
   flex-wrap: wrap;
   gap: 40px;
-  max-width: 1150px;
-  margin: 0 auto;
-  width: 100%;
 }
 
 .footer-brand h2 {
   font-family: var(--font-tech);
-  font-size: 2.2rem;
-  letter-spacing: 0.1em;
+  font-size: 2.5rem;
+  letter-spacing: 0.12em;
   text-transform: uppercase;
 }
 
@@ -352,18 +361,17 @@ footer.site-footer {
   padding-top: 24px;
   display: flex;
   justify-content: space-between;
-  font-size: 0.8rem;
+  font-size: 0.85rem;
   color: rgba(255,255,255,0.4);
   max-width: 1150px;
-  margin: 0 auto;
+  margin: 60px auto 0;
   width: 100%;
 }
 
 @media (max-width: 768px) {
   header.site-header { padding: 16px 20px; }
   .hero { padding: 90px 20px 30px; }
-  .hero-footer { flex-direction: column; gap: 20px; text-align: center; }
-  .hero-spec { text-align: center; }
+  .footer-content { flex-direction: column; }
 }
 </style>
 </head>
@@ -375,114 +383,96 @@ footer.site-footer {
     <span class="brand-title">Sharafutdinov</span>
   </div>
 
-  <div class="header-controls">
+  <!-- КРАЙНИЙ ПРАВЫЙ УГОЛ С АНИМАЦИЕЙ -->
+  <div class="menu-trigger-wrap">
+    <button class="burger-btn" id="menuOpenBtn" aria-label="Open Menu">
+      <span></span><span></span><span></span>
+    </button>
+    <button class="close-btn" id="menuCloseBtn" aria-label="Close Menu">&times;</button>
+  </div>
+</header>
+
+<!-- ВСПЛЫВАЮЩЕЕ МЕНЮ С ЯЗЫКАМИ ВНУТРИ -->
+<div class="menu-drawer" id="menuDrawer">
+  <nav class="menu-nav">
+    <a href="#hero" onclick="toggleMenu(false)">QT12GT Hypercar</a>
+    <a href="#premiere" onclick="toggleMenu(false)">World Premiere</a>
+    <a href="#contact" onclick="toggleMenu(false)">Contact</a>
+  </nav>
+
+  <div class="menu-footer-controls">
     <div class="lang-switch">
       <button class="lang-btn active">EN</button>
       <button class="lang-btn">DE</button>
       <button class="lang-btn">IT</button>
     </div>
-    <button class="burger" id="burgerBtn" aria-label="Menu">
-      <span></span><span></span><span></span>
-    </button>
-  </div>
-</header>
-
-<div class="menu-drawer" id="menuDrawer">
-  <div class="menu-header">
-    <span class="brand-title" style="color:#fff;">Sharafutdinov</span>
-    <button class="close-btn" id="closeBtn">&times;</button>
-  </div>
-  <nav class="menu-nav">
-    <a href="#hero">QT12GT Hypercar</a>
-    <a href="#philosophy">Philosophy</a>
-    <a href="#atelier">Private Atelier</a>
-    <a href="#contact">Contact</a>
-  </nav>
-  <div style="font-family: var(--font-tech); font-size: 0.85rem; color: rgba(255,255,255,0.4); letter-spacing: 0.1em;">
-    SHARAFUTDINOV AUTOMOTIVE INC.
+    <div style="font-family: var(--font-tech); font-size: 0.8rem; color: rgba(255,255,255,0.4); letter-spacing: 0.15em;">
+      SHARAFUTDINOV AUTOMOTIVE INC.
+    </div>
   </div>
 </div>
 
+<!-- СТРАНИЦА 1 -->
 <section class="slide hero" id="hero">
   <div class="hero-header">
     <div class="hero-tag">Limited Series Flagship</div>
     <h1 class="hero-title">QT12GT ROADSTER</h1>
   </div>
 
+  <!-- РАМКА ДЛЯ ВСТАВКИ ФОТО ГИПЕРКАРА -->
   <div class="hero-car-stage">
-    <img src="IMG_9323.png" alt="QT12GT Hypercar">
+    <!-- Когда будет готово фото, вставишь сюда: <img src="твое_фото.png" alt="QT12GT"> -->
+    <span class="photo-placeholder-text">Place for QT12GT Hypercar Photo</span>
   </div>
 
-  <div class="hero-footer">
-    <div class="hero-spec">
-      <strong>2000+ HP</strong>
-      V12 Quad-Turbo Engine
-    </div>
-    <div class="hero-spec">
-      <strong>500 KM/H</strong>
-      Target Velocity
-    </div>
-    <div class="hero-spec">
-      <strong>100 UNITS</strong>
-      Worldwide Allocation
-    </div>
-    <button class="btn-primary" onclick="document.getElementById('philosophy').scrollIntoView({behavior:'smooth'})">
+  <div class="hero-footer-btn">
+    <button class="btn-primary" onclick="document.getElementById('premiere').scrollIntoView({behavior:'smooth'})">
       Discover More
     </button>
   </div>
 </section>
 
-<section class="slide philosophy" id="philosophy">
-  <div class="hero-header" style="text-align: center;">
-    <div class="hero-tag">Automotive Artistry</div>
-    <h2 class="hero-title" style="font-size: 2.6rem;">ANALOG PERFECTION IN A DIGITAL WORLD</h2>
-  </div>
-
-  <div class="philosophy-grid">
-    <div class="philosophy-card">
-      <h3>UNCOMPROMISED ART</h3>
-      <p>A seamless fusion of mechanical precision and bespoke craftsmanship, built for the most discerning collectors on earth.</p>
-    </div>
-    <div class="philosophy-card">
-      <h3>ANALOG SOUL</h3>
-      <p>Celebrating the visceral thrill of an ultra-high-output quad-turbo V12 powertrain engineered for hypnotic acoustic expression.</p>
-    </div>
-    <div class="philosophy-card">
-      <h3>EXCLUSIVE HERITAGE</h3>
-      <p>Strictly limited to 100 bespoke allocations worldwide, ensuring eternal rarity and investment prestige.</p>
-    </div>
-  </div>
+<!-- СТРАНИЦА 2 -->
+<section class="slide premiere-slide" id="premiere">
+  <div class="premiere-title">World Premiere</div>
+  <div class="premiere-year">2028</div>
 </section>
 
-<footer class="site-footer" id="contact">
-  <div class="footer-top">
-    <div class="footer-brand">
-      <h2>SHARAFUTDINOV</h2>
-      <p style="color: rgba(255,255,255,0.4); font-size: 0.9rem; margin-top: 8px;">The Pinnacle of Automotive Art & Engineering</p>
+<!-- СТРАНИЦА 3 (ПОДВАЛ) -->
+<section class="slide" style="background: var(--bg-dark); display: flex; flex-direction: column; justify-content: space-between;" id="contact">
+  <footer class="site-footer" style="height: 100%; justify-content: space-between;">
+    <div class="footer-content">
+      <div class="footer-brand">
+        <h2>SHARAFUTDINOV</h2>
+        <p style="color: rgba(255,255,255,0.4); font-size: 0.95rem; margin-top: 10px;">The Pinnacle of Automotive Art & Engineering</p>
+      </div>
+      <div>
+        <p style="font-family: var(--font-tech); font-size: 0.8rem; color: rgba(255,255,255,0.4); letter-spacing: 0.15em; text-transform: uppercase;">PRIVATE ALLOCATION INQUIRIES</p>
+        <a href="mailto:Sharafutdinovauto@gmail.com" style="font-size: 1.2rem; color: #fff; text-decoration: underline; margin-top: 6px; display: inline-block;">Sharafutdinovauto@gmail.com</a>
+      </div>
     </div>
-    <div>
-      <p style="font-family: var(--font-tech); font-size: 0.8rem; color: rgba(255,255,255,0.4); letter-spacing: 0.15em; text-transform: uppercase;">PRIVATE ALLOCATION INQUIRIES</p>
-      <a href="mailto:Sharafutdinovauto@gmail.com" style="font-size: 1.1rem; color: #fff; text-decoration: underline; margin-top: 4px; display: inline-block;">Sharafutdinovauto@gmail.com</a>
-    </div>
-  </div>
 
-  <div class="footer-bottom">
-    <span>© 2026 Sharafutdinov Automotive Inc. All rights reserved.</span>
-    <span>Miami, FL</span>
-  </div>
-</footer>
+    <div class="footer-bottom">
+      <span>© 2026 Sharafutdinov Automotive Inc. All rights reserved.</span>
+      <span>Brickell, Miami, FL</span>
+    </div>
+  </footer>
+</section>
 
 <script>
-const burgerBtn = document.getElementById('burgerBtn');
-const closeBtn = document.getElementById('closeBtn');
-const menuDrawer = document.getElementById('menuDrawer');
+const openBtn = document.getElementById('menuOpenBtn');
+const closeBtn = document.getElementById('menuCloseBtn');
 
-burgerBtn.addEventListener('click', () => document.body.classList.add('menu-open'));
-closeBtn.addEventListener('click', () => document.body.classList.remove('menu-open'));
+function toggleMenu(open) {
+  if (open) {
+    document.body.classList.add('menu-open');
+  } else {
+    document.body.classList.remove('menu-open');
+  }
+}
 
-document.querySelectorAll('.menu-nav a').forEach(a => {
-  a.addEventListener('click', () => document.body.classList.remove('menu-open'));
-});
+openBtn.addEventListener('click', () => toggleMenu(true));
+closeBtn.addEventListener('click', () => toggleMenu(false));
 </script>
 
 </body>
