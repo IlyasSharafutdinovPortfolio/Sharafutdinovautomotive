@@ -4,460 +4,470 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <title>Sharafutdinov Automotive</title>
-
-<meta name="description" content="Sharafutdinov Automotive — Limited series bespoke hypercars.">
+<meta name="description" content="Sharafutdinov Automotive — limited-series bespoke hypercars.">
 <meta name="robots" content="index, follow">
 
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Syne:wght@700;800&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@100..125,300..800&family=Inter:wght@300;400;500&display=swap" rel="stylesheet">
 
 <style>
 :root {
-  --bg-main: #090a0c;
-  --bg-dark: #050507;
-  
-  --text-primary: #ffffff;
-  --text-muted: rgba(255, 255, 255, 0.65);
-  
-  --accent-lavender: #b9a4e8;
-  --accent-plum: #d488b8;
-  
-  --font-title: 'Syne', sans-serif;
-  --font-tech: 'Space Grotesk', sans-serif;
-  --font-body: 'Inter', sans-serif;
-  
-  box-sizing: border-box;
+  --bg: #08090b; --paper: #efeeeb; --ink: #08090b;
+  --text: #fff; --muted: rgba(255,255,255,.62); --line: rgba(255,255,255,.18);
+  --accent: #d488b8; --accent-2: #b9a4e8;
+  --display: 'Archivo', 'Arial Black', sans-serif;
+  --body: 'Inter', system-ui, sans-serif;
+  --pad: clamp(20px, 3.2vw, 48px);
 }
-
-*, *::before, *::after { box-sizing: inherit; margin: 0; padding: 0; }
-
-html {
-  scroll-snap-type: y mandatory;
-  scroll-behavior: smooth;
-  height: 100%;
-  background: var(--bg-main);
-}
-
-body {
-  font-family: var(--font-body);
-  background: var(--bg-main);
-  color: var(--text-primary);
-  -webkit-font-smoothing: antialiased;
-  height: 100%;
-  overflow-x: hidden;
-}
-
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+html { scroll-snap-type: y proximity; scroll-behavior: smooth; background: var(--bg); }
+body { font-family: var(--body); background: var(--bg); color: var(--text); -webkit-font-smoothing: antialiased; overflow-x: hidden; }
 a { color: inherit; text-decoration: none; }
+button { font: inherit; color: inherit; background: none; border: 0; cursor: pointer; }
+:focus-visible { outline: 2px solid var(--accent-2); outline-offset: 4px; }
+.slide { min-height: 100vh; min-height: 100svh; position: relative; scroll-snap-align: start; overflow: hidden; }
 
-/* SLIDE STRUCTURE */
-.slide {
-  height: 100vh;
-  min-height: 100svh;
-  width: 100vw;
-  scroll-snap-align: start;
-  scroll-snap-stop: always;
-  position: relative;
-  box-sizing: border-box;
-  overflow: hidden;
+/* ---------- HEADER ---------- */
+.site-header {
+  position: fixed; inset: 0 0 auto 0; z-index: 60;
+  display: grid; grid-template-columns: 1fr auto 1fr; align-items: center;
+  padding: calc(22px + env(safe-area-inset-top, 0px)) var(--pad) 22px;
+  background: linear-gradient(180deg, rgba(0,0,0,.55), transparent); pointer-events: none;
 }
+.site-header > * { pointer-events: auto; }
+.brand { grid-column: 2; display: flex; align-items: center; gap: 12px; }
+.brand img { height: 34px; width: auto; }
+.brand img[hidden] { display: none; }
+.brand b { font-family: var(--display); font-stretch: 125%; font-weight: 700; font-size: .95rem; letter-spacing: .32em; text-transform: uppercase; }
 
-/* TOP HEADER */
-header.site-header {
-  position: fixed;
-  top: 0;
-  inset-x: 0;
-  z-index: 50;
-  padding: 28px 40px;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  background: linear-gradient(180deg, rgba(0, 0, 0, 0.6) 0%, transparent 100%);
-}
+/* burger flies away left like a hypercar, X arrives from the right (and back) */
+.menu-btn { grid-column: 3; justify-self: end; position: relative; width: 44px; height: 44px; overflow: hidden; }
+.burger, .close { position: absolute; inset: 0; display: flex; flex-direction: column; justify-content: center; align-items: center; }
+.burger i { display: block; width: 28px; height: 2px; background: #fff; margin: 3px 0; transition: transform .55s cubic-bezier(.77,0,.18,1), opacity .35s, filter .4s; }
+.burger i:nth-child(2) { transition-delay: .05s; } .burger i:nth-child(3) { transition-delay: .1s; }
+.burger { align-items: flex-end; padding-right: 8px; } .burger i:nth-child(2) { width: 18px; } .burger i:nth-child(3) { width: 23px; }
+.close { font-size: 2.3rem; line-height: 1; font-weight: 300; transform: translateX(70px) skewX(-25deg); opacity: 0; filter: blur(4px);
+  transition: transform .6s cubic-bezier(.16,1,.3,1) .15s, opacity .4s .15s, filter .5s .15s; pointer-events: none; }
+body.menu-open .burger i { transform: translateX(-90px) skewX(-30deg) scaleX(1.6); opacity: 0; filter: blur(5px); }
+body.menu-open .close { transform: none; opacity: 1; filter: none; pointer-events: auto; }
 
-.brand-logo-wrap {
-  display: flex;
-  align-items: center;
-  gap: 14px;
-}
+/* ---------- SIDE MENU ---------- */
+.scrim { position: fixed; inset: 0; z-index: 54; background: rgba(0,0,0,.55); opacity: 0; visibility: hidden; transition: opacity .4s, visibility .4s; }
+.menu { position: fixed; top: 0; right: 0; bottom: 0; z-index: 55; width: min(520px, 100%); background: #050507; display: flex; flex-direction: column; overflow-y: auto;
+  clip-path: polygon(44px 0, 100% 0, 100% 100%, 0 100%, 0 44px); transform: translateX(100%); transition: transform .6s cubic-bezier(.77,0,.18,1); }
+body.menu-open .menu { transform: none; }
+body.menu-open .scrim { opacity: 1; visibility: visible; }
+.menu-list { flex: 1; display: flex; flex-direction: column; justify-content: center; align-items: flex-start; gap: 2px; padding: 104px 56px 20px; }
+.menu-list a { display: flex; align-items: center; padding: 6px 0; font-family: var(--display); font-stretch: 118%; font-weight: 700; font-size: clamp(1.4rem, 2.5vw, 2rem); line-height: 1.15; letter-spacing: -.01em; text-transform: uppercase; color: rgba(255,255,255,.36); transition: color .25s; }
+.menu-list a::before { content: ""; width: 0; height: 2px; background: var(--accent); transition: width .35s cubic-bezier(.16,1,.3,1), margin .35s; }
+.menu-list a:hover, .menu-list a.on { color: #fff; }
+.menu-list a:hover::before, .menu-list a.on::before { width: 34px; margin-right: 16px; }
+.emblem { display: block; height: 44px; width: auto; margin-top: 30px; }
+.emblem[hidden] { display: none; }
+.menu-foot { display: flex; justify-content: space-between; align-items: center; gap: 16px; padding: 22px 56px 30px; border-top: 1px solid var(--line); }
+.lang, .msoc { display: flex; gap: 4px; }
+.lang button { padding: 8px 10px; font-family: var(--display); font-weight: 600; font-size: .85rem; letter-spacing: .1em; color: rgba(255,255,255,.4); transition: color .2s; }
+.lang button:hover { color: #fff; }
+.lang button[aria-pressed="true"] { color: #fff; box-shadow: inset 0 -2px var(--accent); }
+.msoc a { display: grid; place-items: center; padding: 9px; color: rgba(255,255,255,.5); transition: color .2s; }
+.msoc a:hover { color: var(--accent-2); }
+.msoc svg { width: 18px; height: 18px; stroke: currentColor; fill: none; stroke-width: 1.5; }
 
-.brand-logo-img {
-  height: 38px;
-  width: auto;
-  filter: drop-shadow(0 4px 12px rgba(0,0,0,0.5));
-}
+/* ---------- CUT-CORNER BUTTON ---------- */
+.cut { --c: 12px; position: relative; display: inline-flex; align-items: center; gap: 14px; padding: 15px 28px; font-size: .88rem; letter-spacing: .04em; color: #fff; isolation: isolate; }
+.cut::before, .cut::after { content: ""; position: absolute; z-index: -1; clip-path: polygon(var(--c) 0, 100% 0, 100% calc(100% - var(--c)), calc(100% - var(--c)) 100%, 0 100%, 0 var(--c)); transition: background .3s; }
+.cut::before { inset: 0; background: rgba(255,255,255,.4); }
+.cut::after { inset: 1px; background: rgba(8,9,11,.82); }
+.cut:hover::after { background: var(--accent); }
+.cut svg { width: 16px; height: 16px; stroke: currentColor; fill: none; stroke-width: 1.5; }
 
-.brand-title {
-  font-family: var(--font-tech);
-  font-weight: 700;
-  font-size: 1.1rem;
-  letter-spacing: 0.22em;
-  text-transform: uppercase;
-  color: var(--text-primary);
-}
+/* ---------- TYPE ---------- */
+.mega { font-family: var(--display); font-stretch: 118%; font-weight: 700; text-transform: uppercase; line-height: .92; letter-spacing: -.02em; font-size: clamp(2.6rem, 9vw, 9rem); }
+.mega span { display: block; }
+.mega .i1 { padding-left: 9vw; } .mega .i2 { padding-left: 18vw; }
+.tag { font-family: var(--display); font-stretch: 112%; font-weight: 500; font-size: .78rem; letter-spacing: .12em; text-transform: uppercase; color: var(--muted); }
 
-/* КНОПКА МЕНЮ В ПРАВОМ ВЕРХНЕМ УГЛУ */
-.menu-trigger-wrap {
-  position: relative;
-  width: 40px;
-  height: 40px;
-  overflow: hidden;
-}
+/* ---------- 1 HERO: render first, text small and low ---------- */
+.hero { display: flex; flex-direction: column; justify-content: flex-end; padding: 120px var(--pad) clamp(40px, 7vh, 72px); }
+.hero-media { position: absolute; inset: 0; z-index: 0; background:
+  radial-gradient(60% 45% at 62% 60%, rgba(185,164,232,.16), transparent 70%),
+  radial-gradient(90% 70% at 50% 40%, #1b1e26 0%, #08090b 78%); }
+.hero-media img, .hero-media video { width: 100%; height: 100%; object-fit: cover; }
+.hero-media::after { content: ""; position: absolute; inset: 55% 0 0; background: linear-gradient(180deg, transparent, rgba(8,9,11,.8)); pointer-events: none; }
+.hero-ph { position: absolute; inset: 0; display: grid; place-items: center; font-size: .8rem; letter-spacing: .3em; text-transform: uppercase; color: rgba(255,255,255,.22); }
+.hero-ph span { border: 1px dashed rgba(255,255,255,.18); padding: 34px 52px; }
+.hero-in { position: relative; z-index: 2; display: flex; justify-content: space-between; align-items: flex-end; gap: 24px; flex-wrap: wrap; }
+.hero .mega { font-size: clamp(1.5rem, 3.4vw, 3.4rem); line-height: 1; }
+.hero .mega .i1 { padding-left: 2.2em; }
+.scroll-hint { position: absolute; z-index: 2; left: 50%; bottom: 14px; transform: translateX(-50%); }
+.scroll-hint i { display: block; width: 1px; height: 30px; background: linear-gradient(#fff, transparent); animation: drip 2.2s ease-in-out infinite; }
+@keyframes drip { 0% { transform: scaleY(0); transform-origin: top; } 50% { transform: scaleY(1); transform-origin: top; } 51% { transform-origin: bottom; } 100% { transform: scaleY(0); transform-origin: bottom; } }
 
-.burger-btn, .close-btn {
-  position: absolute;
-  inset: 0;
-  background: none;
-  border: none;
-  cursor: pointer;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  transition: transform 0.6s cubic-bezier(0.77, 0, 0.175, 1), opacity 0.4s ease, filter 0.4s ease;
-}
+/* ---------- 2 PAST / PRESENT / FUTURE: three vertical panels, the active one opens ---------- */
+.story { display: flex; background: var(--bg); }
+.panel { position: relative; flex: 1; min-width: 0; display: flex; flex-direction: column; justify-content: flex-end; padding: 0 var(--pad) clamp(40px, 9vh, 90px); border-left: 1px solid var(--line); cursor: pointer; overflow: hidden; transition: flex .8s cubic-bezier(.77,0,.18,1); }
+.panel:first-child { border-left: 0; }
+.panel.on { flex: 3.4; }
+/* replace each background with a photo: .panel-bg { background-image: url(past.jpg) } */
+.panel-bg { position: absolute; inset: 0; z-index: 0; opacity: .5; transition: opacity .8s, transform 1.2s; transform: scale(1.06); }
+.panel:nth-child(1) .panel-bg { background: radial-gradient(80% 60% at 30% 70%, #2a2230, transparent), #0c0d10; }
+.panel:nth-child(2) .panel-bg { background: radial-gradient(80% 60% at 50% 70%, #3a2a3d, transparent), #0c0d10; }
+.panel:nth-child(3) .panel-bg { background: radial-gradient(80% 60% at 70% 70%, #43273a, transparent), #0c0d10; }
+.panel.on .panel-bg { opacity: 1; transform: none; }
+.panel::after { content: ""; position: absolute; inset: 0; z-index: 1; background: linear-gradient(180deg, rgba(8,9,11,.5), transparent 40%, rgba(8,9,11,.75)); pointer-events: none; }
+.panel > * { position: relative; z-index: 2; }
+.panel h2 { font-family: var(--display); font-stretch: 118%; font-weight: 700; text-transform: uppercase; letter-spacing: -.02em; line-height: .95; font-size: clamp(1.3rem, 3.2vw, 3.6rem); color: rgba(255,255,255,.55); transition: color .5s; white-space: nowrap; }
+.panel.on h2 { color: #fff; }
+.panel p { max-width: 24ch; margin-top: 22px; font-family: var(--display); font-weight: 300; font-size: clamp(1.1rem, 1.9vw, 1.7rem); line-height: 1.25; opacity: 0; transform: translateY(14px); max-height: 0; transition: opacity .5s, transform .6s, max-height .6s; }
+.panel.on p { opacity: 1; transform: none; max-height: 10em; transition-delay: .35s; }
 
-.burger-btn gap { display: flex; }
-.burger-btn span {
-  display: block;
-  width: 28px;
-  height: 2px;
-  background: var(--text-primary);
-  margin-bottom: 5px;
-}
-.burger-btn span:last-child { margin-bottom: 0; }
+/* ---------- 3 WORLD PREMIERE ---------- */
+.premiere { display: flex; flex-direction: column; justify-content: center; padding: 120px var(--pad) 80px; background: #050507; }
+.premiere .mega { font-size: clamp(3rem, 10.5vw, 11rem); }
+.year { font-family: var(--display); font-stretch: 125%; font-weight: 800; line-height: .8; letter-spacing: -.03em; font-size: clamp(5.5rem, 26vw, 26rem); color: var(--accent); margin: 3vh 0 0 18vw; text-shadow: 0 0 70px rgba(212,136,184,.2); }
+.premiere .tag { position: absolute; left: var(--pad); top: 110px; max-width: 22ch; line-height: 1.5; }
 
-.close-btn {
-  font-size: 2.2rem;
-  color: var(--text-primary);
-  line-height: 1;
-  transform: translateX(60px);
-  opacity: 0;
-}
+.panel .more { align-self: flex-start; display: inline-flex; align-items: center; gap: 10px; margin-top: 22px; font-size: .85rem; letter-spacing: .04em; opacity: 0; transform: translateY(14px); transition: opacity .5s, transform .6s; }
+.panel.on .more { opacity: 1; transform: none; transition-delay: .45s; }
+.more svg { width: 16px; height: 16px; stroke: currentColor; fill: none; stroke-width: 1.5; }
 
-/* АНИМАЦИЯ УЛЕТАЮЩЕГО ГИПЕРКАРА */
-body.menu-open .burger-btn {
-  transform: translateX(-80px) skewX(-20deg);
-  opacity: 0;
-  filter: blur(4px);
-}
+/* ---------- TAB PAGES (opened from the menu) ---------- */
+.page { position: fixed; inset: 0; z-index: 50; overflow-y: auto; display: flex; flex-direction: column; justify-content: center; padding: 140px var(--pad) 80px; background: radial-gradient(70% 60% at 75% 70%, #17141d, var(--bg)); transform: translateX(100%); visibility: hidden; transition: transform .7s cubic-bezier(.77,0,.18,1), visibility 0s .7s; }
+.page.open { transform: none; visibility: visible; transition: transform .7s cubic-bezier(.77,0,.18,1), visibility 0s; }
+.page .mega { font-size: clamp(3rem, 10vw, 10rem); }
+.page .lead { max-width: 38ch; margin: 40px 0 34px 9vw; font-family: var(--display); font-weight: 300; font-size: clamp(1.1rem, 1.8vw, 1.5rem); line-height: 1.35; color: var(--muted); }
+.page .cut { align-self: flex-start; margin-left: 9vw; }
+html.page-open { overflow: hidden; }
+@media (max-width: 768px) { .page .lead, .page .cut { margin-left: 6vw; } }
 
-body.menu-open .close-btn {
-  transform: translateX(0);
-  opacity: 1;
-}
+/* ---------- HYPERCARS models ---------- */
+.models { display: grid; grid-template-columns: repeat(3, 1fr); gap: clamp(12px, 2vw, 28px); margin: 40px 0 34px 9vw; max-width: 1200px; }
+.model { --c: 22px; position: relative; aspect-ratio: 4 / 5; max-height: 42vh; display: flex; flex-direction: column; justify-content: flex-end; gap: 8px; padding: 20px; overflow: hidden;
+  background: linear-gradient(160deg, #1c1e27, #0b0c10); clip-path: polygon(0 0, calc(100% - var(--c)) 0, 100% var(--c), 100% 100%, var(--c) 100%, 0 calc(100% - var(--c))); }
+.model img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; }
+.model > :not(img) { position: relative; }
+.model b { font-family: var(--display); font-stretch: 118%; font-weight: 700; font-size: 1.3rem; text-transform: uppercase; }
+.mstat { font-size: .85rem; color: var(--muted); }
+.mstat::before { content: ""; display: inline-block; width: 7px; height: 7px; border-radius: 50%; background: var(--accent); margin-right: 10px; }
 
-/* MENU DRAWER */
-.menu-drawer {
-  position: fixed;
-  inset: 0;
-  z-index: 45;
-  background: rgba(5, 5, 7, 0.96);
-  backdrop-filter: blur(20px);
-  color: var(--text-primary);
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
-  padding: 120px 8vw 50px;
-  transform: translateX(100%);
-  transition: transform 0.6s cubic-bezier(0.77, 0, 0.175, 1);
-}
-body.menu-open .menu-drawer {
-  transform: translateX(0);
-}
+/* ---------- PRIVATE ALLOCATION form ---------- */
+.page.split { display: grid; grid-template-columns: 1fr minmax(340px, 540px); gap: clamp(32px, 6vw, 96px); align-items: center; }
+.split .mega { font-size: clamp(2.6rem, 6.2vw, 7rem); }
+.split .lead { margin-left: 0; }
+.req { display: flex; flex-direction: column; gap: 22px; }
+.req .row { display: grid; grid-template-columns: 1fr 1fr; gap: 22px; }
+.req label { display: flex; flex-direction: column; gap: 6px; font-size: .82rem; color: var(--muted); }
+.req input:not([type=checkbox]), .req select, .req textarea { width: 100%; background: transparent; border: 0; border-bottom: 1px solid var(--line); border-radius: 0; color: #fff; font: inherit; font-size: 1rem; padding: 10px 0; transition: border-color .25s; }
+.req input:focus, .req select:focus, .req textarea:focus { border-color: var(--accent-2); }
+.req select option { background: #0e1014; color: #fff; }
+.req textarea { resize: vertical; min-height: 84px; }
+.req .chk { flex-direction: row; align-items: flex-start; gap: 12px; }
+.req .chk input { margin-top: 3px; accent-color: var(--accent); }
+.req .hp { position: absolute; left: -9999px; opacity: 0; }
+.req .act { display: flex; align-items: center; gap: 22px; flex-wrap: wrap; }
+.req .cut { margin-left: 0; }
+.req #allocNote { font-size: .9rem; color: var(--accent-2); max-width: 34ch; }
 
-.menu-nav {
-  display: flex;
-  flex-direction: column;
-  gap: 28px;
-}
-.menu-nav a {
-  font-family: var(--font-tech);
-  font-weight: 700;
-  font-size: clamp(2.2rem, 5vw, 4.2rem);
-  text-transform: uppercase;
-  letter-spacing: 0.05em;
-  transition: color 0.3s, transform 0.3s;
-}
-.menu-nav a:hover {
-  color: var(--accent-lavender);
-  transform: translateX(16px);
-}
-
-.menu-footer-controls {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  border-top: 1px solid rgba(255,255,255,0.12);
-  padding-top: 24px;
-}
-
-.lang-switch {
-  display: flex;
-  gap: 12px;
-  font-family: var(--font-tech);
-  font-size: 0.9rem;
-  font-weight: 600;
-}
-.lang-btn {
-  background: none;
-  border: none;
-  color: rgba(255,255,255,0.4);
-  cursor: pointer;
-  padding: 4px 6px;
-  transition: color 0.2s;
-}
-.lang-btn.active, .lang-btn:hover {
-  color: var(--accent-lavender);
-}
-
-/* СТРАНИЦА 1: FULLSCREEN RENDER CANVAS */
-.hero {
-  position: relative;
-  width: 100vw;
-  height: 100vh;
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
-  padding: 120px 40px 40px;
-  background: #090a0c;
-}
-
-/* РЕНДЕР НА ВЕСЬ ЭКРАН (ФОН) */
-.full-screen-render {
-  position: absolute;
-  inset: 0;
-  width: 100%;
-  height: 100%;
-  z-index: 1;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  background: radial-gradient(circle at 50% 50%, #1a1c23 0%, #050507 100%);
-}
-
-.full-screen-render img {
-  width: 100%;
-  height: 100%;
-  object-fit: cover; /* Рендер растягивается во весь экран */
-}
-
-.render-placeholder {
-  font-family: var(--font-tech);
-  font-size: 1rem;
-  letter-spacing: 0.3em;
-  color: rgba(255, 255, 255, 0.3);
-  text-transform: uppercase;
-  border: 1px dashed rgba(255, 255, 255, 0.15);
-  padding: 40px 60px;
-}
-
-/* КНОПКА И ИНФО ПОВЕРХ РЕНДЕРА */
-.hero-overlay-content {
-  position: relative;
-  z-index: 2;
-  width: 100%;
-  height: 100%;
-  display: flex;
-  flex-direction: column;
-  justify-content: flex-end;
-  align-items: center;
-  padding-bottom: 20px;
-}
-
-.btn-primary {
-  font-family: var(--font-tech);
-  font-weight: 600;
-  font-size: 0.85rem;
-  letter-spacing: 0.2em;
-  text-transform: uppercase;
-  padding: 18px 42px;
-  background: rgba(255, 255, 255, 0.1);
-  color: #ffffff;
-  border: 1px solid rgba(255, 255, 255, 0.25);
-  backdrop-filter: blur(12px);
-  cursor: pointer;
-  transition: all 0.3s;
-}
-.btn-primary:hover {
-  background: var(--accent-plum);
-  border-color: var(--accent-plum);
-  box-shadow: 0 10px 30px rgba(212, 136, 184, 0.4);
-}
-
-/* СТРАНИЦА 2: WORLD PREMIERE 2028 (FULLSCREEN) */
-.premiere-slide {
-  position: relative;
-  background: #050507;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  text-align: center;
-  padding: 40px;
-}
-
-.premiere-title {
-  font-family: var(--font-tech);
-  font-weight: 800;
-  font-size: clamp(3rem, 8vw, 7rem);
-  letter-spacing: 0.08em;
-  text-transform: uppercase;
-  color: #ffffff;
-  line-height: 1;
-}
-
-.premiere-year {
-  font-family: var(--font-tech);
-  font-weight: 700;
-  font-size: clamp(4rem, 14vw, 12rem);
-  letter-spacing: 0.12em;
-  color: var(--accent-plum);
-  margin-top: 10px;
-  line-height: 0.85;
-  text-shadow: 0 0 40px rgba(212, 136, 184, 0.2);
-}
-
-/* СТРАНИЦА 3: FOOTER */
-footer.site-footer {
-  background: #050507;
-  color: var(--text-primary);
-  padding: 100px 40px 40px;
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
-  height: 100%;
-}
-
-.footer-content {
-  max-width: 1150px;
-  margin: 0 auto;
-  width: 100%;
-  display: flex;
-  justify-content: space-between;
-  align-items: flex-start;
-  flex-wrap: wrap;
-  gap: 40px;
-}
-
-.footer-brand h2 {
-  font-family: var(--font-tech);
-  font-size: 2.5rem;
-  letter-spacing: 0.12em;
-  text-transform: uppercase;
-}
-
-.footer-bottom {
-  border-top: 1px solid rgba(255,255,255,0.1);
-  padding-top: 24px;
-  display: flex;
-  justify-content: space-between;
-  font-size: 0.85rem;
-  color: rgba(255,255,255,0.4);
-  max-width: 1150px;
-  margin: 0 auto;
-  width: 100%;
-}
+/* ---------- CONTACT (Brickell background) ---------- */
+.page.contact { display: block; padding: 0; background: #050507; }
+.contact-in { position: relative; min-height: 100%; display: flex; flex-direction: column; justify-content: space-between; gap: 40px; padding: 140px var(--pad) 28px; }
+.contact-bg { position: absolute; inset: 0; z-index: 0; background: radial-gradient(80% 60% at 70% 30%, #243046, transparent), linear-gradient(180deg, #10131a, #050507); }
+.contact-bg img { width: 100%; height: 100%; object-fit: cover; display: block; }
+.contact-bg::after { content: ""; position: absolute; inset: 0; background: linear-gradient(180deg, rgba(5,5,7,.55), rgba(5,5,7,.1) 40%, rgba(5,5,7,.88)); }
+.contact-in > :not(.contact-bg) { position: relative; z-index: 1; }
+.cdata { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 28px; max-width: 1100px; }
+.cdata dt { font-size: .8rem; color: var(--muted); margin-bottom: 8px; }
+.cdata dd { font-size: clamp(1rem, 1.5vw, 1.3rem); line-height: 1.4; }
+.cdata a { text-decoration: underline; text-underline-offset: 5px; }
+.cfoot { display: flex; justify-content: space-between; gap: 16px; flex-wrap: wrap; font-size: .8rem; color: var(--muted); border-top: 1px solid var(--line); padding-top: 18px; }
+@media (max-width: 900px) { .page.split { grid-template-columns: 1fr; } .req .row { grid-template-columns: 1fr; } }
+@media (max-width: 768px) { .models { grid-template-columns: 1fr; margin-left: 6vw; } .model { aspect-ratio: auto; min-height: 120px; max-height: none; } .cdata { grid-template-columns: 1fr; } }
 
 @media (max-width: 768px) {
-  header.site-header { padding: 20px; }
-  .footer-content { flex-direction: column; }
+  .mega .i1 { padding-left: 6vw; } .mega .i2 { padding-left: 12vw; }
+  .hero .mega { font-size: 1.6rem; } .hero .mega .i1 { padding-left: 1.4em; }
+  .year { margin-left: 6vw; }
+  .premiere .tag { position: static; margin-bottom: 28px; }
+  .story { flex-direction: column; }
+  .panel { flex: 1; border-left: 0; border-top: 1px solid var(--line); justify-content: center; padding-block: 24px; }
+  .panel:first-child { border-top: 0; }
+  .panel.on { flex: 3; }
+  .panel p { margin-top: 12px; }
+}
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+  *, *::before, *::after { animation: none !important; transition-duration: .01ms !important; transition-delay: 0s !important; }
 }
 </style>
 </head>
 <body>
 
 <header class="site-header">
-  <div class="brand-logo-wrap">
-    <img src="IMG_9323.png" alt="Sharafutdinov" class="brand-logo-img">
-    <span class="brand-title">Sharafutdinov</span>
-  </div>
-
-  <div class="menu-trigger-wrap">
-    <button class="burger-btn" id="menuOpenBtn" aria-label="Open Menu">
-      <span></span><span></span><span></span>
-    </button>
-    <button class="close-btn" id="menuCloseBtn" aria-label="Close Menu">&times;</button>
+  <a class="brand" href="#hero" aria-label="Sharafutdinov Automotive">
+    <img src="IMG_9323.png" alt="" onerror="this.hidden=true">
+    <b>Sharafutdinov</b>
+  </a>
+  <div class="menu-btn" id="menuBtn" role="button" tabindex="0" aria-label="Open menu" aria-expanded="false" aria-controls="menu">
+    <span class="burger"><i></i><i></i><i></i></span>
+    <span class="close" aria-hidden="true">&times;</span>
   </div>
 </header>
 
-<!-- FULLSCREEN MENU DRAWER -->
-<div class="menu-drawer" id="menuDrawer">
-  <nav class="menu-nav">
-    <a href="#hero" onclick="toggleMenu(false)">Home</a>
-    <a href="#premiere" onclick="toggleMenu(false)">World Premiere</a>
-    <a href="#contact" onclick="toggleMenu(false)">Contact</a>
-  </nav>
-
-  <div class="menu-footer-controls">
-    <div class="lang-switch">
-      <button class="lang-btn active">EN</button>
-      <button class="lang-btn">DE</button>
-      <button class="lang-btn">IT</button>
+<div class="scrim" id="scrim"></div>
+<nav class="menu" id="menu" aria-label="Main menu">
+  <div class="menu-list">
+    <a href="#hero" class="on" data-i18n="nav_home">Home</a>
+    <a href="#heritage" data-i18n="nav_heritage">Heritage</a>
+    <a href="#hypercars" data-i18n="nav_hyper">Hypercars</a>
+    <a href="#premiere" data-i18n="nav_premiere">World Premiere</a>
+    <a href="#allocation" data-i18n="alloc">Private allocation</a>
+    <a href="#press" data-i18n="nav_press">Press</a>
+    <a href="#contact" data-i18n="nav_contact">Contact</a>
+    <img class="emblem" src="IMG_9323.png" alt="" onerror="this.hidden=true">
+  </div>
+  <div class="menu-foot">
+    <div class="lang">
+      <button data-lang="en" aria-pressed="true">EN</button>
+      <button data-lang="de" aria-pressed="false">DE</button>
+      <button data-lang="it" aria-pressed="false">IT</button>
     </div>
-    <div style="font-family: var(--font-tech); font-size: 0.8rem; color: rgba(255,255,255,0.4); letter-spacing: 0.15em;">
-      SHARAFUTDINOV AUTOMOTIVE INC.
+    <div class="msoc">
+      <a href="#" aria-label="Instagram"><svg viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.2" cy="6.8" r=".6"/></svg></a>
+      <a href="#" aria-label="YouTube"><svg viewBox="0 0 24 24"><rect x="2.5" y="5.5" width="19" height="13" rx="4"/><path d="M10 9.5l5 2.5-5 2.5z"/></svg></a>
+      <a href="#" aria-label="X"><svg viewBox="0 0 24 24"><path d="M4 4l16 16M20 4L4 20"/></svg></a>
+      <a href="#" aria-label="LinkedIn"><svg viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M8 10v6M8 7.5v.01M12 16v-6M12 12.5c0-2 4-2.5 4 .5v3"/></svg></a>
     </div>
   </div>
-</div>
+</nav>
 
-<!-- СТРАНИЦА 1 (FULLSCREEN RENDER) -->
+<!-- 1 · HERO -->
 <section class="slide hero" id="hero">
-  <div class="full-screen-render">
-    <!-- Твой полноэкранный 3D-рендер или фоновое видео будет здесь: -->
-    <!-- <img src="ваше_полноэкранное_фото.jpg" alt="QT12GT Hypercar Render"> -->
-    <div class="render-placeholder">Full-Screen Hypercar Render Canvas</div>
+  <div class="hero-media">
+    <!-- Your full-screen render or video, e.g.: <img src="hero.jpg" alt="Sharafutdinov hypercar"> -->
+    <div class="hero-ph"><span>Hypercar render</span></div>
   </div>
-
-  <div class="hero-overlay-content">
-    <button class="btn-primary" onclick="document.getElementById('premiere').scrollIntoView({behavior:'smooth'})">
-      Discover More
-    </button>
+  <div class="hero-in">
+    <h1 class="mega">
+      <span data-i18n="h1a">We keep</span>
+      <span class="i1" data-i18n="h1b">pure Mechanics</span>
+    </h1>
+    <a class="cut" href="#premiere"><span data-i18n="discover">Discover</span>
+      <svg viewBox="0 0 16 16" aria-hidden="true"><path d="M1 8h13M9 3l5 5-5 5"/></svg>
+    </a>
   </div>
+  <div class="scroll-hint" aria-hidden="true"><i></i></div>
 </section>
 
-<!-- СТРАНИЦА 2 (WORLD PREMIERE 2028) -->
-<section class="slide premiere-slide" id="premiere">
-  <div class="premiere-title">World Premiere</div>
-  <div class="premiere-year">2028</div>
+<!-- 2 · PAST / PRESENT / FUTURE -->
+<section class="slide story" id="heritage">
+  <a class="panel" href="#past">
+    <div class="panel-bg"></div>
+    <h2 data-i18n="past">Past</h2>
+    <p data-i18n="past_t">Every great machine starts as an idea on paper.</p>
+    <span class="more"><span data-i18n="open">Open</span><svg viewBox="0 0 16 16" aria-hidden="true"><path d="M1 8h13M9 3l5 5-5 5"/></svg></span>
+  </a>
+  <a class="panel on" href="#present">
+    <div class="panel-bg"></div>
+    <h2 data-i18n="present">Present</h2>
+    <p data-i18n="present_t">Hand-built hypercars, in limited series.</p>
+    <span class="more"><span data-i18n="open">Open</span><svg viewBox="0 0 16 16" aria-hidden="true"><path d="M1 8h13M9 3l5 5-5 5"/></svg></span>
+  </a>
+  <a class="panel" href="#future">
+    <div class="panel-bg"></div>
+    <h2 data-i18n="future">Future</h2>
+    <p data-i18n="future_t">The next chapter arrives in 2028.</p>
+    <span class="more"><span data-i18n="open">Open</span><svg viewBox="0 0 16 16" aria-hidden="true"><path d="M1 8h13M9 3l5 5-5 5"/></svg></span>
+  </a>
 </section>
 
-<!-- СТРАНИЦА 3 (CONTACT / FOOTER) -->
-<section class="slide" id="contact">
-  <footer class="site-footer">
-    <div class="footer-content">
-      <div class="footer-brand">
-        <h2>SHARAFUTDINOV</h2>
-        <p style="color: rgba(255,255,255,0.4); font-size: 0.95rem; margin-top: 10px;">The Pinnacle of Automotive Art & Engineering</p>
-      </div>
-      <div>
-        <p style="font-family: var(--font-tech); font-size: 0.8rem; color: rgba(255,255,255,0.4); letter-spacing: 0.15em; text-transform: uppercase;">PRIVATE ALLOCATION INQUIRIES</p>
-        <a href="mailto:Sharafutdinovauto@gmail.com" style="font-size: 1.2rem; color: #fff; text-decoration: underline; margin-top: 6px; display: inline-block;">Sharafutdinovauto@gmail.com</a>
-      </div>
-    </div>
+<!-- 3 · WORLD PREMIERE -->
+<section class="slide premiere" id="premiere">
+  <p class="tag" data-i18n="prem_tag">Limited series. Built by hand in Miami.</p>
+  <h2 class="mega">
+    <span data-i18n="prem1">World</span>
+    <span class="i1" data-i18n="prem2">Premiere</span>
+  </h2>
+  <div class="year">2028</div>
+</section>
 
-    <div class="footer-bottom">
-      <span>© 2026 Sharafutdinov Automotive Inc. All rights reserved.</span>
-      <span>Miami, FL</span>
+<!-- TAB PAGES: opened from the menu / buttons (hash routing) -->
+<section class="page" id="press">
+  <h2 class="mega"><span data-i18n="press_a">Press</span><span class="i1" data-i18n="press_b">room</span></h2>
+  <p class="lead" data-i18n="press_t">Media enquiries and press materials are available on request.</p>
+  <a class="cut" href="mailto:Sharafutdinovauto@gmail.com"><span data-i18n="press_c">Contact press team</span><svg viewBox="0 0 16 16" aria-hidden="true"><path d="M1 8h13M9 3l5 5-5 5"/></svg></a>
+</section>
+
+<section class="page" id="hypercars">
+  <h2 class="mega"><span data-i18n="nav_hyper">Hypercars</span></h2>
+  <p class="lead" data-i18n="hyper_l">Development has begun on three models. More will follow once they are complete.</p>
+  <div class="models">
+    <!-- Replace with real names; add a render with <img src="model1.jpg" alt=""> inside any .model -->
+    <div class="model"><b><span data-i18n="model">Model</span> I</b><span class="mstat" data-i18n="hyper_dev">In development</span></div>
+    <div class="model"><b><span data-i18n="model">Model</span> II</b><span class="mstat" data-i18n="hyper_dev">In development</span></div>
+    <div class="model"><b><span data-i18n="model">Model</span> III</b><span class="mstat" data-i18n="hyper_dev">In development</span></div>
+  </div>
+  <a class="cut" href="#premiere"><span data-i18n="hypercars_c">World Premiere</span><svg viewBox="0 0 16 16" aria-hidden="true"><path d="M1 8h13M9 3l5 5-5 5"/></svg></a>
+</section>
+<section class="page split" id="allocation">
+  <div>
+    <h2 class="mega"><span data-i18n="allocation_a">Private</span><span class="i1" data-i18n="allocation_b">allocation</span></h2>
+    <p class="lead" data-i18n="allocation_t">Cars are allocated to a small circle of clients by invitation. Send a request and we will reply personally.</p>
+  </div>
+  <form class="req" id="allocForm">
+    <div class="row">
+      <label><span data-i18n="f_name">Full name</span><input name="name" required autocomplete="name"></label>
+      <label><span data-i18n="f_email">Email</span><input name="email" type="email" required autocomplete="email"></label>
     </div>
-  </footer>
+    <div class="row">
+      <label><span data-i18n="f_phone">Phone</span><input name="phone" type="tel" autocomplete="tel"></label>
+      <label><span data-i18n="f_country">Country and city</span><input name="country" autocomplete="country-name"></label>
+    </div>
+    <label><span data-i18n="f_model">Model of interest</span>
+      <select name="model">
+        <option value="Not decided yet" data-i18n="f_nd">Not decided yet</option>
+        <option>Model I</option><option>Model II</option><option>Model III</option>
+      </select>
+    </label>
+    <label><span data-i18n="f_msg">Message</span><textarea name="message" rows="3"></textarea></label>
+    <label class="chk"><input type="checkbox" name="consent" required><span data-i18n="f_consent">I agree to be contacted about this request.</span></label>
+    <input class="hp" name="company" tabindex="-1" autocomplete="off" aria-hidden="true">
+    <div class="act">
+      <button class="cut" type="submit"><span data-i18n="f_send">Send request</span><svg viewBox="0 0 16 16" aria-hidden="true"><path d="M1 8h13M9 3l5 5-5 5"/></svg></button>
+      <p id="allocNote" role="status" aria-live="polite"></p>
+    </div>
+  </form>
+</section>
+<section class="page" id="past">
+  <h2 class="mega"><span data-i18n="past">Past</span></h2>
+  <p class="lead" data-i18n="past_l">The company was founded on one idea: a hypercar should be defined by pure mechanics, and nothing less.</p>
+  <a class="cut" href="#present"><span data-i18n="present">Present</span><svg viewBox="0 0 16 16" aria-hidden="true"><path d="M1 8h13M9 3l5 5-5 5"/></svg></a>
+</section>
+<section class="page" id="present">
+  <h2 class="mega"><span data-i18n="present">Present</span></h2>
+  <p class="lead" data-i18n="present_l">Work has begun on three models, each built by hand in strictly limited numbers.</p>
+  <a class="cut" href="#hypercars"><span data-i18n="nav_hyper">Hypercars</span><svg viewBox="0 0 16 16" aria-hidden="true"><path d="M1 8h13M9 3l5 5-5 5"/></svg></a>
+</section>
+<section class="page" id="future">
+  <h2 class="mega"><span data-i18n="future">Future</span></h2>
+  <p class="lead" data-i18n="future_l">The World Premiere is set for 2028. More models will follow once the first three are complete.</p>
+  <a class="cut" href="#premiere"><span data-i18n="hypercars_c">World Premiere</span><svg viewBox="0 0 16 16" aria-hidden="true"><path d="M1 8h13M9 3l5 5-5 5"/></svg></a>
+</section>
+<section class="page contact" id="contact">
+  <div class="contact-in">
+    <div class="contact-bg"><!-- Brickell photo: save it as brickell.jpg next to index.html -->
+      <img src="brickell.jpg" alt="Brickell, Miami" onerror="this.remove()">
+    </div>
+    <h2 class="mega"><span data-i18n="nav_contact">Contact</span></h2>
+    <dl class="cdata">
+      <div><dt data-i18n="c_addr">Address</dt><dd><!-- YOUR ADDRESS -->Your address, Brickell, Miami, FL</dd></div>
+      <div><dt data-i18n="c_mail">Email</dt><dd><a href="mailto:Sharafutdinovauto@gmail.com">Sharafutdinovauto@gmail.com</a></dd></div>
+      <div><dt data-i18n="c_phone">Phone</dt><dd><!-- YOUR PHONE -->+1 (000) 000-0000</dd></div>
+    </dl>
+    <div class="cfoot"><span data-i18n="rights">© 2026 Sharafutdinov Automotive Inc. All rights reserved.</span><span>Miami, FL</span></div>
+  </div>
 </section>
 
 <script>
-const openBtn = document.getElementById('menuOpenBtn');
-const closeBtn = document.getElementById('menuCloseBtn');
-
-function toggleMenu(open) {
-  if (open) {
-    document.body.classList.add('menu-open');
-  } else {
-    document.body.classList.remove('menu-open');
-  }
+/* ---- menu ---- */
+const body = document.body, btn = document.getElementById('menuBtn');
+function setMenu(open) {
+  body.classList.toggle('menu-open', open);
+  btn.setAttribute('aria-expanded', open);
+  btn.setAttribute('aria-label', open ? 'Close menu' : 'Open menu');
 }
+const toggle = () => setMenu(!body.classList.contains('menu-open'));
+btn.addEventListener('click', toggle);
+btn.addEventListener('keydown', e => { if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); toggle(); } });
+document.getElementById('scrim').addEventListener('click', () => setMenu(false));
+document.querySelectorAll('#menu a').forEach(a => a.addEventListener('click', () => setMenu(false)));
+addEventListener('keydown', e => { if (e.key === 'Escape') setMenu(false); });
 
-openBtn.addEventListener('click', () => toggleMenu(true));
-closeBtn.addEventListener('click', () => toggleMenu(false));
+const links = [...document.querySelectorAll('#menu a')];
+const io = new IntersectionObserver(es => es.forEach(e => {
+  if (e.isIntersecting && !body.classList.contains('page-open')) links.forEach(l => l.classList.toggle('on', l.getAttribute('href') === '#' + e.target.id));
+}), { threshold: .55 });
+document.querySelectorAll('.slide').forEach(s => io.observe(s));
+
+/* ---- tab pages (hash routing, Back button works) ---- */
+const pages = [...document.querySelectorAll('.page')];
+function route() {
+  const id = location.hash.slice(1), p = pages.find(x => x.id === id);
+  pages.forEach(x => x.classList.toggle('open', x === p));
+  document.documentElement.classList.toggle('page-open', !!p);
+  body.classList.toggle('page-open', !!p);
+  if (p) links.forEach(l => l.classList.toggle('on', l.getAttribute('href') === '#' + (['past', 'present', 'future'].includes(id) ? 'heritage' : id)));
+}
+addEventListener('hashchange', route); route();
+addEventListener('keydown', e => { if (e.key === 'Escape' && pages.some(p => p.classList.contains('open'))) location.hash = '#hero'; });
+
+/* ---- Past / Present / Future panels ---- */
+const panels = [...document.querySelectorAll('.panel')];
+const open = p => panels.forEach(x => x.classList.toggle('on', x === p));
+panels.forEach(p => {
+  p.addEventListener('mouseenter', () => open(p));
+  p.addEventListener('focus', () => open(p));
+});
+
+/* ---- languages (edit texts here) ---- */
+const T = {
+  en: { nav_home:'Home', nav_heritage:'Heritage', nav_premiere:'World Premiere', nav_contact:'Contact',
+    h1a:'We keep', h1b:'pure Mechanics', discover:'Discover',
+    past:'Past', past_t:'Every great machine starts as an idea on paper.',
+    present:'Present', present_t:'Hand-built hypercars, in limited series.',
+    future:'Future', future_t:'The next chapter arrives in 2028.',
+    prem_tag:'Limited series. Built by hand in Miami.', prem1:'World', prem2:'Premiere',
+    f1:'Built', f2:'for few', f3:'driven by all', alloc:'Private allocation', alloc_q:'Private allocation inquiries',
+    rights:'© 2026 Sharafutdinov Automotive Inc. All rights reserved.', nav_hyper:'Hypercars', nav_visit:'Visit us', nav_press:'Press', hypercars_a:'Limited', hypercars_b:'series', hypercars_t:'Every Sharafutdinov hypercar is built by hand in a strictly limited run. The first model debuts in 2028.', hypercars_c:'World Premiere', allocation_a:'Private', allocation_b:'allocation', allocation_t:'Cars are allocated to a small circle of clients by invitation. Send a request and we will reply personally.', allocation_c:'Request allocation', visit_a:'Visit', visit_b:'us', visit_t:'Our office is in Miami, Florida. Visits are by appointment only; write to us to arrange a meeting.', visit_c:'Arrange a visit', press_a:'Press', press_b:'room', press_t:'Media enquiries and press materials are available on request.', press_c:'Contact press team', open:'Open', model:'Model', hyper_dev:'In development', hyper_l:'Development has begun on three models. More will follow once they are complete.', past_l:'The company was founded on one idea: a hypercar should be defined by pure mechanics, and nothing less.', present_l:'Work has begun on three models, each built by hand in strictly limited numbers.', future_l:'The World Premiere is set for 2028. More models will follow once the first three are complete.', f_name:'Full name', f_email:'Email', f_phone:'Phone', f_country:'Country and city', f_model:'Model of interest', f_nd:'Not decided yet', f_msg:'Message', f_consent:'I agree to be contacted about this request.', f_send:'Send request', f_ok:'Thank you. Your request has been sent and we will reply personally.', f_mail:'Your email app has opened with your request. Press send to finish.', f_err:'Something went wrong. Please try again or write to us directly.', c_addr:'Address', c_mail:'Email', c_phone:'Phone' },
+  de: { nav_home:'Start', nav_heritage:'Geschichte', nav_premiere:'Weltpremiere', nav_contact:'Kontakt',
+    h1a:'Wir bewahren', h1b:'reine Mechanik', discover:'Entdecken',
+    past:'Vergangenheit', past_t:'Jede große Maschine beginnt als Idee auf Papier.',
+    present:'Gegenwart', present_t:'Handgefertigte Hypercars in limitierter Serie.',
+    future:'Zukunft', future_t:'Das nächste Kapitel beginnt 2028.',
+    prem_tag:'Limitierte Serie. Handgefertigt in Miami.', prem1:'Welt-', prem2:'premiere',
+    f1:'Gebaut', f2:'für wenige', f3:'gefahren von allen', alloc:'Private Zuteilung', alloc_q:'Anfragen zur privaten Zuteilung',
+    rights:'© 2026 Sharafutdinov Automotive Inc. Alle Rechte vorbehalten.', nav_hyper:'Hypercars', nav_visit:'Besuch', nav_press:'Presse', hypercars_a:'Limitierte', hypercars_b:'Serie', hypercars_t:'Jedes Sharafutdinov-Hypercar wird in streng limitierter Auflage von Hand gebaut. Das erste Modell debütiert 2028.', hypercars_c:'Weltpremiere', allocation_a:'Private', allocation_b:'Zuteilung', allocation_t:'Die Fahrzeuge werden auf Einladung an einen kleinen Kundenkreis vergeben. Senden Sie eine Anfrage, wir antworten persönlich.', allocation_c:'Zuteilung anfragen', visit_a:'Besuchen', visit_b:'Sie uns', visit_t:'Unser Büro befindet sich in Miami, Florida. Besuche nur nach Vereinbarung; schreiben Sie uns für einen Termin.', visit_c:'Besuch vereinbaren', press_a:'Presse', press_b:'bereich', press_t:'Medienanfragen und Pressematerial erhalten Sie auf Anfrage.', press_c:'Presseteam kontaktieren', open:'Öffnen', model:'Modell', hyper_dev:'In Entwicklung', hyper_l:'Die Entwicklung von drei Modellen hat begonnen. Weitere folgen, sobald sie fertig sind.', past_l:'Das Unternehmen wurde auf einer Idee gegründet: Ein Hypercar soll durch reine Mechanik definiert werden, nicht weniger.', present_l:'Die Arbeit an drei Modellen hat begonnen, jedes von Hand gebaut und in streng limitierter Stückzahl.', future_l:'Die Weltpremiere ist für 2028 geplant. Weitere Modelle folgen, sobald die ersten drei fertig sind.', f_name:'Vollständiger Name', f_email:'E-Mail', f_phone:'Telefon', f_country:'Land und Stadt', f_model:'Modell von Interesse', f_nd:'Noch unentschieden', f_msg:'Nachricht', f_consent:'Ich bin damit einverstanden, zu dieser Anfrage kontaktiert zu werden.', f_send:'Anfrage senden', f_ok:'Vielen Dank. Ihre Anfrage wurde gesendet, wir antworten persönlich.', f_mail:'Ihre E-Mail-App wurde mit Ihrer Anfrage geöffnet. Zum Abschluss auf Senden drücken.', f_err:'Etwas ist schiefgelaufen. Bitte versuchen Sie es erneut oder schreiben Sie uns direkt.', c_addr:'Adresse', c_mail:'E-Mail', c_phone:'Telefon' },
+  it: { nav_home:'Home', nav_heritage:'Storia', nav_premiere:'Prima mondiale', nav_contact:'Contatti',
+    h1a:'Custodiamo', h1b:'la meccanica pura', discover:'Scopri',
+    past:'Passato', past_t:'Ogni grande macchina nasce come idea su carta.',
+    present:'Presente', present_t:'Hypercar costruite a mano, in serie limitata.',
+    future:'Futuro', future_t:'Il prossimo capitolo arriva nel 2028.',
+    prem_tag:'Serie limitata. Costruita a mano a Miami.', prem1:'Prima', prem2:'mondiale',
+    f1:'Costruita', f2:'per pochi', f3:'guidata da tutti', alloc:'Assegnazione privata', alloc_q:'Richieste di assegnazione privata',
+    rights:'© 2026 Sharafutdinov Automotive Inc. Tutti i diritti riservati.', nav_hyper:'Hypercar', nav_visit:'Visitaci', nav_press:'Stampa', hypercars_a:'Serie', hypercars_b:'limitata', hypercars_t:'Ogni hypercar Sharafutdinov è costruita a mano in una serie rigorosamente limitata. Il primo modello debutta nel 2028.', hypercars_c:'Prima mondiale', allocation_a:'Assegnazione', allocation_b:'privata', allocation_t:'Le auto sono assegnate su invito a una cerchia ristretta di clienti. Invia una richiesta e risponderemo personalmente.', allocation_c:'Richiedi assegnazione', visit_a:'Vieni a', visit_b:'trovarci', visit_t:'Il nostro ufficio è a Miami, in Florida. Le visite sono solo su appuntamento; scrivici per fissare un incontro.', visit_c:'Fissa una visita', press_a:'Sala', press_b:'stampa', press_t:'Richieste dei media e materiali stampa disponibili su richiesta.', press_c:'Contatta la stampa', open:'Apri', model:'Modello', hyper_dev:'In sviluppo', hyper_l:'È iniziato lo sviluppo di tre modelli. Altri seguiranno al loro completamento.', past_l:'L’azienda nasce da un’idea: una hypercar deve essere definita dalla meccanica pura, niente di meno.', present_l:'Sono iniziati i lavori su tre modelli, ciascuno costruito a mano in numero rigorosamente limitato.', future_l:'La prima mondiale è prevista per il 2028. Altri modelli seguiranno al completamento dei primi tre.', f_name:'Nome completo', f_email:'Email', f_phone:'Telefono', f_country:'Paese e città', f_model:'Modello di interesse', f_nd:'Non ancora deciso', f_msg:'Messaggio', f_consent:'Acconsento a essere contattato in merito a questa richiesta.', f_send:'Invia richiesta', f_ok:'Grazie. La tua richiesta è stata inviata e risponderemo personalmente.', f_mail:'La tua app di posta si è aperta con la richiesta. Premi invio per completare.', f_err:'Qualcosa è andato storto. Riprova o scrivici direttamente.', c_addr:'Indirizzo', c_mail:'Email', c_phone:'Telefono' }
+};
+function setLang(l) {
+  document.documentElement.lang = l;
+  document.querySelectorAll('[data-i18n]').forEach(el => { el.textContent = T[l][el.dataset.i18n]; });
+  document.querySelectorAll('.lang button').forEach(b => b.setAttribute('aria-pressed', b.dataset.lang === l));
+  try { localStorage.setItem('lang', l); } catch (e) {}
+}
+document.querySelectorAll('.lang button').forEach(b => b.addEventListener('click', () => setLang(b.dataset.lang)));
+let saved = 'en'; try { saved = localStorage.getItem('lang') || 'en'; } catch (e) {}
+if (T[saved] && saved !== 'en') setLang(saved);
+
+/* ---- Private allocation form ---- */
+const FORM_ENDPOINT = ''; // paste a Formspree / own backend URL to send silently; empty = opens the visitor's email app
+const MAIL_TO = 'Sharafutdinovauto@gmail.com';
+const form = document.getElementById('allocForm'), note = document.getElementById('allocNote');
+const tr = k => T[document.documentElement.lang][k];
+form.addEventListener('submit', async e => {
+  e.preventDefault();
+  const d = Object.fromEntries(new FormData(form));
+  if (d.company) return; // spam trap
+  const text = ['Name: ' + d.name, 'Email: ' + d.email, 'Phone: ' + (d.phone || '-'), 'Country and city: ' + (d.country || '-'), 'Model of interest: ' + d.model, '', d.message || ''].join('\n');
+  if (FORM_ENDPOINT) {
+    try {
+      const r = await fetch(FORM_ENDPOINT, { method: 'POST', headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' }, body: JSON.stringify(d) });
+      if (!r.ok) throw new Error('send failed');
+      form.reset(); note.textContent = tr('f_ok');
+    } catch (err) { note.textContent = tr('f_err'); }
+  } else {
+    location.href = 'mailto:' + MAIL_TO + '?subject=' + encodeURIComponent('Private allocation request') + '&body=' + encodeURIComponent(text);
+    note.textContent = tr('f_mail');
+  }
+});
+
 </script>
-
 </body>
 </html>
