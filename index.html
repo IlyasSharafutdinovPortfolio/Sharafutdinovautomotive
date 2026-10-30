@@ -63,7 +63,7 @@ body.menu-open .scrim { opacity: 1; visibility: visible; }
 .menu-list a::before { content: ""; width: 0; height: 2px; background: var(--accent); transition: width .35s cubic-bezier(.16,1,.3,1), margin .35s; }
 .menu-list a:hover, .menu-list a.on { color: #fff; }
 .menu-list a:hover::before, .menu-list a.on::before { width: 34px; margin-right: 16px; }
-.emblem { display: block; height: 44px; width: auto; margin-top: 30px; }
+.emblem { display: block; height: clamp(76px, 13vh, 104px); width: auto; margin-top: 34px; }
 .emblem[hidden] { display: none; }
 .menu-foot { display: flex; justify-content: space-between; align-items: center; gap: 16px; padding: 22px 56px 30px; border-top: 1px solid var(--line); }
 .lang, .msoc { display: flex; gap: 4px; }
@@ -153,7 +153,8 @@ html.page-open { overflow: hidden; }
 
 /* ---------- PRIVATE ALLOCATION form ---------- */
 .page.split { display: grid; grid-template-columns: 1fr minmax(340px, 540px); gap: clamp(32px, 6vw, 96px); align-items: center; }
-.split .mega { font-size: clamp(2.6rem, 6.2vw, 7rem); }
+.split .mega { font-size: clamp(2rem, 3.3vw, 4.2rem); }
+.split .mega .i1 { padding-left: 2vw; }
 .split .lead { margin-left: 0; }
 .req { display: flex; flex-direction: column; gap: 22px; }
 .req .row { display: grid; grid-template-columns: 1fr 1fr; gap: 22px; }
@@ -181,7 +182,7 @@ html.page-open { overflow: hidden; }
 .cdata dd { font-size: clamp(1rem, 1.5vw, 1.3rem); line-height: 1.4; }
 .cdata a { text-decoration: underline; text-underline-offset: 5px; }
 .cfoot { display: flex; justify-content: space-between; gap: 16px; flex-wrap: wrap; font-size: .8rem; color: var(--muted); border-top: 1px solid var(--line); padding-top: 18px; }
-@media (max-width: 900px) { .page.split { grid-template-columns: 1fr; } .req .row { grid-template-columns: 1fr; } }
+@media (max-width: 900px) { .split .mega { font-size: clamp(1.5rem, 6.2vw, 4rem); } .page.split { grid-template-columns: 1fr; } .req .row { grid-template-columns: 1fr; } }
 @media (max-width: 768px) { .models { grid-template-columns: 1fr; margin-left: 6vw; } .model { aspect-ratio: auto; min-height: 120px; max-height: none; } .cdata { grid-template-columns: 1fr; } }
 
 @media (max-width: 768px) {
@@ -204,10 +205,6 @@ html.page-open { overflow: hidden; }
 <body>
 
 <header class="site-header">
-  <a class="brand" href="#hero" aria-label="Sharafutdinov Automotive">
-    <img src="IMG_9323.png" alt="" onerror="this.hidden=true">
-    <b>Sharafutdinov</b>
-  </a>
   <div class="menu-btn" id="menuBtn" role="button" tabindex="0" aria-label="Open menu" aria-expanded="false" aria-controls="menu">
     <span class="burger"><i></i><i></i><i></i></span>
     <span class="close" aria-hidden="true">&times;</span>
@@ -221,7 +218,7 @@ html.page-open { overflow: hidden; }
     <a href="#heritage" data-i18n="nav_heritage">Heritage</a>
     <a href="#hypercars" data-i18n="nav_hyper">Hypercars</a>
     <a href="#premiere" data-i18n="nav_premiere">World Premiere</a>
-    <a href="#allocation" data-i18n="alloc">Private allocation</a>
+    <a href="#allocation" data-i18n="alloc">Partnership and Investments</a>
     <a href="#press" data-i18n="nav_press">Press</a>
     <a href="#contact" data-i18n="nav_contact">Contact</a>
     <img class="emblem" src="IMG_9323.png" alt="" onerror="this.hidden=true">
@@ -311,8 +308,8 @@ html.page-open { overflow: hidden; }
 </section>
 <section class="page split" id="allocation">
   <div>
-    <h2 class="mega"><span data-i18n="allocation_a">Private</span><span class="i1" data-i18n="allocation_b">allocation</span></h2>
-    <p class="lead" data-i18n="allocation_t">Cars are allocated to a small circle of clients by invitation. Send a request and we will reply personally.</p>
+    <h2 class="mega"><span data-i18n="allocation_a">Partnership</span><span class="i1" data-i18n="allocation_b">and Investments</span></h2>
+    <p class="lead" data-i18n="allocation_t">We welcome partners and investors who share our passion for engineering. Tell us about yourself and we will reply personally.</p>
   </div>
   <form class="req" id="allocForm">
     <div class="row">
@@ -323,10 +320,11 @@ html.page-open { overflow: hidden; }
       <label><span data-i18n="f_phone">Phone</span><input name="phone" type="tel" autocomplete="tel"></label>
       <label><span data-i18n="f_country">Country and city</span><input name="country" autocomplete="country-name"></label>
     </div>
-    <label><span data-i18n="f_model">Model of interest</span>
-      <select name="model">
-        <option value="Not decided yet" data-i18n="f_nd">Not decided yet</option>
-        <option>Model I</option><option>Model II</option><option>Model III</option>
+    <label><span data-i18n="f_model">I am interested in</span>
+      <select name="interest">
+        <option value="Partnership" data-i18n="o_partner">Partnership</option>
+        <option value="Investment" data-i18n="o_invest">Investment</option>
+        <option value="Other" data-i18n="o_other">Other</option>
       </select>
     </label>
     <label><span data-i18n="f_msg">Message</span><textarea name="message" rows="3"></textarea></label>
@@ -417,24 +415,24 @@ const T = {
     present:'Present', present_t:'Hand-built hypercars, in limited series.',
     future:'Future', future_t:'The next chapter arrives in 2028.',
     prem_tag:'Limited series. Built by hand in Miami.', prem1:'World', prem2:'Premiere',
-    f1:'Built', f2:'for few', f3:'driven by all', alloc:'Private allocation', alloc_q:'Private allocation inquiries',
-    rights:'© 2026 Sharafutdinov Automotive Inc. All rights reserved.', nav_hyper:'Hypercars', nav_visit:'Visit us', nav_press:'Press', hypercars_a:'Limited', hypercars_b:'series', hypercars_t:'Every Sharafutdinov hypercar is built by hand in a strictly limited run. The first model debuts in 2028.', hypercars_c:'World Premiere', allocation_a:'Private', allocation_b:'allocation', allocation_t:'Cars are allocated to a small circle of clients by invitation. Send a request and we will reply personally.', allocation_c:'Request allocation', visit_a:'Visit', visit_b:'us', visit_t:'Our office is in Miami, Florida. Visits are by appointment only; write to us to arrange a meeting.', visit_c:'Arrange a visit', press_a:'Press', press_b:'room', press_t:'Media enquiries and press materials are available on request.', press_c:'Contact press team', open:'Open', model:'Model', hyper_dev:'In development', hyper_l:'Development has begun on three models. More will follow once they are complete.', past_l:'The company was founded on one idea: a hypercar should be defined by pure mechanics, and nothing less.', present_l:'Work has begun on three models, each built by hand in strictly limited numbers.', future_l:'The World Premiere is set for 2028. More models will follow once the first three are complete.', f_name:'Full name', f_email:'Email', f_phone:'Phone', f_country:'Country and city', f_model:'Model of interest', f_nd:'Not decided yet', f_msg:'Message', f_consent:'I agree to be contacted about this request.', f_send:'Send request', f_ok:'Thank you. Your request has been sent and we will reply personally.', f_mail:'Your email app has opened with your request. Press send to finish.', f_err:'Something went wrong. Please try again or write to us directly.', c_addr:'Address', c_mail:'Email', c_phone:'Phone' },
+    f1:'Built', f2:'for few', f3:'driven by all', alloc:'Partnership and Investments', alloc_q:'Partnership and investment inquiries',
+    rights:'© 2026 Sharafutdinov Automotive Inc. All rights reserved.', nav_hyper:'Hypercars', nav_visit:'Visit us', nav_press:'Press', hypercars_a:'Limited', hypercars_b:'series', hypercars_t:'Every Sharafutdinov hypercar is built by hand in a strictly limited run. The first model debuts in 2028.', hypercars_c:'World Premiere', allocation_a:'Partnership', allocation_b:'and Investments', allocation_t:'We welcome partners and investors who share our passion for engineering. Tell us about yourself and we will reply personally.', allocation_c:'Request allocation', visit_a:'Visit', visit_b:'us', visit_t:'Our office is in Miami, Florida. Visits are by appointment only; write to us to arrange a meeting.', visit_c:'Arrange a visit', press_a:'Press', press_b:'room', press_t:'Media enquiries and press materials are available on request.', press_c:'Contact press team', open:'Open', model:'Model', hyper_dev:'In development', hyper_l:'Development has begun on three models. More will follow once they are complete.', past_l:'The company was founded on one idea: a hypercar should be defined by pure mechanics, and nothing less.', present_l:'Work has begun on three models, each built by hand in strictly limited numbers.', future_l:'The World Premiere is set for 2028. More models will follow once the first three are complete.', f_name:'Full name', f_email:'Email', f_phone:'Phone', f_country:'Country and city', f_model:'I am interested in', f_nd:'Not decided yet', f_msg:'Message', f_consent:'I agree to be contacted about this request.', f_send:'Send request', f_ok:'Thank you. Your request has been sent and we will reply personally.', f_mail:'Your email app has opened with your request. Press send to finish.', f_err:'Something went wrong. Please try again or write to us directly.', c_addr:'Address', c_mail:'Email', c_phone:'Phone', o_partner:'Partnership', o_invest:'Investment', o_other:'Other' },
   de: { nav_home:'Start', nav_heritage:'Geschichte', nav_premiere:'Weltpremiere', nav_contact:'Kontakt',
     h1a:'Wir bewahren', h1b:'reine Mechanik', discover:'Entdecken',
     past:'Vergangenheit', past_t:'Jede große Maschine beginnt als Idee auf Papier.',
     present:'Gegenwart', present_t:'Handgefertigte Hypercars in limitierter Serie.',
     future:'Zukunft', future_t:'Das nächste Kapitel beginnt 2028.',
     prem_tag:'Limitierte Serie. Handgefertigt in Miami.', prem1:'Welt-', prem2:'premiere',
-    f1:'Gebaut', f2:'für wenige', f3:'gefahren von allen', alloc:'Private Zuteilung', alloc_q:'Anfragen zur privaten Zuteilung',
-    rights:'© 2026 Sharafutdinov Automotive Inc. Alle Rechte vorbehalten.', nav_hyper:'Hypercars', nav_visit:'Besuch', nav_press:'Presse', hypercars_a:'Limitierte', hypercars_b:'Serie', hypercars_t:'Jedes Sharafutdinov-Hypercar wird in streng limitierter Auflage von Hand gebaut. Das erste Modell debütiert 2028.', hypercars_c:'Weltpremiere', allocation_a:'Private', allocation_b:'Zuteilung', allocation_t:'Die Fahrzeuge werden auf Einladung an einen kleinen Kundenkreis vergeben. Senden Sie eine Anfrage, wir antworten persönlich.', allocation_c:'Zuteilung anfragen', visit_a:'Besuchen', visit_b:'Sie uns', visit_t:'Unser Büro befindet sich in Miami, Florida. Besuche nur nach Vereinbarung; schreiben Sie uns für einen Termin.', visit_c:'Besuch vereinbaren', press_a:'Presse', press_b:'bereich', press_t:'Medienanfragen und Pressematerial erhalten Sie auf Anfrage.', press_c:'Presseteam kontaktieren', open:'Öffnen', model:'Modell', hyper_dev:'In Entwicklung', hyper_l:'Die Entwicklung von drei Modellen hat begonnen. Weitere folgen, sobald sie fertig sind.', past_l:'Das Unternehmen wurde auf einer Idee gegründet: Ein Hypercar soll durch reine Mechanik definiert werden, nicht weniger.', present_l:'Die Arbeit an drei Modellen hat begonnen, jedes von Hand gebaut und in streng limitierter Stückzahl.', future_l:'Die Weltpremiere ist für 2028 geplant. Weitere Modelle folgen, sobald die ersten drei fertig sind.', f_name:'Vollständiger Name', f_email:'E-Mail', f_phone:'Telefon', f_country:'Land und Stadt', f_model:'Modell von Interesse', f_nd:'Noch unentschieden', f_msg:'Nachricht', f_consent:'Ich bin damit einverstanden, zu dieser Anfrage kontaktiert zu werden.', f_send:'Anfrage senden', f_ok:'Vielen Dank. Ihre Anfrage wurde gesendet, wir antworten persönlich.', f_mail:'Ihre E-Mail-App wurde mit Ihrer Anfrage geöffnet. Zum Abschluss auf Senden drücken.', f_err:'Etwas ist schiefgelaufen. Bitte versuchen Sie es erneut oder schreiben Sie uns direkt.', c_addr:'Adresse', c_mail:'E-Mail', c_phone:'Telefon' },
+    f1:'Gebaut', f2:'für wenige', f3:'gefahren von allen', alloc:'Partnerschaft und Investitionen', alloc_q:'Anfragen zur privaten Zuteilung',
+    rights:'© 2026 Sharafutdinov Automotive Inc. Alle Rechte vorbehalten.', nav_hyper:'Hypercars', nav_visit:'Besuch', nav_press:'Presse', hypercars_a:'Limitierte', hypercars_b:'Serie', hypercars_t:'Jedes Sharafutdinov-Hypercar wird in streng limitierter Auflage von Hand gebaut. Das erste Modell debütiert 2028.', hypercars_c:'Weltpremiere', allocation_a:'Partnerschaft', allocation_b:'und Investitionen', allocation_t:'Wir freuen uns über Partner und Investoren, die unsere Leidenschaft für Ingenieurskunst teilen. Erzählen Sie uns von sich, wir antworten persönlich.', allocation_c:'Zuteilung anfragen', visit_a:'Besuchen', visit_b:'Sie uns', visit_t:'Unser Büro befindet sich in Miami, Florida. Besuche nur nach Vereinbarung; schreiben Sie uns für einen Termin.', visit_c:'Besuch vereinbaren', press_a:'Presse', press_b:'bereich', press_t:'Medienanfragen und Pressematerial erhalten Sie auf Anfrage.', press_c:'Presseteam kontaktieren', open:'Öffnen', model:'Modell', hyper_dev:'In Entwicklung', hyper_l:'Die Entwicklung von drei Modellen hat begonnen. Weitere folgen, sobald sie fertig sind.', past_l:'Das Unternehmen wurde auf einer Idee gegründet: Ein Hypercar soll durch reine Mechanik definiert werden, nicht weniger.', present_l:'Die Arbeit an drei Modellen hat begonnen, jedes von Hand gebaut und in streng limitierter Stückzahl.', future_l:'Die Weltpremiere ist für 2028 geplant. Weitere Modelle folgen, sobald die ersten drei fertig sind.', f_name:'Vollständiger Name', f_email:'E-Mail', f_phone:'Telefon', f_country:'Land und Stadt', f_model:'Ich interessiere mich für', f_nd:'Noch unentschieden', f_msg:'Nachricht', f_consent:'Ich bin damit einverstanden, zu dieser Anfrage kontaktiert zu werden.', f_send:'Anfrage senden', f_ok:'Vielen Dank. Ihre Anfrage wurde gesendet, wir antworten persönlich.', f_mail:'Ihre E-Mail-App wurde mit Ihrer Anfrage geöffnet. Zum Abschluss auf Senden drücken.', f_err:'Etwas ist schiefgelaufen. Bitte versuchen Sie es erneut oder schreiben Sie uns direkt.', c_addr:'Adresse', c_mail:'E-Mail', c_phone:'Telefon', o_partner:'Partnerschaft', o_invest:'Investition', o_other:'Sonstiges' },
   it: { nav_home:'Home', nav_heritage:'Storia', nav_premiere:'Prima mondiale', nav_contact:'Contatti',
     h1a:'Custodiamo', h1b:'la meccanica pura', discover:'Scopri',
     past:'Passato', past_t:'Ogni grande macchina nasce come idea su carta.',
     present:'Presente', present_t:'Hypercar costruite a mano, in serie limitata.',
     future:'Futuro', future_t:'Il prossimo capitolo arriva nel 2028.',
     prem_tag:'Serie limitata. Costruita a mano a Miami.', prem1:'Prima', prem2:'mondiale',
-    f1:'Costruita', f2:'per pochi', f3:'guidata da tutti', alloc:'Assegnazione privata', alloc_q:'Richieste di assegnazione privata',
-    rights:'© 2026 Sharafutdinov Automotive Inc. Tutti i diritti riservati.', nav_hyper:'Hypercar', nav_visit:'Visitaci', nav_press:'Stampa', hypercars_a:'Serie', hypercars_b:'limitata', hypercars_t:'Ogni hypercar Sharafutdinov è costruita a mano in una serie rigorosamente limitata. Il primo modello debutta nel 2028.', hypercars_c:'Prima mondiale', allocation_a:'Assegnazione', allocation_b:'privata', allocation_t:'Le auto sono assegnate su invito a una cerchia ristretta di clienti. Invia una richiesta e risponderemo personalmente.', allocation_c:'Richiedi assegnazione', visit_a:'Vieni a', visit_b:'trovarci', visit_t:'Il nostro ufficio è a Miami, in Florida. Le visite sono solo su appuntamento; scrivici per fissare un incontro.', visit_c:'Fissa una visita', press_a:'Sala', press_b:'stampa', press_t:'Richieste dei media e materiali stampa disponibili su richiesta.', press_c:'Contatta la stampa', open:'Apri', model:'Modello', hyper_dev:'In sviluppo', hyper_l:'È iniziato lo sviluppo di tre modelli. Altri seguiranno al loro completamento.', past_l:'L’azienda nasce da un’idea: una hypercar deve essere definita dalla meccanica pura, niente di meno.', present_l:'Sono iniziati i lavori su tre modelli, ciascuno costruito a mano in numero rigorosamente limitato.', future_l:'La prima mondiale è prevista per il 2028. Altri modelli seguiranno al completamento dei primi tre.', f_name:'Nome completo', f_email:'Email', f_phone:'Telefono', f_country:'Paese e città', f_model:'Modello di interesse', f_nd:'Non ancora deciso', f_msg:'Messaggio', f_consent:'Acconsento a essere contattato in merito a questa richiesta.', f_send:'Invia richiesta', f_ok:'Grazie. La tua richiesta è stata inviata e risponderemo personalmente.', f_mail:'La tua app di posta si è aperta con la richiesta. Premi invio per completare.', f_err:'Qualcosa è andato storto. Riprova o scrivici direttamente.', c_addr:'Indirizzo', c_mail:'Email', c_phone:'Telefono' }
+    f1:'Costruita', f2:'per pochi', f3:'guidata da tutti', alloc:'Partnership e investimenti', alloc_q:'Richieste di assegnazione privata',
+    rights:'© 2026 Sharafutdinov Automotive Inc. Tutti i diritti riservati.', nav_hyper:'Hypercar', nav_visit:'Visitaci', nav_press:'Stampa', hypercars_a:'Serie', hypercars_b:'limitata', hypercars_t:'Ogni hypercar Sharafutdinov è costruita a mano in una serie rigorosamente limitata. Il primo modello debutta nel 2028.', hypercars_c:'Prima mondiale', allocation_a:'Partnership', allocation_b:'e investimenti', allocation_t:'Accogliamo partner e investitori che condividono la nostra passione per l’ingegneria. Raccontaci di te e risponderemo personalmente.', allocation_c:'Richiedi assegnazione', visit_a:'Vieni a', visit_b:'trovarci', visit_t:'Il nostro ufficio è a Miami, in Florida. Le visite sono solo su appuntamento; scrivici per fissare un incontro.', visit_c:'Fissa una visita', press_a:'Sala', press_b:'stampa', press_t:'Richieste dei media e materiali stampa disponibili su richiesta.', press_c:'Contatta la stampa', open:'Apri', model:'Modello', hyper_dev:'In sviluppo', hyper_l:'È iniziato lo sviluppo di tre modelli. Altri seguiranno al loro completamento.', past_l:'L’azienda nasce da un’idea: una hypercar deve essere definita dalla meccanica pura, niente di meno.', present_l:'Sono iniziati i lavori su tre modelli, ciascuno costruito a mano in numero rigorosamente limitato.', future_l:'La prima mondiale è prevista per il 2028. Altri modelli seguiranno al completamento dei primi tre.', f_name:'Nome completo', f_email:'Email', f_phone:'Telefono', f_country:'Paese e città', f_model:'Sono interessato a', f_nd:'Non ancora deciso', f_msg:'Messaggio', f_consent:'Acconsento a essere contattato in merito a questa richiesta.', f_send:'Invia richiesta', f_ok:'Grazie. La tua richiesta è stata inviata e risponderemo personalmente.', f_mail:'La tua app di posta si è aperta con la richiesta. Premi invio per completare.', f_err:'Qualcosa è andato storto. Riprova o scrivici direttamente.', c_addr:'Indirizzo', c_mail:'Email', c_phone:'Telefono', o_partner:'Partnership', o_invest:'Investimento', o_other:'Altro' }
 };
 function setLang(l) {
   document.documentElement.lang = l;
@@ -455,7 +453,7 @@ form.addEventListener('submit', async e => {
   e.preventDefault();
   const d = Object.fromEntries(new FormData(form));
   if (d.company) return; // spam trap
-  const text = ['Name: ' + d.name, 'Email: ' + d.email, 'Phone: ' + (d.phone || '-'), 'Country and city: ' + (d.country || '-'), 'Model of interest: ' + d.model, '', d.message || ''].join('\n');
+  const text = ['Name: ' + d.name, 'Email: ' + d.email, 'Phone: ' + (d.phone || '-'), 'Country and city: ' + (d.country || '-'), 'Interested in: ' + d.interest, '', d.message || ''].join('\n');
   if (FORM_ENDPOINT) {
     try {
       const r = await fetch(FORM_ENDPOINT, { method: 'POST', headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' }, body: JSON.stringify(d) });
@@ -463,7 +461,7 @@ form.addEventListener('submit', async e => {
       form.reset(); note.textContent = tr('f_ok');
     } catch (err) { note.textContent = tr('f_err'); }
   } else {
-    location.href = 'mailto:' + MAIL_TO + '?subject=' + encodeURIComponent('Private allocation request') + '&body=' + encodeURIComponent(text);
+    location.href = 'mailto:' + MAIL_TO + '?subject=' + encodeURIComponent('Partnership and investment inquiry') + '&body=' + encodeURIComponent(text);
     note.textContent = tr('f_mail');
   }
 });
