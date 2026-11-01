@@ -429,31 +429,30 @@ panels.forEach(p => {
 const slides = [...document.querySelectorAll('.slide')];
 const coarse = matchMedia('(pointer: coarse)').matches;
 const reduce = matchMedia('(prefers-reduced-motion: reduce)').matches;
-const DURATION = reduce ? 0 : 1700;   // scroll animation time in ms (bigger = slower, more cinematic)
-let current = 0, locked = false, lastWheel = 0;
+const DURATION = reduce ? 0 : 1200;   // scroll animation time in ms
+let current = 0, locked = false, lastWheel = 0, unlockT = 0, raf = 0;
 
-/* slow start, long soft landing */
-const ease = t => t < .5 ? 8 * t * t * t * t : 1 - Math.pow(-2 * t + 2, 4) / 2;
+/* instant start, long soft landing: reacts at once, then glides in */
+const ease = t => 1 - Math.pow(1 - t, 5);
 const blocked = () => body.classList.contains('menu-open') || body.classList.contains('page-open');
 
-function animateTo(y, done) {
-  if (coarse || !DURATION) {
-    scrollTo({ top: y, behavior: DURATION ? 'smooth' : 'auto' });
-    setTimeout(done, DURATION ? 700 : 0);
-    return;
-  }
+function animateTo(y) {
+  cancelAnimationFrame(raf);
+  if (coarse || !DURATION) { scrollTo({ top: y, behavior: DURATION ? 'smooth' : 'auto' }); return; }
   const start = scrollY, dist = y - start, t0 = performance.now();
   (function step(now) {
     const t = Math.min(1, (now - t0) / DURATION);
     scrollTo(0, start + dist * ease(t));
-    t < 1 ? requestAnimationFrame(step) : done();
+    if (t < 1) raf = requestAnimationFrame(step);
   })(t0);
 }
 function goTo(i, force) {
   i = Math.max(0, Math.min(slides.length - 1, i));
   if (!force && i === current) return;
   current = i; locked = true;
-  animateTo(slides[i].offsetTop, () => setTimeout(() => { locked = false; }, 250));
+  animateTo(slides[i].offsetTop);
+  clearTimeout(unlockT);
+  unlockT = setTimeout(() => { locked = false; }, DURATION * .6);   // next swipe is accepted before the glide fully ends
 }
 function syncCurrent() {
   current = Math.round(scrollY / innerHeight);
@@ -479,14 +478,20 @@ addEventListener('scroll', () => {
 }, { passive: true });
 depth();
 
-/* mouse wheel / trackpad: one gesture = exactly one screen */
+/* mouse wheel / trackpad: one swipe = exactly one screen, reacts instantly */
+let acc = 0, fired = false, lastAbs = 0, lastDir = 0;
 addEventListener('wheel', e => {
   if (coarse || blocked() || e.ctrlKey) return;
   e.preventDefault();
-  const now = performance.now(), newGesture = now - lastWheel > 120;
-  lastWheel = now;   // trackpad inertia keeps refreshing this, so it never triggers a second jump
-  if (locked || !newGesture || Math.abs(e.deltaY) < 4) return;
-  goTo(current + (e.deltaY > 0 ? 1 : -1));
+  const now = performance.now(), abs = Math.abs(e.deltaY), dir = Math.sign(e.deltaY);
+  /* a new swipe starts after a pause, on a sudden increase of speed, or when direction flips */
+  if (now - lastWheel > 80 || (abs > lastAbs * 1.5 && abs >= 15) || dir !== lastDir) { acc = 0; fired = false; }
+  lastWheel = now; lastAbs = abs; lastDir = dir;
+  acc += e.deltaY;
+  if (locked) { fired = true; return; }          // swallow the inertia tail of the previous swipe
+  if (fired || Math.abs(acc) < 25) return;
+  fired = true;
+  goTo(current + (acc > 0 ? 1 : -1));
 }, { passive: false });
 
 /* keyboard */
