@@ -170,23 +170,25 @@ html.page-open { overflow: hidden; }
 .tabs a.on::before { content: ""; width: 6px; height: 6px; background: var(--grad); transform: rotate(45deg); }
 .ch > .tag { margin-top: 14px; }
 
-.steps { flex: 1; display: grid; margin-top: clamp(20px, 5vh, 56px); }
-.step { grid-area: 1 / 1; display: grid; grid-template-columns: minmax(0, 1.15fr) minmax(0, .85fr); grid-template-areas: "t i" "m p"; gap: clamp(20px, 4vh, 44px) clamp(24px, 5vw, 80px); align-content: start;
+.steps { flex: 1; display: grid; margin-top: clamp(20px, 4vh, 48px); }
+.step { grid-area: 1 / 1; display: grid; grid-template-columns: minmax(0, 1.05fr) minmax(0, .95fr); grid-template-areas: "t i" "m p"; gap: clamp(20px, 3.5vh, 40px) clamp(24px, 5vw, 80px); align-content: start;
   visibility: hidden; opacity: 0; transition: opacity .5s, visibility 0s .5s; }
 .step.on { visibility: visible; opacity: 1; transition: opacity .6s .15s, visibility 0s; }
-.step h3 { grid-area: t; font-family: var(--display); font-stretch: 118%; font-weight: 700; text-transform: uppercase; line-height: .95; letter-spacing: -.02em; font-size: clamp(1.9rem, 4.8vw, 5.2rem);
+.step h3 { grid-area: t; font-family: var(--display); font-stretch: 118%; font-weight: 700; text-transform: uppercase; line-height: .95; letter-spacing: -.02em; font-size: clamp(1.9rem, 4.6vw, 5rem);
   transform: translateY(34px); transition: transform .9s cubic-bezier(.16,1,.3,1); }
 .step h3 span { display: block; }
 .step h3 .i1 { padding-left: 6vw; }
 .step.on h3 { transform: none; transition-delay: .15s; }
 .idx { grid-area: i; justify-self: end; font-family: var(--display); font-stretch: 125%; font-weight: 800; line-height: .8; letter-spacing: -.03em; font-size: clamp(4rem, 12vw, 12rem);
   background: var(--grad); -webkit-background-clip: text; background-clip: text; color: transparent; filter: drop-shadow(0 0 40px rgba(240,143,200,.22)); }
-.media { grid-area: m; --c: 22px; width: 100%; aspect-ratio: 16 / 10; max-height: 42vh; display: grid; place-items: center;
+.media { grid-area: m; --c: 22px; width: 100%; aspect-ratio: 16 / 10; max-height: 38vh; display: grid; place-items: center;
   background: radial-gradient(80% 70% at 50% 85%, rgba(240,143,200,.35), transparent), radial-gradient(60% 50% at 15% 15%, rgba(185,164,255,.28), transparent), linear-gradient(160deg, #1c1e27, #0b0c10);
   background-size: cover; background-position: center;
   clip-path: polygon(0 0, calc(100% - var(--c)) 0, 100% var(--c), 100% 100%, var(--c) 100%, 0 calc(100% - var(--c))); }
 .media em { font-style: normal; font-size: .72rem; letter-spacing: .3em; text-transform: uppercase; color: rgba(255,255,255,.3); border: 1px dashed rgba(255,255,255,.22); padding: 18px 28px; }
-.step p { grid-area: p; align-self: end; max-width: 40ch; font-family: var(--display); font-weight: 300; font-size: clamp(1rem, 1.35vw, 1.3rem); line-height: 1.4; color: var(--muted); }
+.txt { grid-area: p; align-self: end; max-width: 48ch; }
+.txt p { font-family: var(--display); font-weight: 300; font-size: clamp(.95rem, 1.2vw, 1.15rem); line-height: 1.45; color: var(--muted); }
+.txt blockquote { margin-top: 18px; padding-left: 16px; border-left: 2px solid var(--accent); border-image: var(--grad) 1; font-family: var(--display); font-weight: 500; font-size: clamp(1rem, 1.3vw, 1.25rem); line-height: 1.35; color: #fff; }
 
 .tl { position: absolute; left: var(--pad); right: var(--pad); bottom: 48px; display: flex; justify-content: space-between; gap: 16px; border-top: 1px solid var(--line); overflow-x: auto; }
 .tl button { position: relative; padding: 22px 0 0; white-space: nowrap; font-size: .8rem; color: rgba(255,255,255,.45); text-align: left; transition: color .3s; }
@@ -272,7 +274,7 @@ html.page-open { overflow: hidden; }
   .step { grid-template-columns: 1fr; grid-template-areas: "i" "t" "m" "p"; }
   .idx { justify-self: start; font-size: 4rem; }
   .step h3 .i1 { padding-left: 4vw; }
-  .media { max-height: 26vh; }
+  .media { max-height: 24vh; }
   .arr { display: none; }
   .mega .i1 { padding-left: 6vw; } .mega .i2 { padding-left: 12vw; }
   .hero .mega { font-size: 1.6rem; } .hero .mega .i1 { padding-left: 1.4em; }
@@ -379,7 +381,7 @@ html.page-open { overflow: hidden; }
 <!-- HYPERCARS -->
 <section class="page hyper" id="hypercars">
   <ol class="rail" aria-label="Models">
-    <li><button class="on" data-m="0"><i>01</i><span>Aretẽ</span></button></li>
+    <li><button class="on" data-m="0"><i>01</i><span>Aretē</span></button></li>
     <li><button data-m="1"><i>02</i><span>&nbsp;</span></button></li>
     <li><button data-m="2"><i>03</i><span>&nbsp;</span></button></li>
   </ol>
@@ -391,7 +393,7 @@ html.page-open { overflow: hidden; }
     <div class="fleet">
       <!-- photo: add <img src="model1.jpg" alt=""> as the first line inside any .car -->
       <article class="car on" data-m="0" tabindex="0">
-        <b>Aretẽ</b>
+        <b>Aretē</b>
         <span class="mstat">2028</span>
         <u></u>
       </article>
@@ -662,38 +664,62 @@ const T = {
     c_addr:'Indirizzo', c_mail:'Email', c_phone:'Telefono', o_partner:'Partnership', o_invest:'Investimento', o_other:'Altro' }
 };
 
-/* ---- Heritage chapters (English texts; DE/IT fall back to English until translated) ---- */
+/* ---- Heritage chapters (English texts; DE/IT fall back to English until translated) ----
+   _l = timeline label, _t = title ("|" starts the indented second line), _p = paragraph, _q = optional highlighted line */
 Object.assign(T.en, {
-  past_tag:'Heritage & Foundations',
-  past1_l:'Mathematics', past1_t:'The Mathematical|Base',
-  past1_p:'A grandfather-engineer and a mathematician instilled a strict, analytical logic. It still shapes every design decision we make.',
-  past2_l:'Aerodynamics', past2_t:'The Aerodynamic|Intuition',
-  past2_p:'Growing up beside a pilot father built an instinct for working with air at extreme speeds.',
-  past3_l:'Workshop', past3_t:'The Workshop|Practice',
-  past3_p:'Thirty years in the family automotive technical center meant hands-on experience with the internal combustion engine, with loads, and with the mechanical reliability of every unit.',
+  /* PAST: Chapter I — The Triad of Inherited Discipline */
+  past_tag:'Chapter I · The Triad of Inherited Discipline',
+  past1_l:'Mathematics', past1_t:'The Mathematical|Inheritance',
+  past1_p:'The foundation of the Sharafutdinov brand was not born in a corporate marketing suite. It was forged through three generations of physical discipline, scientific rigor and mechanical practice. From the founder’s grandfather, the brand inherited a fundamental principle: the universe is not chaotic. It is structured by immutable mathematical equations waiting to be uncovered.',
+  past1_q:'Engineering is not the arbitrary creation of shape, but the deliberate alignment of physical matter with the laws of nature.',
+  past2_l:'Fluid dynamics', past2_t:'The Lessons|of Water',
+  past2_p:'Growing up within a family-owned bottled water enterprise provided an early, intuitive mastery of liquid behavior, laminar movement and structural purity. Water taught a timeless engineering truth.',
+  past2_q:'Any disturbance in structural flow creates unwanted turbulence and energy loss.',
+  past3_l:'Aviation', past3_t:'Aviation Instinct|& Analog Philosophy',
+  past3_p:'Childhood beside a pilot father instilled a second key instinct: how air behaves under severe pressure and velocity. Observing the total automation of modern aviation, where complex systems replace human feel, led to a core conviction.',
+  past3_q:'Sharafutdinov vehicles will never be software platforms on wheels. They are analog instruments designed for ultimate human-machine feedback.',
+  past4_l:'Workshop', past4_t:'Thirty Years|in the Workshop',
+  past4_p:'Complementing this theoretical and aerodynamic foundation is thirty years of family automotive workshop history. Decades spent inside the mechanics of internal combustion engines, structural fatigue and power delivery ensure that every aesthetic concept the brand envisions is anchored in absolute mechanical viability.',
 
-  present_tag:'R&D & Platform Engineering',
-  pres1_l:'Three concepts', pres1_t:'Multi-Model|Pipeline',
-  pres1_p:'Three unique configurations are in parallel development on a single carbon platform: a flagship hypercar built for limit speeds, a track-focused aerodynamic concept and an exclusive gran turismo.',
-  pres2_l:'Simulation', pres2_t:'Aerodynamic & Thermal|CFD Simulation',
-  pres2_p:'We are in the active phase of digital testing in a virtual wind tunnel: optimizing airflow, distributing downforce and designing efficient cooling channels for the power unit.',
-  pres3_l:'Packaging', pres3_t:'Platform Packaging|& Structural Layout',
-  pres3_p:'We are fixing the geometry of the carbon-fiber monocoque, the driver’s seating position and the layout of the drive components, aiming for perfect weight distribution and the lowest possible center of gravity.',
-  pres4_l:'Integration', pres4_t:'Strategic Technical|Integration',
-  pres4_p:'Engineering of a power plant for alternative fuels (E85), and development of the drivetrain units together with the world’s leading Tier-1 suppliers of transmissions and composites.',
+  /* PRESENT: Chapter II — The Evolution of Architecture + Chapter III — The Eurasian Bridge */
+  present_tag:'Chapters II & III · Architecture and Identity',
+  pres1_l:'The question', pres1_t:'The Question|of Proportion',
+  pres1_p:'The path toward the Aretē platform began not with incremental improvements on existing sports cars, but with a fundamental question.',
+  pres1_q:'Why have modern hypercars compromised their proportion out of fear of aerodynamic drag?',
+  pres2_l:'5.55 m', pres2_t:'A Monumental|Beginning',
+  pres2_p:'The first design explorations pushed the boundaries of automotive scale, starting from a monumental profile 5.55 meters long and 2.22 meters wide. Certain air channels and canopy silhouettes were conceived in dreams: subconscious flashes of fluid flow around a central teardrop structure. But in the Sharafutdinov methodology, romance is always subjected to cold computational physics.',
+  pres2_q:'5.55 m × 2.22 m',
+  pres3_l:'CFD', pres3_t:'Shaped|by Computation',
+  pres3_p:'Through relentless Computational Fluid Dynamics iterations, the concept underwent aggressive optimization. Every excess millimeter of frontal surface was shaved off, consolidating the package into a surgical 1.80 m² frontal area. The result is the signature teardrop canopy: a 135 cm base windshield that tapers aggressively to minimize upper-hemisphere turbulent wake. It delivers high-speed stability at 500 km/h without drag-inducing active wings or heavy electronic assistance.',
+  pres3_q:'1.80 m² frontal area · 135 cm windshield',
+  pres4_l:'Tatarstan', pres4_t:'The Eurasian|Bridge',
+  pres4_p:'The Sharafutdinov identity occupies a unique position in global hyper-engineering. Rooted in Tatarstan, historically recognized as the Eurasian center of Islamic culture and academic science, the brand serves as a strategic cultural bridge.',
+  pres5_l:'The name', pres5_t:'A Name|with Meaning',
+  pres5_p:'The name Sharafutdinov represents a synthesis of traditional values: honor, structural integrity and purpose (teleological optimism). It connects the rigorous mathematical heritage of Eurasia with the exclusive hyper-luxury demands of the Gulf Cooperation Council (GCC) markets.',
+  pres6_l:'Authenticity', pres6_t:'A Surname|as Guarantee',
+  pres6_p:'To collectors in Dubai, Riyadh and Doha, Sharafutdinov does not present an artificial corporate brand created by investment funds. It presents an authentic engineering legacy: a brand where the founder’s surname is stamped on the monocoque as a personal guarantee of physical excellence.',
 
-  future_tag:'The 500 km/h Artifact & Aretẽ',
-  fut1_l:'500 km/h', fut1_t:'Target|500 km/h',
-  fut1_p:'A target top speed of 500 km/h (138.88 m/s) on Michelin Pilot Sport Cup 2 R tires.',
-  fut2_l:'Pure physics', fut2_t:'Pure Physics|over Electronics',
-  fut2_p:'No heavy hybrid batteries and no artificial amplifiers. We give them up for the sake of absolute mechanical purity.',
-  fut3_l:'100 cars', fut3_t:'Limited Production|Artifact',
-  fut3_p:'An exclusive series of 100 cars for ultra-high-net-worth collectors, opening a new chapter in uncompromising hyper-engineering.'
+  /* FUTURE: Chapter IV — The Aretē Manifesto */
+  future_tag:'Chapter IV · The Aretē Manifesto',
+  fut1_l:'Aretē', fut1_t:'The Aretē|Manifesto',
+  fut1_p:'Derived from the ancient Greek concept of Aretē, the achievement of ultimate potential and moral excellence, the final objective of the platform is a physical artifact that defies modern hybrid complexity. While the industry moves toward heavy battery packs, artificial synthetic sound and digital limiters, Sharafutdinov returns to absolute mechanical purity.',
+  fut2_l:'Mass', fut2_t:'Mass Optimization|Architecture',
+  fut2_p:'Prioritizing absolute structural efficiency and carbon-composite integration to achieve class-leading power-to-weight ratios, without sacrificing mechanical reliability or engine durability.',
+  fut3_l:'Powertrain', fut3_t:'Powertrain|Sovereignty',
+  fut3_p:'Advanced R&D into a high-revving internal combustion engine running on carbon-neutral E85 biofuel, laying the groundwork for the future proprietary X20 Quad-Turbo engine architecture.',
+  fut4_l:'Aerodynamics', fut4_t:'Aerodynamic|Purity',
+  fut4_p:'Zero-DRS passive aero guidance, leveraging venturi tunnels and structural side channels to create downforce through pure geometry rather than heavy hydraulics.',
+  fut5_l:'100 chassis', fut5_t:'100 Numbered|Chassis',
+  fut5_p:'A strictly capped production run of 100 numbered chassis, designed not as disposable supercars, but as mathematical heirlooms for the world’s most discerning collectors.'
 });
 
-const CH = { past:['past1','past2','past3'], present:['pres1','pres2','pres3','pres4'], future:['fut1','fut2','fut3'] };
+const CH = {
+  past:    ['past1', 'past2', 'past3', 'past4'],
+  present: ['pres1', 'pres2', 'pres3', 'pres4', 'pres5', 'pres6'],
+  future:  ['fut1', 'fut2', 'fut3', 'fut4', 'fut5']
+};
 const order = ['past', 'present', 'future'];
-const IMG = {};   // photos: IMG.past1 = 'past1.jpg'; IMG.pres2 = 'cfd.jpg' ...
+const IMG = {};   // photos: IMG.past1 = 'past1.jpg'; IMG.pres3 = 'cfd.jpg' ...
 const ARROW = '<svg viewBox="0 0 16 16" aria-hidden="true"><path d="M1 8h13M9 3l5 5-5 5"/></svg>';
 const state = { past: 0, present: 0, future: 0 };
 let jump = null;
@@ -706,7 +732,7 @@ order.forEach(c => {
       <h3 data-t="${k}_t"></h3>
       <div class="idx">0${i + 1}</div>
       <div class="media"${IMG[k] ? ` style="background-image:url(${IMG[k]})"` : ''}>${IMG[k] ? '' : `<em>${k}</em>`}</div>
-      <p data-i18n="${k}_p"></p></article>`).join('')}</div>
+      <div class="txt"><p data-i18n="${k}_p"></p>${T.en[k + '_q'] ? `<blockquote data-i18n="${k}_q"></blockquote>` : ''}</div></article>`).join('')}</div>
     <button class="arr prev" aria-label="Previous">${ARROW}</button>
     <button class="arr next" aria-label="Next">${ARROW}</button>
     <div class="tl">${CH[c].map((k, i) => `<button class="${i ? '' : 'on'}" data-i18n="${k}_l"></button>`).join('')}</div>
