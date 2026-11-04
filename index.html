@@ -15,7 +15,9 @@
 :root {
   --bg: #08090b; --paper: #efeeeb; --ink: #08090b;
   --text: #fff; --muted: rgba(255,255,255,.62); --line: rgba(255,255,255,.18);
-  --accent: #d488b8; --accent-2: #b9a4e8;
+  --accent: #f08fc8;      /* pink */
+  --accent-2: #b9a4ff;    /* lavender */
+  --grad: linear-gradient(120deg, var(--accent), var(--accent-2));
   --display: 'Archivo', 'Arial Black', sans-serif;
   --body: 'Inter', system-ui, sans-serif;
   --pad: clamp(20px, 3.2vw, 48px);
@@ -69,13 +71,14 @@ body.menu-open .close { transform: none; opacity: 1; filter: none; pointer-event
 
 /* ---------- SIDE MENU ---------- */
 .scrim { position: fixed; inset: 0; z-index: 54; background: rgba(0,0,0,.55); opacity: 0; visibility: hidden; transition: opacity .4s, visibility .4s; }
-.menu { position: fixed; top: 0; right: 0; bottom: 0; z-index: 55; width: min(520px, 100%); background: #050507; display: flex; flex-direction: column; overflow-y: auto;
+.menu { position: fixed; top: 0; right: 0; bottom: 0; z-index: 55; width: min(520px, 100%); display: flex; flex-direction: column; overflow-y: auto;
+  background: radial-gradient(70% 45% at 85% 100%, rgba(240,143,200,.14), transparent 70%), radial-gradient(60% 40% at 0% 0%, rgba(185,164,255,.12), transparent 70%), #050507;
   clip-path: polygon(44px 0, 100% 0, 100% 100%, 0 100%, 0 44px); transform: translateX(100%); transition: transform .6s cubic-bezier(.77,0,.18,1); }
 body.menu-open .menu { transform: none; }
 body.menu-open .scrim { opacity: 1; visibility: visible; }
 .menu-list { flex: 1; display: flex; flex-direction: column; justify-content: center; align-items: flex-start; gap: 2px; padding: 104px 56px 20px; }
 .menu-list a { display: flex; align-items: center; padding: 6px 0; font-family: var(--display); font-stretch: 118%; font-weight: 700; font-size: clamp(1.4rem, 2.5vw, 2rem); line-height: 1.15; letter-spacing: -.01em; text-transform: uppercase; color: rgba(255,255,255,.36); transition: color .25s; }
-.menu-list a::before { content: ""; width: 0; height: 2px; background: var(--accent); transition: width .35s cubic-bezier(.16,1,.3,1), margin .35s; }
+.menu-list a::before { content: ""; width: 0; height: 2px; background: var(--grad); transition: width .35s cubic-bezier(.16,1,.3,1), margin .35s; }
 .menu-list a:hover, .menu-list a.on { color: #fff; }
 .menu-list a:hover::before, .menu-list a.on::before { width: 34px; margin-right: 16px; }
 .emblem { display: block; height: clamp(76px, 13vh, 104px); width: auto; margin-top: 34px; align-self: center; }
@@ -92,9 +95,9 @@ body.menu-open .scrim { opacity: 1; visibility: visible; }
 /* ---------- CUT-CORNER BUTTON ---------- */
 .cut { --c: 12px; position: relative; display: inline-flex; align-items: center; gap: 14px; padding: 15px 28px; font-size: .88rem; letter-spacing: .04em; color: #fff; isolation: isolate; }
 .cut::before, .cut::after { content: ""; position: absolute; z-index: -1; clip-path: polygon(var(--c) 0, 100% 0, 100% calc(100% - var(--c)), calc(100% - var(--c)) 100%, 0 100%, 0 var(--c)); transition: background .3s; }
-.cut::before { inset: 0; background: rgba(255,255,255,.4); }
-.cut::after { inset: 1px; background: rgba(8,9,11,.82); }
-.cut:hover::after { background: var(--accent); }
+.cut::before { inset: 0; background: linear-gradient(120deg, rgba(240,143,200,.7), rgba(185,164,255,.7)); }
+.cut::after { inset: 1px; background: rgba(8,9,11,.86); }
+.cut:hover::after { background: var(--grad); }
 .cut svg { width: 16px; height: 16px; stroke: currentColor; fill: none; stroke-width: 1.5; }
 
 /* ---------- TYPE ---------- */
@@ -106,7 +109,8 @@ body.menu-open .scrim { opacity: 1; visibility: visible; }
 /* ---------- 1 HERO ---------- */
 .hero { display: flex; flex-direction: column; justify-content: flex-end; padding: 120px var(--pad) clamp(40px, 7vh, 72px); }
 .hero-media { position: absolute; inset: 0; z-index: 0; background:
-  radial-gradient(60% 45% at 62% 60%, rgba(185,164,232,.16), transparent 70%),
+  radial-gradient(60% 45% at 62% 60%, rgba(240,143,200,.2), transparent 70%),
+  radial-gradient(50% 40% at 28% 38%, rgba(185,164,255,.16), transparent 70%),
   radial-gradient(90% 70% at 50% 40%, #1b1e26 0%, #08090b 78%); }
 .hero-media img, .hero-media video { width: 100%; height: 100%; object-fit: cover; }
 .hero-media::after { content: ""; position: absolute; inset: 55% 0 0; background: linear-gradient(180deg, transparent, rgba(8,9,11,.8)); pointer-events: none; }
@@ -124,9 +128,9 @@ body.menu-open .scrim { opacity: 1; visibility: visible; }
 .panel.on { flex: 3.4; }
 /* replace each background with a photo: .panel-bg { background-image: url(past.jpg) } */
 .panel-bg { position: absolute; inset: 0; z-index: 0; opacity: .5; transition: opacity .8s, transform 1.2s; transform: scale(1.06); }
-.panel:nth-child(1) .panel-bg { background: radial-gradient(80% 60% at 30% 70%, #2a2230, transparent), #0c0d10; }
-.panel:nth-child(2) .panel-bg { background: radial-gradient(80% 60% at 50% 70%, #3a2a3d, transparent), #0c0d10; }
-.panel:nth-child(3) .panel-bg { background: radial-gradient(80% 60% at 70% 70%, #43273a, transparent), #0c0d10; }
+.panel:nth-child(1) .panel-bg { background: radial-gradient(80% 60% at 30% 70%, rgba(185,164,255,.5), transparent), #0c0d10; }
+.panel:nth-child(2) .panel-bg { background: radial-gradient(80% 60% at 50% 70%, rgba(214,154,226,.5), transparent), #0c0d10; }
+.panel:nth-child(3) .panel-bg { background: radial-gradient(80% 60% at 70% 70%, rgba(240,143,200,.55), transparent), #0c0d10; }
 .panel.on .panel-bg { opacity: 1; transform: none; }
 .panel::after { content: ""; position: absolute; inset: 0; z-index: 1; background: linear-gradient(180deg, rgba(8,9,11,.5), transparent 40%, rgba(8,9,11,.75)); pointer-events: none; }
 .panel > * { position: relative; z-index: 2; }
@@ -139,19 +143,62 @@ body.menu-open .scrim { opacity: 1; visibility: visible; }
 .more svg { width: 16px; height: 16px; stroke: currentColor; fill: none; stroke-width: 1.5; }
 
 /* ---------- 3 WORLD PREMIERE ---------- */
-.premiere { display: flex; flex-direction: column; justify-content: center; padding: 120px var(--pad) 80px; background: #050507; }
+.premiere { display: flex; flex-direction: column; justify-content: center; padding: 120px var(--pad) 80px;
+  background: radial-gradient(60% 50% at 72% 72%, rgba(240,143,200,.14), transparent 70%), radial-gradient(50% 40% at 15% 25%, rgba(185,164,255,.12), transparent 70%), #050507; }
 .premiere .mega { font-size: clamp(3rem, 10.5vw, 11rem); }
-.year { font-family: var(--display); font-stretch: 125%; font-weight: 800; line-height: .8; letter-spacing: -.03em; font-size: clamp(5.5rem, 26vw, 26rem); color: var(--accent); margin: 3vh 0 0 18vw; text-shadow: 0 0 70px rgba(212,136,184,.2); }
+.year { font-family: var(--display); font-stretch: 125%; font-weight: 800; line-height: .8; letter-spacing: -.03em; font-size: clamp(5.5rem, 26vw, 26rem); margin: 3vh 0 0 18vw;
+  background: var(--grad); -webkit-background-clip: text; background-clip: text; color: transparent; filter: drop-shadow(0 0 40px rgba(240,143,200,.25)); }
 .premiere .tag { position: absolute; left: var(--pad); top: 110px; max-width: 22ch; line-height: 1.5; }
 
 /* ---------- TAB PAGES (opened from the menu) ---------- */
-.page { position: fixed; inset: 0; z-index: 50; overflow-y: auto; display: flex; flex-direction: column; justify-content: center; padding: 140px var(--pad) 80px; background: radial-gradient(70% 60% at 75% 70%, #17141d, var(--bg)); transform: translateX(100%); visibility: hidden; transition: transform .7s cubic-bezier(.77,0,.18,1), visibility 0s .7s; }
+.page { position: fixed; inset: 0; z-index: 50; overflow-y: auto; display: flex; flex-direction: column; justify-content: center; padding: 140px var(--pad) 80px;
+  background: radial-gradient(60% 50% at 82% 78%, rgba(240,143,200,.16), transparent 70%), radial-gradient(55% 45% at 12% 18%, rgba(185,164,255,.14), transparent 70%), var(--bg);
+  transform: translateX(100%); visibility: hidden; transition: transform .7s cubic-bezier(.77,0,.18,1), visibility 0s .7s; }
 .page.open { transform: none; visibility: visible; transition: transform .7s cubic-bezier(.77,0,.18,1), visibility 0s; }
 .page .mega { font-size: clamp(3rem, 10vw, 10rem); }
 .page .lead { max-width: 38ch; margin: 40px 0 34px 9vw; font-family: var(--display); font-weight: 300; font-size: clamp(1.1rem, 1.8vw, 1.5rem); line-height: 1.35; color: var(--muted); }
 .page .cut { align-self: flex-start; margin-left: 9vw; }
 html.page-open { overflow: hidden; }
 @media (max-width: 768px) { .page .lead, .page .cut { margin-left: 6vw; } }
+
+/* ---------- HERITAGE chapters: timeline (Pagani) + big type (Koenigsegg) ---------- */
+.page.chapter { display: block; padding: 0; }
+.ch { position: relative; min-height: 100%; display: flex; flex-direction: column; padding: 130px var(--pad) 150px; }
+.tabs { display: flex; gap: clamp(18px, 3vw, 44px); font-family: var(--display); font-stretch: 112%; font-weight: 600; font-size: .85rem; letter-spacing: .08em; text-transform: uppercase; }
+.tabs a { display: inline-flex; align-items: center; gap: 10px; color: rgba(255,255,255,.4); transition: color .25s; }
+.tabs a:hover, .tabs a.on { color: #fff; }
+.tabs a.on::before { content: ""; width: 6px; height: 6px; background: var(--grad); transform: rotate(45deg); }
+.ch > .tag { margin-top: 14px; }
+
+.steps { flex: 1; display: grid; margin-top: clamp(20px, 5vh, 56px); }
+.step { grid-area: 1 / 1; display: grid; grid-template-columns: minmax(0, 1.15fr) minmax(0, .85fr); grid-template-areas: "t i" "m p"; gap: clamp(20px, 4vh, 44px) clamp(24px, 5vw, 80px); align-content: start;
+  visibility: hidden; opacity: 0; transition: opacity .5s, visibility 0s .5s; }
+.step.on { visibility: visible; opacity: 1; transition: opacity .6s .15s, visibility 0s; }
+.step h3 { grid-area: t; font-family: var(--display); font-stretch: 118%; font-weight: 700; text-transform: uppercase; line-height: .95; letter-spacing: -.02em; font-size: clamp(1.9rem, 4.8vw, 5.2rem);
+  transform: translateY(34px); transition: transform .9s cubic-bezier(.16,1,.3,1); }
+.step h3 span { display: block; }
+.step h3 .i1 { padding-left: 6vw; }
+.step.on h3 { transform: none; transition-delay: .15s; }
+.idx { grid-area: i; justify-self: end; font-family: var(--display); font-stretch: 125%; font-weight: 800; line-height: .8; letter-spacing: -.03em; font-size: clamp(4rem, 12vw, 12rem);
+  background: var(--grad); -webkit-background-clip: text; background-clip: text; color: transparent; filter: drop-shadow(0 0 40px rgba(240,143,200,.22)); }
+.media { grid-area: m; --c: 22px; width: 100%; aspect-ratio: 16 / 10; max-height: 42vh; display: grid; place-items: center;
+  background: radial-gradient(80% 70% at 50% 85%, rgba(240,143,200,.35), transparent), radial-gradient(60% 50% at 15% 15%, rgba(185,164,255,.28), transparent), linear-gradient(160deg, #1c1e27, #0b0c10);
+  background-size: cover; background-position: center;
+  clip-path: polygon(0 0, calc(100% - var(--c)) 0, 100% var(--c), 100% 100%, var(--c) 100%, 0 calc(100% - var(--c))); }
+.media em { font-style: normal; font-size: .72rem; letter-spacing: .3em; text-transform: uppercase; color: rgba(255,255,255,.3); border: 1px dashed rgba(255,255,255,.22); padding: 18px 28px; }
+.step p { grid-area: p; align-self: end; max-width: 40ch; font-family: var(--display); font-weight: 300; font-size: clamp(1rem, 1.35vw, 1.3rem); line-height: 1.4; color: var(--muted); }
+
+.tl { position: absolute; left: var(--pad); right: var(--pad); bottom: 48px; display: flex; justify-content: space-between; gap: 16px; border-top: 1px solid var(--line); overflow-x: auto; }
+.tl button { position: relative; padding: 22px 0 0; white-space: nowrap; font-size: .8rem; color: rgba(255,255,255,.45); text-align: left; transition: color .3s; }
+.tl button::before { content: ""; position: absolute; top: 0; left: 0; width: 1px; height: 10px; background: var(--line); transition: height .4s, background .3s; }
+.tl button.on { color: #fff; }
+.tl button.on::before { height: 20px; background: var(--grad); }
+
+.arr { position: absolute; top: 50%; z-index: 2; width: 48px; height: 96px; display: grid; place-items: center; background: rgba(255,255,255,.04); transition: background .3s; }
+.arr:hover { background: var(--grad); }
+.arr.prev { left: 0; } .arr.next { right: 0; }
+.arr svg { width: 18px; height: 18px; stroke: #fff; fill: none; stroke-width: 1.5; }
+.arr.prev svg { transform: scaleX(-1); }
 
 /* ---------- HYPERCARS: rail (Pagani) + cards (Koenigsegg) + our cut corners ---------- */
 .page.hyper { display: grid; grid-template-columns: auto 1fr; gap: clamp(24px, 5vw, 80px); align-content: center; align-items: center; }
@@ -170,7 +217,7 @@ html.page-open { overflow: hidden; }
 
 .fleet { display: grid; grid-template-columns: repeat(3, 1fr); gap: clamp(12px, 2vw, 28px); }
 .car { --c: 22px; position: relative; aspect-ratio: 3 / 4; max-height: 50vh; display: flex; flex-direction: column; justify-content: flex-end; gap: 8px; padding: 24px 24px 22px; overflow: hidden; cursor: pointer;
-  background: radial-gradient(90% 60% at 50% 75%, #3a2a3d, transparent), linear-gradient(160deg, #1c1e27, #0b0c10);
+  background: radial-gradient(90% 60% at 50% 78%, rgba(240,143,200,.38), transparent), radial-gradient(70% 50% at 20% 18%, rgba(185,164,255,.28), transparent), linear-gradient(160deg, #1c1e27, #0b0c10);
   clip-path: polygon(0 0, calc(100% - var(--c)) 0, 100% var(--c), 100% 100%, var(--c) 100%, 0 calc(100% - var(--c)));
   filter: brightness(.55); transition: filter .6s, transform .6s cubic-bezier(.16,1,.3,1); }
 .car.on { filter: none; transform: translateY(-8px); }
@@ -178,9 +225,9 @@ html.page-open { overflow: hidden; }
 .car > :not(img) { position: relative; }
 .car b { font-family: var(--display); font-stretch: 118%; font-weight: 700; font-size: clamp(1.1rem, 1.8vw, 1.7rem); text-transform: uppercase; }
 .mstat { font-size: .85rem; color: var(--muted); }
-.mstat::before { content: ""; display: inline-block; width: 7px; height: 7px; border-radius: 50%; background: var(--accent); margin-right: 10px; }
+.mstat::before { content: ""; display: inline-block; width: 7px; height: 7px; border-radius: 50%; background: var(--grad); margin-right: 10px; }
 .car u { display: block; height: 1px; width: 35%; margin-top: 10px; background: #fff; transition: width .7s cubic-bezier(.77,0,.18,1), background .3s; }
-.car.on u { width: 100%; background: var(--accent); }
+.car.on u { width: 100%; height: 2px; background: var(--grad); }
 
 /* ---------- PARTNERSHIP form ---------- */
 .page.split { display: grid; grid-template-columns: 1fr minmax(340px, 540px); gap: clamp(32px, 6vw, 96px); align-items: center; }
@@ -204,7 +251,7 @@ html.page-open { overflow: hidden; }
 /* ---------- CONTACT ---------- */
 .page.contact { display: block; padding: 0; background: #050507; }
 .contact-in { position: relative; min-height: 100%; display: flex; flex-direction: column; justify-content: space-between; gap: 40px; padding: 140px var(--pad) 28px; }
-.contact-bg { position: absolute; inset: 0; z-index: 0; background: radial-gradient(80% 60% at 70% 30%, #243046, transparent), linear-gradient(180deg, #10131a, #050507); }
+.contact-bg { position: absolute; inset: 0; z-index: 0; background: radial-gradient(80% 60% at 70% 30%, rgba(185,164,255,.32), transparent), radial-gradient(60% 50% at 20% 80%, rgba(240,143,200,.18), transparent), linear-gradient(180deg, #10131a, #050507); }
 .contact-bg img { width: 100%; height: 100%; object-fit: cover; display: block; }
 .contact-bg::after { content: ""; position: absolute; inset: 0; background: linear-gradient(180deg, rgba(5,5,7,.55), rgba(5,5,7,.1) 40%, rgba(5,5,7,.88)); }
 .contact-in > :not(.contact-bg) { position: relative; z-index: 1; }
@@ -221,6 +268,12 @@ html.page-open { overflow: hidden; }
   .rail { display: none; }
   .fleet { grid-template-columns: 1fr; }
   .car { aspect-ratio: auto; min-height: 120px; max-height: none; filter: none; }
+  .ch { padding-bottom: 120px; }
+  .step { grid-template-columns: 1fr; grid-template-areas: "i" "t" "m" "p"; }
+  .idx { justify-self: start; font-size: 4rem; }
+  .step h3 .i1 { padding-left: 4vw; }
+  .media { max-height: 26vh; }
+  .arr { display: none; }
   .mega .i1 { padding-left: 6vw; } .mega .i2 { padding-left: 12vw; }
   .hero .mega { font-size: 1.6rem; } .hero .mega .i1 { padding-left: 1.4em; }
   .year { margin-left: 6vw; }
@@ -359,6 +412,7 @@ html.page-open { overflow: hidden; }
   </div>
 </section>
 
+<!-- PARTNERSHIP -->
 <section class="page split" id="allocation">
   <div>
     <h2 class="mega"><span data-i18n="allocation_a">Partnership</span><span class="i1" data-i18n="allocation_b">and Investments</span></h2>
@@ -390,21 +444,12 @@ html.page-open { overflow: hidden; }
   </form>
 </section>
 
-<section class="page" id="past">
-  <h2 class="mega"><span data-i18n="past">Past</span></h2>
-  <p class="lead" data-i18n="past_l">The company was founded on one idea: a hypercar should be defined by pure mechanics, and nothing less.</p>
-  <a class="cut" href="#present"><span data-i18n="present">Present</span><svg viewBox="0 0 16 16" aria-hidden="true"><path d="M1 8h13M9 3l5 5-5 5"/></svg></a>
-</section>
-<section class="page" id="present">
-  <h2 class="mega"><span data-i18n="present">Present</span></h2>
-  <p class="lead" data-i18n="present_l">Work has begun on three models, each built by hand in strictly limited numbers.</p>
-  <a class="cut" href="#hypercars"><span data-i18n="nav_hyper">Hypercars</span><svg viewBox="0 0 16 16" aria-hidden="true"><path d="M1 8h13M9 3l5 5-5 5"/></svg></a>
-</section>
-<section class="page" id="future">
-  <h2 class="mega"><span data-i18n="future">Future</span></h2>
-  <p class="lead" data-i18n="future_l">The World Premiere is set for 2028. More models will follow once the first three are complete.</p>
-  <a class="cut" href="#premiere"><span data-i18n="hypercars_c">World Premiere</span><svg viewBox="0 0 16 16" aria-hidden="true"><path d="M1 8h13M9 3l5 5-5 5"/></svg></a>
-</section>
+<!-- HERITAGE CHAPTERS (content is built by JS from the texts below) -->
+<section class="page chapter" id="past"></section>
+<section class="page chapter" id="present"></section>
+<section class="page chapter" id="future"></section>
+
+<!-- CONTACT -->
 <section class="page contact" id="contact">
   <div class="contact-in">
     <div class="contact-bg">
@@ -575,9 +620,6 @@ const T = {
     allocation_t:'We welcome partners and investors who share our passion for engineering. Tell us about yourself and we will reply personally.',
     open:'Open', model:'Model', hyper_dev:'In development',
     hyper_l:'Development has begun on three models. More will follow once they are complete.',
-    past_l:'The company was founded on one idea: a hypercar should be defined by pure mechanics, and nothing less.',
-    present_l:'Work has begun on three models, each built by hand in strictly limited numbers.',
-    future_l:'The World Premiere is set for 2028. More models will follow once the first three are complete.',
     f_name:'Full name', f_email:'Email', f_phone:'Phone', f_country:'Country and city', f_model:'I am interested in', f_msg:'Message',
     f_consent:'I agree to be contacted about this request.', f_send:'Send request',
     f_ok:'Thank you. Your request has been sent and we will reply personally.',
@@ -595,9 +637,6 @@ const T = {
     allocation_t:'Wir freuen uns über Partner und Investoren, die unsere Leidenschaft für Ingenieurskunst teilen. Erzählen Sie uns von sich, wir antworten persönlich.',
     open:'Öffnen', model:'Modell', hyper_dev:'In Entwicklung',
     hyper_l:'Die Entwicklung von drei Modellen hat begonnen. Weitere folgen, sobald sie fertig sind.',
-    past_l:'Das Unternehmen wurde auf einer Idee gegründet: Ein Hypercar soll durch reine Mechanik definiert werden, nicht weniger.',
-    present_l:'Die Arbeit an drei Modellen hat begonnen, jedes von Hand gebaut und in streng limitierter Stückzahl.',
-    future_l:'Die Weltpremiere ist für 2028 geplant. Weitere Modelle folgen, sobald die ersten drei fertig sind.',
     f_name:'Vollständiger Name', f_email:'E-Mail', f_phone:'Telefon', f_country:'Land und Stadt', f_model:'Ich interessiere mich für', f_msg:'Nachricht',
     f_consent:'Ich bin damit einverstanden, zu dieser Anfrage kontaktiert zu werden.', f_send:'Anfrage senden',
     f_ok:'Vielen Dank. Ihre Anfrage wurde gesendet, wir antworten persönlich.',
@@ -615,9 +654,6 @@ const T = {
     allocation_t:'Accogliamo partner e investitori che condividono la nostra passione per l’ingegneria. Raccontaci di te e risponderemo personalmente.',
     open:'Apri', model:'Modello', hyper_dev:'In sviluppo',
     hyper_l:'È iniziato lo sviluppo di tre modelli. Altri seguiranno al loro completamento.',
-    past_l:'L’azienda nasce da un’idea: una hypercar deve essere definita dalla meccanica pura, niente di meno.',
-    present_l:'Sono iniziati i lavori su tre modelli, ciascuno costruito a mano in numero rigorosamente limitato.',
-    future_l:'La prima mondiale è prevista per il 2028. Altri modelli seguiranno al completamento dei primi tre.',
     f_name:'Nome completo', f_email:'Email', f_phone:'Telefono', f_country:'Paese e città', f_model:'Sono interessato a', f_msg:'Messaggio',
     f_consent:'Acconsento a essere contattato in merito a questa richiesta.', f_send:'Invia richiesta',
     f_ok:'Grazie. La tua richiesta è stata inviata e risponderemo personalmente.',
@@ -625,21 +661,103 @@ const T = {
     f_err:'Qualcosa è andato storto. Riprova o scrivici direttamente.',
     c_addr:'Indirizzo', c_mail:'Email', c_phone:'Telefono', o_partner:'Partnership', o_invest:'Investimento', o_other:'Altro' }
 };
+
+/* ---- Heritage chapters (English texts; DE/IT fall back to English until translated) ---- */
+Object.assign(T.en, {
+  past_tag:'Heritage & Foundations',
+  past1_l:'Mathematics', past1_t:'The Mathematical|Base',
+  past1_p:'A grandfather-engineer and a mathematician instilled a strict, analytical logic. It still shapes every design decision we make.',
+  past2_l:'Aerodynamics', past2_t:'The Aerodynamic|Intuition',
+  past2_p:'Growing up beside a pilot father built an instinct for working with air at extreme speeds.',
+  past3_l:'Workshop', past3_t:'The Workshop|Practice',
+  past3_p:'Thirty years in the family automotive technical center meant hands-on experience with the internal combustion engine, with loads, and with the mechanical reliability of every unit.',
+
+  present_tag:'R&D & Platform Engineering',
+  pres1_l:'Three concepts', pres1_t:'Multi-Model|Pipeline',
+  pres1_p:'Three unique configurations are in parallel development on a single carbon platform: a flagship hypercar built for limit speeds, a track-focused aerodynamic concept and an exclusive gran turismo.',
+  pres2_l:'Simulation', pres2_t:'Aerodynamic & Thermal|CFD Simulation',
+  pres2_p:'We are in the active phase of digital testing in a virtual wind tunnel: optimizing airflow, distributing downforce and designing efficient cooling channels for the power unit.',
+  pres3_l:'Packaging', pres3_t:'Platform Packaging|& Structural Layout',
+  pres3_p:'We are fixing the geometry of the carbon-fiber monocoque, the driver’s seating position and the layout of the drive components, aiming for perfect weight distribution and the lowest possible center of gravity.',
+  pres4_l:'Integration', pres4_t:'Strategic Technical|Integration',
+  pres4_p:'Engineering of a power plant for alternative fuels (E85), and development of the drivetrain units together with the world’s leading Tier-1 suppliers of transmissions and composites.',
+
+  future_tag:'The 500 km/h Artifact & Aretẽ',
+  fut1_l:'500 km/h', fut1_t:'Target|500 km/h',
+  fut1_p:'A target top speed of 500 km/h (138.88 m/s) on Michelin Pilot Sport Cup 2 R tires.',
+  fut2_l:'Pure physics', fut2_t:'Pure Physics|over Electronics',
+  fut2_p:'No heavy hybrid batteries and no artificial amplifiers. We give them up for the sake of absolute mechanical purity.',
+  fut3_l:'100 cars', fut3_t:'Limited Production|Artifact',
+  fut3_p:'An exclusive series of 100 cars for ultra-high-net-worth collectors, opening a new chapter in uncompromising hyper-engineering.'
+});
+
+const CH = { past:['past1','past2','past3'], present:['pres1','pres2','pres3','pres4'], future:['fut1','fut2','fut3'] };
+const order = ['past', 'present', 'future'];
+const IMG = {};   // photos: IMG.past1 = 'past1.jpg'; IMG.pres2 = 'cfd.jpg' ...
+const ARROW = '<svg viewBox="0 0 16 16" aria-hidden="true"><path d="M1 8h13M9 3l5 5-5 5"/></svg>';
+const state = { past: 0, present: 0, future: 0 };
+let jump = null;
+
+order.forEach(c => {
+  document.getElementById(c).innerHTML = `<div class="ch">
+    <nav class="tabs">${order.map(k => `<a href="#${k}" class="${k === c ? 'on' : ''}" data-i18n="${k}"></a>`).join('')}</nav>
+    <p class="tag" data-i18n="${c}_tag"></p>
+    <div class="steps">${CH[c].map((k, i) => `<article class="step${i ? '' : ' on'}">
+      <h3 data-t="${k}_t"></h3>
+      <div class="idx">0${i + 1}</div>
+      <div class="media"${IMG[k] ? ` style="background-image:url(${IMG[k]})"` : ''}>${IMG[k] ? '' : `<em>${k}</em>`}</div>
+      <p data-i18n="${k}_p"></p></article>`).join('')}</div>
+    <button class="arr prev" aria-label="Previous">${ARROW}</button>
+    <button class="arr next" aria-label="Next">${ARROW}</button>
+    <div class="tl">${CH[c].map((k, i) => `<button class="${i ? '' : 'on'}" data-i18n="${k}_l"></button>`).join('')}</div>
+  </div>`;
+  document.querySelectorAll(`#${c} .tl button`).forEach((b, i) => b.addEventListener('click', () => show(c, i)));
+  document.querySelector(`#${c} .prev`).addEventListener('click', () => go(-1));
+  document.querySelector(`#${c} .next`).addEventListener('click', () => go(1));
+});
+
+const cur = () => order.find(k => location.hash === '#' + k);
+function show(c, i) {
+  state[c] = i;
+  const p = document.getElementById(c);
+  p.querySelectorAll('.step').forEach((s, k) => s.classList.toggle('on', k === i));
+  p.querySelectorAll('.tl button').forEach((b, k) => b.classList.toggle('on', k === i));
+}
+function go(d) {
+  const c = cur(); if (!c) return;
+  const i = state[c] + d;
+  if (i >= 0 && i < CH[c].length) return show(c, i);
+  const n = order.indexOf(c) + Math.sign(d);
+  if (n < 0 || n > 2) return;
+  jump = d > 0 ? 0 : CH[order[n]].length - 1;   // next chapter starts at its first step, previous at its last
+  location.hash = '#' + order[n];
+}
+addEventListener('hashchange', () => { const c = cur(); if (c) { show(c, jump ?? 0); jump = null; } });
+addEventListener('keydown', e => { if (!cur()) return; if (e.key === 'ArrowRight') go(1); else if (e.key === 'ArrowLeft') go(-1); });
+let tx = 0;
+addEventListener('touchstart', e => { tx = e.touches[0].clientX; }, { passive: true });
+addEventListener('touchend', e => { const dx = e.changedTouches[0].clientX - tx; if (cur() && Math.abs(dx) > 50) go(dx < 0 ? 1 : -1); }, { passive: true });
+
 function setLang(l) {
+  const g = k => T[l][k] ?? T.en[k];   // missing DE/IT texts fall back to English
   document.documentElement.lang = l;
-  document.querySelectorAll('[data-i18n]').forEach(el => { el.textContent = T[l][el.dataset.i18n]; });
+  document.querySelectorAll('[data-i18n]').forEach(el => { el.textContent = g(el.dataset.i18n); });
+  document.querySelectorAll('[data-t]').forEach(el => {
+    const s = g(el.dataset.t).split('|');
+    el.innerHTML = '<span>' + s[0] + '</span>' + (s[1] ? '<span class="i1">' + s[1] + '</span>' : '');
+  });
   document.querySelectorAll('.lang button').forEach(b => b.setAttribute('aria-pressed', b.dataset.lang === l));
   try { localStorage.setItem('lang', l); } catch (e) {}
 }
 document.querySelectorAll('.lang button').forEach(b => b.addEventListener('click', () => setLang(b.dataset.lang)));
 let saved = 'en'; try { saved = localStorage.getItem('lang') || 'en'; } catch (e) {}
-if (T[saved] && saved !== 'en') setLang(saved);
+setLang(T[saved] ? saved : 'en');
 
 /* ---- Partnership form ---- */
 const FORM_ENDPOINT = ''; // paste a Formspree / own backend URL to send silently; empty = opens the visitor's email app
 const MAIL_TO = 'Sharafutdinovauto@gmail.com';
 const form = document.getElementById('allocForm'), note = document.getElementById('allocNote');
-const tr = k => T[document.documentElement.lang][k];
+const tr = k => T[document.documentElement.lang][k] ?? T.en[k];
 form.addEventListener('submit', async e => {
   e.preventDefault();
   const d = Object.fromEntries(new FormData(form));
