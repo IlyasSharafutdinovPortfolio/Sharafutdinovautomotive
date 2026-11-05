@@ -126,7 +126,7 @@ body.menu-open .scrim { opacity: 1; visibility: visible; }
 .panel { position: relative; flex: 1; min-width: 0; display: flex; flex-direction: column; justify-content: flex-end; padding: 0 var(--pad) clamp(40px, 9vh, 90px); border-left: 1px solid var(--line); cursor: pointer; overflow: hidden; transition: flex .8s cubic-bezier(.77,0,.18,1); }
 .panel:first-child { border-left: 0; }
 .panel.on { flex: 3.4; }
-/* replace each background with a photo: .panel-bg { background-image: url(past.jpg) } */
+const IMG = { past1:'algebra.jpg', past2:'past2.jpg', pres1:'pres1.jpg' };
 .panel-bg { position: absolute; inset: 0; z-index: 0; opacity: .5; transition: opacity .8s, transform 1.2s; transform: scale(1.06); }
 .panel:nth-child(1) .panel-bg { background: radial-gradient(80% 60% at 30% 70%, rgba(185,164,255,.5), transparent), #0c0d10; }
 .panel:nth-child(2) .panel-bg { background: radial-gradient(80% 60% at 50% 70%, rgba(214,154,226,.5), transparent), #0c0d10; }
@@ -186,6 +186,15 @@ html.page-open { overflow: hidden; }
   background-size: cover; background-position: center;
   clip-path: polygon(0 0, calc(100% - var(--c)) 0, 100% var(--c), 100% 100%, var(--c) 100%, 0 calc(100% - var(--c))); }
 .media em { font-style: normal; font-size: .72rem; letter-spacing: .3em; text-transform: uppercase; color: rgba(255,255,255,.3); border: 1px dashed rgba(255,255,255,.22); padding: 18px 28px; }
+.media.has-img { background: none; clip-path: none; position: relative; isolation: isolate; overflow: visible; }
+/* glow: blurred copy of the photo spills its colours into the page background */
+.media.has-img::before { content: ""; position: absolute; inset: -22% -12%; z-index: -1; background: var(--img) center / cover no-repeat; filter: blur(70px) saturate(1.5); opacity: .6; }
+/* the photo itself, with all four edges feathered away */
+.media.has-img::after { content: ""; position: absolute; inset: 0; background: var(--img) center / cover no-repeat;
+  -webkit-mask-image: linear-gradient(to right, transparent, #000 16%, #000 84%, transparent), linear-gradient(to bottom, transparent, #000 18%, #000 82%, transparent);
+  -webkit-mask-composite: source-in;
+  mask-image: linear-gradient(to right, transparent, #000 16%, #000 84%, transparent), linear-gradient(to bottom, transparent, #000 18%, #000 82%, transparent);
+  mask-composite: intersect; }
 .txt { grid-area: p; align-self: end; max-width: 48ch; }
 .txt p { font-family: var(--display); font-weight: 300; font-size: clamp(.95rem, 1.2vw, 1.15rem); line-height: 1.45; color: var(--muted); }
 .txt blockquote { margin-top: 18px; padding-left: 16px; border-left: 2px solid var(--accent); border-image: var(--grad) 1; font-family: var(--display); font-weight: 500; font-size: clamp(1rem, 1.3vw, 1.25rem); line-height: 1.35; color: #fff; }
@@ -782,7 +791,7 @@ order.forEach(c => {
     <div class="steps">${CH[c].map((k, i) => `<article class="step${i ? '' : ' on'}">
       <h3 data-t="${k}_t"></h3>
       <div class="idx">0${i + 1}</div>
-      <div class="media"${IMG[k] ? ` style="background-image:url(${IMG[k]})"` : ''}>${IMG[k] ? '' : `<em>${k}</em>`}</div>
+      <div class="media${IMG[k] ? ' has-img' : ''}"${IMG[k] ? ` style="--img:url('${IMG[k]}')"` : ''}>${IMG[k] ? '' : `<em>${k}</em>`}</div>
       <div class="txt"><p data-i18n="${k}_p"></p>${T.en[k + '_q'] ? `<blockquote data-i18n="${k}_q"></blockquote>` : ''}</div></article>`).join('')}</div>
     <button class="arr prev" aria-label="Previous">${ARROW}</button>
     <button class="arr next" aria-label="Next">${ARROW}</button>
