@@ -1,4 +1,4 @@
- <!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
 <meta charset="utf-8">
@@ -170,6 +170,10 @@ html.page-open { overflow: hidden; }
   background: radial-gradient(130% 110% at 30% 70%, var(--pg) 30%, var(--pg2) 100%),
     radial-gradient(60% 50% at 82% 78%, rgba(240,143,200,.16), transparent 70%),
     radial-gradient(55% 45% at 12% 18%, rgba(185,164,255,.14), transparent 70%), var(--bg); }
+.page.chapter.light .tabs a, .page.chapter.light .tl button { color: rgba(255,255,255,.72); }
+.page.chapter.light .tabs a.on, .page.chapter.light .tabs a:hover, .page.chapter.light .tl button.on { color: #fff; }
+.page.chapter.light .ch > .tag, .page.chapter.light .txt p { color: rgba(255,255,255,.92); }
+.page.chapter.light .step h3, .page.chapter.light .txt, .page.chapter.light .ch > .tag { text-shadow: 0 1px 18px rgba(0,0,0,.28); }
 .page.chapter.open { transition: transform .7s cubic-bezier(.77,0,.18,1), visibility 0s, --pg 1s ease, --pg2 1s ease; }
 .ch { position: relative; min-height: 100%; display: flex; flex-direction: column; padding: 130px var(--pad) 150px; }
 .tabs { display: flex; gap: clamp(18px, 3vw, 44px); font-family: var(--display); font-stretch: 112%; font-weight: 600; font-size: .85rem; letter-spacing: .08em; text-transform: uppercase; }
@@ -809,13 +813,14 @@ order.forEach(c => {
 });
 
 /* ---- edge colour: sample the photo's border, use it as the chapter's page background ---- */
-const MAX_LIGHT = 0.30;   // how light the page background may get (0 = black, 1 = as bright as the photo's edge)
+const MAX_LIGHT = 1;   // 1 = page background is exactly the photo's edge colour; lower (e.g. 0.4) darkens it
 function applyBg(p) {
   const s = p.querySelector('.step.on');
+  p.classList.toggle('light', !!(s && s.dataset.light));
   if (s && s.dataset.pg) { p.style.setProperty('--pg', s.dataset.pg); p.style.setProperty('--pg2', s.dataset.pg2); }
   else { p.style.removeProperty('--pg'); p.style.removeProperty('--pg2'); }
 }
-function edgeColor(src, box, cb) {
+function edgeColor(src, box, cb) {   // cb(colour, darker colour, brightness 0..1)
   const im = new Image();
   im.onload = () => {
     try {
@@ -834,17 +839,17 @@ function edgeColor(src, box, cb) {
       }
       r /= n; g /= n; b /= n;
       const L = (0.2126 * r + 0.7152 * g + 0.0722 * b) / 255;
-      const k = L > MAX_LIGHT ? MAX_LIGHT / L : 1;            // keep the hue, darken so white text stays readable
+      const k = L > MAX_LIGHT ? MAX_LIGHT / L : 1;
       const c = f => 'rgb(' + (r * f | 0) + ',' + (g * f | 0) + ',' + (b * f | 0) + ')';
-      cb(c(k), c(k * 0.35));
+      cb(c(k), c(k * 0.6), L);
     } catch (e) {}
   };
   im.src = src;
 }
 document.querySelectorAll('.media.has-img').forEach(m => {
   const u = m.style.getPropertyValue('--img').match(/url\(['"]?(.*?)['"]?\)/);
-  if (u) edgeColor(u[1], m, (c1, c2) => {
-    const st = m.closest('.step'); st.dataset.pg = c1; st.dataset.pg2 = c2;
+  if (u) edgeColor(u[1], m, (c1, c2, L) => {
+    const st = m.closest('.step'); st.dataset.pg = c1; st.dataset.pg2 = c2; st.dataset.light = L > 0.3 ? '1' : '';
     applyBg(m.closest('.page'));
   });
 });
