@@ -250,6 +250,15 @@ html.page-open { overflow: hidden; }
 .req .cut { margin-left: 0; }
 .req #allocNote { font-size: .9rem; color: var(--accent-2); max-width: 34ch; }
 
+.page.legal { display: block; }
+.legal .wrap { max-width: 760px; }
+.legal .mega { font-size: clamp(2rem, 5vw, 4.5rem); margin-bottom: 34px; }
+.legal h3 { font-family: var(--display); font-stretch: 112%; font-weight: 600; font-size: 1.05rem; letter-spacing: .04em; text-transform: uppercase; margin: 34px 0 10px; }
+.legal p, .legal li { font-size: 1rem; line-height: 1.6; color: var(--muted); }
+.legal ul { padding-left: 1.2em; margin-top: 8px; }
+.legal a, .req .chk a, .cfoot a { text-decoration: underline; text-underline-offset: 4px; }
+.legal .upd { margin-top: 36px; font-size: .85rem; }
+
 /* ---------- CONTACT ---------- */
 .page.contact { display: block; padding: 0; background: #050507; }
 .contact-in { position: relative; min-height: 100%; display: flex; flex-direction: column; justify-content: space-between; gap: 40px; padding: 140px var(--pad) 28px; }
@@ -437,7 +446,7 @@ html.page-open { overflow: hidden; }
       </select>
     </label>
     <label><span data-i18n="f_msg">Message</span><textarea name="message" rows="3"></textarea></label>
-    <label class="chk"><input type="checkbox" name="consent" required><span data-i18n="f_consent">I agree to be contacted about this request.</span></label>
+    <label class="chk"><input type="checkbox" name="consent" required><span><span data-i18n="f_consent">I agree to be contacted about this request.</span> <a href="#privacy" data-i18n="privacy">Privacy Policy</a></span></label>
     <input class="hp" name="company" tabindex="-1" autocomplete="off" aria-hidden="true">
     <div class="act">
       <button class="cut" type="submit"><span data-i18n="f_send">Send request</span><svg viewBox="0 0 16 16" aria-hidden="true"><path d="M1 8h13M9 3l5 5-5 5"/></svg></button>
@@ -451,6 +460,48 @@ html.page-open { overflow: hidden; }
 <section class="page chapter" id="present"></section>
 <section class="page chapter" id="future"></section>
 
+<!-- PRIVACY POLICY -->
+<section class="page legal" id="privacy">
+  <div class="wrap">
+    <h2 class="mega"><span data-i18n="privacy">Privacy Policy</span></h2>
+
+    <h3>Who we are</h3>
+    <p>This website is operated by Sharafutdinov Automotive Inc., Brickell, Miami, FL, USA (“we”, “us”). You can reach us at <a href="mailto:Sharafutdinovauto@gmail.com">Sharafutdinovauto@gmail.com</a>.</p>
+
+    <h3>What we collect</h3>
+    <ul>
+      <li><b>Partnership form:</b> your name, email, phone (optional), country and city (optional), area of interest and any message you write.</li>
+      <li><b>Email you send us directly:</b> your email address and the content of your message.</li>
+      <li><b>Language setting:</b> your chosen language is saved in your browser (local storage) so the site remembers it. It is not sent to us.</li>
+      <li><b>Fonts:</b> the site loads fonts from Google Fonts, so Google receives your IP address when the page loads.</li>
+    </ul>
+    <p>We do not use advertising cookies or sell your data.</p>
+
+    <h3>Why we use it</h3>
+    <p>We use your details only to answer your request and to discuss a possible partnership or investment. If you are in the EU or UK, our legal basis is your consent (the checkbox on the form) and our legitimate interest in replying to inquiries.</p>
+
+    <h3>How the form sends your data</h3>
+    <p>Depending on how the site is configured, the form either opens your own email app with the message prepared, or sends it to us through a form-processing service. In both cases the message reaches our email inbox, which is hosted by our email provider.</p>
+
+    <h3>Sharing</h3>
+    <p>We share your data only with service providers that help us run the site and handle email, and when the law requires it. Some of these providers are located in the United States, so your data may be transferred outside your country.</p>
+
+    <h3>How long we keep it</h3>
+    <p>We keep inquiries for as long as needed to handle your request and any resulting relationship, and then delete them or keep only what the law requires.</p>
+
+    <h3>Your rights</h3>
+    <p>Depending on where you live, you may have the right to access, correct or delete your data, to withdraw your consent at any time, to object to or restrict processing, to receive a copy of your data, and to complain to your local data protection authority. California residents have similar rights to know and delete their data. To use any of these rights, email us at the address above.</p>
+
+    <h3>Children</h3>
+    <p>This site is not intended for people under 18, and we do not knowingly collect their data.</p>
+
+    <h3>Changes</h3>
+    <p>We may update this policy from time to time. The latest version is always on this page.</p>
+
+    <p class="upd">Last updated: November 4, 2026</p>
+  </div>
+</section>
+
 <!-- CONTACT -->
 <section class="page contact" id="contact">
   <div class="contact-in">
@@ -463,7 +514,7 @@ html.page-open { overflow: hidden; }
       <div><dt data-i18n="c_mail">Email</dt><dd><a href="mailto:Sharafutdinovauto@gmail.com">Sharafutdinovauto@gmail.com</a></dd></div>
       <div><dt data-i18n="c_phone">Phone</dt><dd><!-- YOUR PHONE -->+1 (000) 000-0000</dd></div>
     </dl>
-    <div class="cfoot"><span data-i18n="rights">© 2026 Sharafutdinov Automotive Inc. All rights reserved.</span><span>Miami, FL</span></div>
+    <div class="cfoot"><span data-i18n="rights">© 2026 Sharafutdinov Automotive Inc. All rights reserved.</span><span><a href="#privacy" data-i18n="privacy">Privacy Policy</a> · Miami, FL</span></div>
   </div>
 </section>
 
@@ -627,7 +678,7 @@ const T = {
     f_ok:'Thank you. Your request has been sent and we will reply personally.',
     f_mail:'Your email app has opened with your request. Press send to finish.',
     f_err:'Something went wrong. Please try again or write to us directly.',
-    c_addr:'Address', c_mail:'Email', c_phone:'Phone', o_partner:'Partnership', o_invest:'Investment', o_other:'Other' },
+    c_addr:'Address', c_mail:'Email', c_phone:'Phone', o_partner:'Partnership', o_invest:'Investment', o_other:'Other', privacy:'Privacy Policy' },
   de: { nav_home:'Start', nav_heritage:'Geschichte', nav_premiere:'Weltpremiere', nav_contact:'Kontakt', nav_hyper:'Hypercars',
     h1a:'Wir bewahren', h1b:'reine Mechanik', discover:'Entdecken',
     past:'Vergangenheit', past_t:'Jede große Maschine beginnt als Idee auf Papier.',
@@ -644,7 +695,7 @@ const T = {
     f_ok:'Vielen Dank. Ihre Anfrage wurde gesendet, wir antworten persönlich.',
     f_mail:'Ihre E-Mail-App wurde mit Ihrer Anfrage geöffnet. Zum Abschluss auf Senden drücken.',
     f_err:'Etwas ist schiefgelaufen. Bitte versuchen Sie es erneut oder schreiben Sie uns direkt.',
-    c_addr:'Adresse', c_mail:'E-Mail', c_phone:'Telefon', o_partner:'Partnerschaft', o_invest:'Investition', o_other:'Sonstiges' },
+    c_addr:'Adresse', c_mail:'E-Mail', c_phone:'Telefon', o_partner:'Partnerschaft', o_invest:'Investition', o_other:'Sonstiges', privacy:'Datenschutz' },
   it: { nav_home:'Home', nav_heritage:'Storia', nav_premiere:'Prima mondiale', nav_contact:'Contatti', nav_hyper:'Hypercar',
     h1a:'Custodiamo', h1b:'la meccanica pura', discover:'Scopri',
     past:'Passato', past_t:'Ogni grande macchina nasce come idea su carta.',
@@ -661,7 +712,7 @@ const T = {
     f_ok:'Grazie. La tua richiesta è stata inviata e risponderemo personalmente.',
     f_mail:'La tua app di posta si è aperta con la richiesta. Premi invio per completare.',
     f_err:'Qualcosa è andato storto. Riprova o scrivici direttamente.',
-    c_addr:'Indirizzo', c_mail:'Email', c_phone:'Telefono', o_partner:'Partnership', o_invest:'Investimento', o_other:'Altro' }
+    c_addr:'Indirizzo', c_mail:'Email', c_phone:'Telefono', o_partner:'Partnership', o_invest:'Investimento', o_other:'Altro', privacy:'Informativa sulla privacy' }
 };
 
 /* ---- Heritage chapters (English texts; DE/IT fall back to English until translated) ----
@@ -670,7 +721,7 @@ Object.assign(T.en, {
   /* PAST: Chapter I — The Triad of Inherited Discipline */
   past_tag:'Chapter I · The Triad of Inherited Discipline',
   past1_l:'Mathematics', past1_t:'The Mathematical|Inheritance',
-  past1_p:'The foundation of the Sharafutdinov brand was not born in a corporate marketing suite. It was forged through three generations of physical discipline, scientific rigor and mechanical practice. From Ilyas’s grandfather, the brand inherited a fundamental principle: the universe is not chaotic. It is structured by immutable mathematical equations waiting to be uncovered.',
+  past1_p:'The foundation of the Sharafutdinov brand was not born in a corporate marketing suite. It was forged through three generations of physical discipline, scientific rigor and mechanical practice. From the Ilyas’s grandfather, the brand inherited a fundamental principle: the universe is not chaotic. It is structured by immutable mathematical equations waiting to be uncovered.',
   past1_q:'Engineering is not the arbitrary creation of shape, but the deliberate alignment of physical matter with the laws of nature.',
   past2_l:'Fluid dynamics', past2_t:'The Lessons|of Water',
   past2_p:'Growing up within a family-owned bottled water enterprise provided an early, intuitive mastery of liquid behavior, laminar movement and structural purity. Water taught a timeless engineering truth.',
