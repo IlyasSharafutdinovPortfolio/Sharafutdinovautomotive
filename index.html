@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+ <!DOCTYPE html>
 <html lang="en">
 <head>
 <meta charset="utf-8">
@@ -163,6 +163,14 @@ html.page-open { overflow: hidden; }
 
 /* ---------- HERITAGE chapters: timeline (Pagani) + big type (Koenigsegg) ---------- */
 .page.chapter { display: block; padding: 0; }
+/* page background = colour of the photo's edges (JS sets --pg and --pg2 on the chapter) */
+@property --pg  { syntax: '<color>'; inherits: true; initial-value: transparent; }
+@property --pg2 { syntax: '<color>'; inherits: true; initial-value: transparent; }
+.page.chapter { transition: transform .7s cubic-bezier(.77,0,.18,1), visibility 0s .7s, --pg 1s ease, --pg2 1s ease;
+  background: radial-gradient(130% 110% at 30% 70%, var(--pg) 30%, var(--pg2) 100%),
+    radial-gradient(60% 50% at 82% 78%, rgba(240,143,200,.16), transparent 70%),
+    radial-gradient(55% 45% at 12% 18%, rgba(185,164,255,.14), transparent 70%), var(--bg); }
+.page.chapter.open { transition: transform .7s cubic-bezier(.77,0,.18,1), visibility 0s, --pg 1s ease, --pg2 1s ease; }
 .ch { position: relative; min-height: 100%; display: flex; flex-direction: column; padding: 130px var(--pad) 150px; }
 .tabs { display: flex; gap: clamp(18px, 3vw, 44px); font-family: var(--display); font-stretch: 112%; font-weight: 600; font-size: .85rem; letter-spacing: .08em; text-transform: uppercase; }
 .tabs a { display: inline-flex; align-items: center; gap: 10px; color: rgba(255,255,255,.4); transition: color .25s; }
@@ -187,9 +195,6 @@ html.page-open { overflow: hidden; }
   clip-path: polygon(0 0, calc(100% - var(--c)) 0, 100% var(--c), 100% 100%, var(--c) 100%, 0 calc(100% - var(--c))); }
 .media em { font-style: normal; font-size: .72rem; letter-spacing: .3em; text-transform: uppercase; color: rgba(255,255,255,.3); border: 1px dashed rgba(255,255,255,.22); padding: 18px 28px; }
 .media.has-img { background: none; clip-path: none; position: relative; isolation: isolate; overflow: visible; }
-/* background colour = average colour of the photo's edges (set by JS as --edge) */
-.media.has-img::before { content: ""; position: absolute; inset: -30% -18%; z-index: -1;
-  background: radial-gradient(closest-side, var(--edge, transparent) 70%, transparent 100%); }
 /* the photo itself, with all four edges feathered away */
 .media.has-img::after { content: ""; position: absolute; inset: 0; background: var(--img) center / cover no-repeat;
   -webkit-mask-image: linear-gradient(to right, transparent, #000 16%, #000 84%, transparent), linear-gradient(to bottom, transparent, #000 18%, #000 82%, transparent);
@@ -803,7 +808,13 @@ order.forEach(c => {
   document.querySelector(`#${c} .next`).addEventListener('click', () => go(1));
 });
 
-/* ---- edge colour: sample the photo's border and use it as the background colour ---- */
+/* ---- edge colour: sample the photo's border, use it as the chapter's page background ---- */
+const MAX_LIGHT = 0.30;   // how light the page background may get (0 = black, 1 = as bright as the photo's edge)
+function applyBg(p) {
+  const s = p.querySelector('.step.on');
+  if (s && s.dataset.pg) { p.style.setProperty('--pg', s.dataset.pg); p.style.setProperty('--pg2', s.dataset.pg2); }
+  else { p.style.removeProperty('--pg'); p.style.removeProperty('--pg2'); }
+}
 function edgeColor(src, box, cb) {
   const im = new Image();
   im.onload = () => {
@@ -821,14 +832,21 @@ function edgeColor(src, box, cb) {
         if (x > 1 && x < w - 2 && y > 1 && y < h - 2) continue;   // border ring only
         const i = (y * w + x) * 4; r += d[i]; g += d[i + 1]; b += d[i + 2]; n++;
       }
-      cb('rgb(' + (r / n | 0) + ',' + (g / n | 0) + ',' + (b / n | 0) + ')');
+      r /= n; g /= n; b /= n;
+      const L = (0.2126 * r + 0.7152 * g + 0.0722 * b) / 255;
+      const k = L > MAX_LIGHT ? MAX_LIGHT / L : 1;            // keep the hue, darken so white text stays readable
+      const c = f => 'rgb(' + (r * f | 0) + ',' + (g * f | 0) + ',' + (b * f | 0) + ')';
+      cb(c(k), c(k * 0.35));
     } catch (e) {}
   };
   im.src = src;
 }
 document.querySelectorAll('.media.has-img').forEach(m => {
   const u = m.style.getPropertyValue('--img').match(/url\(['"]?(.*?)['"]?\)/);
-  if (u) edgeColor(u[1], m, c => m.style.setProperty('--edge', c));
+  if (u) edgeColor(u[1], m, (c1, c2) => {
+    const st = m.closest('.step'); st.dataset.pg = c1; st.dataset.pg2 = c2;
+    applyBg(m.closest('.page'));
+  });
 });
 
 const cur = () => order.find(k => location.hash === '#' + k);
@@ -837,6 +855,7 @@ function show(c, i) {
   const p = document.getElementById(c);
   p.querySelectorAll('.step').forEach((s, k) => s.classList.toggle('on', k === i));
   p.querySelectorAll('.tl button').forEach((b, k) => b.classList.toggle('on', k === i));
+  applyBg(p);
 }
 function go(d) {
   const c = cur(); if (!c) return;
