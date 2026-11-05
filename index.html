@@ -196,10 +196,10 @@ html.page-open { overflow: hidden; }
   -webkit-mask-composite: source-in;
   mask-image: linear-gradient(to right, transparent, #000 16%, #000 84%, transparent), linear-gradient(to bottom, transparent, #000 18%, #000 82%, transparent);
   mask-composite: intersect; }
-.txt { grid-area: p; align-self: end; max-width: 48ch; }
-.txt p { font-family: var(--display); font-weight: 300; font-size: clamp(.95rem, 1.2vw, 1.15rem); line-height: 1.45; color: var(--muted); }
-.txt blockquote { margin-top: 18px; padding-left: 16px; border-left: 2px solid var(--accent); border-image: var(--grad) 1; font-family: var(--display); font-weight: 500; font-size: clamp(1rem, 1.3vw, 1.25rem); line-height: 1.35; color: #fff; }
-
+.txt { grid-area: p; align-self: end; max-width: 54ch; }
+.txt p { font-family: var(--display); font-weight: 300; font-size: clamp(1.05rem, 1.55vw, 1.6rem); line-height: 1.5; color: rgba(255,255,255,.8); }
+.txt blockquote { margin-top: 22px; padding-left: 18px; border-left: 2px solid var(--accent); border-image: var(--grad) 1; font-family: var(--display); font-weight: 500; font-size: clamp(1.2rem, 1.9vw, 1.9rem); line-height: 1.35; color: #fff; }
+  
 .tl { position: absolute; left: var(--pad); right: var(--pad); bottom: 48px; display: flex; justify-content: space-between; gap: 16px; border-top: 1px solid var(--line); overflow-x: auto; }
 .tl button { position: relative; padding: 22px 0 0; white-space: nowrap; font-size: .8rem; color: rgba(255,255,255,.45); text-align: left; transition: color .3s; }
 .tl button::before { content: ""; position: absolute; top: 0; left: 0; width: 1px; height: 10px; background: var(--line); transition: height .4s, background .3s; }
