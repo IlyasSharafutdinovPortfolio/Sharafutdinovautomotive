@@ -308,6 +308,7 @@ html.page-open { overflow: hidden; }
 @media (prefers-reduced-motion: reduce) {
   *, *::before, *::after { animation: none !important; transition-duration: .01ms !important; transition-delay: 0s !important; }
 }
+  
 </style>
 </head>
 <body>
@@ -527,7 +528,196 @@ html.page-open { overflow: hidden; }
     <div class="cfoot"><span data-i18n="rights">© 2026 Sharafutdinov Automotive Inc. All rights reserved.</span><span><a href="#privacy" data-i18n="privacy">Privacy Policy</a> · Miami, FL</span></div>
   </div>
 </section>
+/* extra.js — подключить в index.html одной строкой перед </body>, ПОСЛЕ основного <script>:
+   <script src="extra.js"></script> */
+(() => {
+const MAIL = 'info@sharafutdinov.com', OLD = 'Sharafutdinovauto@gmail.com';
 
+/* ---------- CSS ---------- */
+const st = document.createElement('style');
+st.textContent = `
+/* 2028 больше не обрезается: фон-градиент раньше заканчивался на краю блока */
+.year{display:inline-block;align-self:flex-start;font-size:clamp(5rem,21vw,22rem);padding-right:.08em}
+.premiere .tag{position:static;max-width:none;margin-bottom:3vh}
+/* Hypercars: медленнее и плавнее */
+.car{transition:filter 1.4s cubic-bezier(.4,0,.2,1),transform 1.5s cubic-bezier(.22,1,.36,1)}
+.car u{transition:width 1.5s cubic-bezier(.65,0,.35,1),height .9s,background .9s}
+.car img{transition:transform 2.2s cubic-bezier(.22,1,.36,1)}
+.car.on img{transform:scale(1.06)}
+.rail button{transition:width 1.3s cubic-bezier(.65,0,.35,1),color .9s,border-color .9s}
+.rail span{transition:opacity 1s .25s}
+/* контакты: 2 колонки */
+.cdata{grid-template-columns:repeat(2,minmax(0,1fr))}
+@media(max-width:768px){.cdata{grid-template-columns:1fr}}
+/* cookies */
+.cookie{position:fixed;left:var(--pad);right:var(--pad);bottom:calc(20px + env(safe-area-inset-bottom,0px));z-index:70;display:flex;align-items:center;justify-content:space-between;gap:18px 28px;flex-wrap:wrap;padding:18px 24px;background:rgba(10,11,14,.9);-webkit-backdrop-filter:blur(14px);backdrop-filter:blur(14px);border:1px solid var(--line);font-size:.88rem;line-height:1.5;color:var(--muted);animation:ckIn .9s cubic-bezier(.16,1,.3,1)}
+.cookie[hidden],body.menu-open .cookie{display:none}
+.cookie p{max-width:72ch}
+.cookie a,.cfoot button{color:#fff;text-decoration:underline;text-underline-offset:4px}
+.cfoot button{color:inherit}
+.cookie div{display:flex;gap:12px}
+.cookie .cut{padding:11px 22px}
+@keyframes ckIn{from{opacity:0;transform:translateY(24px)}}`;
+document.head.appendChild(st);
+
+/* ---------- Переводы ---------- */
+Object.assign(T.en, {
+  cookie_t:'We use only essential storage (your language choice) and Google Fonts. No advertising or tracking cookies.',
+  cookie_ok:'Accept', cookie_no:'Decline', cookie_set:'Cookie settings',
+  o_loi:'Letter of Intent (LOI)', o_queue:'Reserve a place in the purchase queue', o_press:'Press and media',
+  allocation_t:'We welcome partners, investors and future owners who share our passion for engineering. Tell us about yourself and we will reply personally.'
+});
+T.en.past1_p = T.en.past1_p.replace('From the Ilyas’s', 'From Ilyas’s');
+Object.assign(T.de, {
+  cookie_t:'Wir verwenden nur notwendige Speicherung (Ihre Sprachauswahl) und Google Fonts. Keine Werbe- oder Tracking-Cookies.',
+  cookie_ok:'Akzeptieren', cookie_no:'Ablehnen', cookie_set:'Cookie-Einstellungen',
+  o_loi:'Absichtserklärung (LOI)', o_queue:'Platz auf der Kaufliste reservieren', o_press:'Presse und Medien',
+  allocation_t:'Wir freuen uns über Partner, Investoren und künftige Besitzer, die unsere Leidenschaft für Ingenieurskunst teilen. Erzählen Sie uns von sich, wir antworten persönlich.',
+  past_tag:'Kapitel I · Die Triade ererbter Disziplin',
+  past1_l:'Mathematik', past1_t:'Das mathematische|Erbe',
+  past1_p:'Das Fundament der Marke Sharafutdinov entstand nicht in einer Marketingabteilung. Es wurde über drei Generationen aus körperlicher Disziplin, wissenschaftlicher Strenge und mechanischer Praxis geschmiedet. Von Ilyas’ Großvater erbte die Marke ein grundlegendes Prinzip: Das Universum ist nicht chaotisch. Es wird von unveränderlichen mathematischen Gleichungen geordnet, die darauf warten, entdeckt zu werden.',
+  past1_q:'Ingenieurkunst ist nicht die willkürliche Erschaffung von Form, sondern die bewusste Ausrichtung physischer Materie an den Gesetzen der Natur.',
+  past2_l:'Strömungslehre', past2_t:'Die Lehren|des Wassers',
+  past2_p:'Das Aufwachsen in einem Familienunternehmen für abgefülltes Wasser vermittelte früh ein intuitives Gespür für das Verhalten von Flüssigkeiten, laminare Strömung und strukturelle Reinheit. Das Wasser lehrte eine zeitlose Wahrheit der Ingenieurkunst.',
+  past2_q:'Jede Störung der Strömung erzeugt unerwünschte Turbulenzen und Energieverlust.',
+  past3_l:'Luftfahrt', past3_t:'Fliegerinstinkt|& analoge Philosophie',
+  past3_p:'Eine Kindheit an der Seite eines Pilotenvaters prägte einen zweiten Schlüsselinstinkt: wie sich Luft unter extremem Druck und hoher Geschwindigkeit verhält. Die vollständige Automatisierung der modernen Luftfahrt, in der komplexe Systeme das menschliche Gefühl ersetzen, führte zu einer festen Überzeugung.',
+  past3_q:'Fahrzeuge von Sharafutdinov werden keine Softwareplattformen auf Rädern sein. Sie sind analoge Instrumente für ein Höchstmaß an Rückmeldung zwischen Mensch und Maschine.',
+  past4_l:'Werkstatt', past4_t:'Dreißig Jahre|in der Werkstatt',
+  past4_p:'Ergänzt wird dieses theoretische und aerodynamische Fundament durch dreißig Jahre Geschichte einer familiären Autowerkstatt. Jahrzehnte im Inneren von Verbrennungsmotoren, Materialermüdung und Kraftübertragung stellen sicher, dass jedes ästhetische Konzept der Marke in absoluter mechanischer Machbarkeit verankert ist.',
+  present_tag:'Kapitel II & III · Architektur und Identität',
+  pres1_l:'Die Frage', pres1_t:'Die Frage|der Proportion',
+  pres1_p:'Der Weg zur Plattform Aretē begann nicht mit schrittweisen Verbesserungen bestehender Sportwagen, sondern mit einer grundlegenden Frage.',
+  pres1_q:'Warum haben moderne Hypercars ihre Proportionen aus Angst vor dem Luftwiderstand verwässert?',
+  pres2_l:'5,55 m', pres2_t:'Ein monumentaler|Anfang',
+  pres2_p:'Die ersten Designstudien sprengten die Grenzen automobiler Dimensionen, ausgehend von einem monumentalen Profil von 5,55 Metern Länge und 2,22 Metern Breite. Bestimmte Luftkanäle und Kanzelsilhouetten entstanden in Träumen: unbewusste Eindrücke von Strömung um eine zentrale Tropfenform. Doch in der Methodik von Sharafutdinov wird Romantik stets kalter numerischer Physik unterworfen.',
+  pres2_q:'5,55 m × 2,22 m',
+  pres3_l:'CFD', pres3_t:'Geformt|durch Berechnung',
+  pres3_p:'In unzähligen Iterationen der numerischen Strömungssimulation (CFD) wurde das Konzept konsequent optimiert. Jeder überschüssige Millimeter der Frontfläche wurde entfernt, bis das Paket auf eine chirurgische Stirnfläche von 1,80 m² verdichtet war. Das Ergebnis ist die charakteristische Tropfenkanzel: eine 135 cm breite Windschutzscheibe an der Basis, die sich stark verjüngt, um den turbulenten Nachlauf der oberen Hemisphäre zu minimieren. Sie sorgt für Stabilität bei 500 km/h, ohne widerstandserzeugende aktive Flügel oder aufwendige Elektronik.',
+  pres3_q:'1,80 m² Stirnfläche · 135 cm Windschutzscheibe',
+  pres4_l:'Tatarstan', pres4_t:'Die eurasische|Brücke',
+  pres4_p:'Die Identität von Sharafutdinov nimmt eine einzigartige Stellung im globalen Hyper-Engineering ein. Verwurzelt in Tatarstan, historisch als eurasisches Zentrum islamischer Kultur und akademischer Wissenschaft anerkannt, dient die Marke als strategische kulturelle Brücke.',
+  pres5_l:'Der Name', pres5_t:'Ein Name|mit Bedeutung',
+  pres5_p:'Der Name Sharafutdinov steht für eine Synthese traditioneller Werte: Ehre, strukturelle Integrität und Zielstrebigkeit (teleologischer Optimismus). Er verbindet das strenge mathematische Erbe Eurasiens mit den exklusiven Hyper-Luxus-Ansprüchen der Märkte des Golf-Kooperationsrats (GCC).',
+  pres6_l:'Authentizität', pres6_t:'Ein Familienname|als Garantie',
+  pres6_p:'Für Sammler in Dubai, Riad und Doha ist Sharafutdinov keine künstliche Marke von Investmentfonds. Es ist ein authentisches Ingenieurerbe: eine Marke, bei der der Familienname des Gründers als persönliche Garantie für physische Exzellenz in das Monocoque geprägt ist.',
+  future_tag:'Kapitel IV · Das Aretē-Manifest',
+  fut1_l:'Aretē', fut1_t:'Das Aretē-|Manifest',
+  fut1_p:'Abgeleitet vom altgriechischen Begriff Aretē, dem Erreichen des höchsten Potenzials und moralischer Vortrefflichkeit, ist das Endziel der Plattform ein physisches Artefakt, das der modernen Hybridkomplexität trotzt. Während die Branche auf schwere Batteriepakete, künstlichen Klang und digitale Begrenzer setzt, kehrt Sharafutdinov zu absoluter mechanischer Reinheit zurück.',
+  fut2_l:'Masse', fut2_t:'Architektur der|Massenoptimierung',
+  fut2_p:'Absolute strukturelle Effizienz und Kohlefaser-Verbundbauweise für klassenbeste Leistungsgewichte, ohne Abstriche bei mechanischer Zuverlässigkeit und Motorhaltbarkeit.',
+  fut3_l:'Antrieb', fut3_t:'Souveränität|des Antriebs',
+  fut3_p:'Fortgeschrittene Forschung und Entwicklung an einem hochdrehenden Verbrennungsmotor, der mit CO₂-neutralem E85-Biokraftstoff läuft, abgestimmt auf Klang, Ansprechverhalten und langfristige Haltbarkeit.',
+  fut4_l:'Aerodynamik', fut4_t:'Aerodynamische|Reinheit',
+  fut4_p:'Passive Aerodynamik ohne DRS: Venturi-Tunnel und strukturelle Seitenkanäle erzeugen Abtrieb durch reine Geometrie statt durch schwere Hydraulik.',
+  fut5_l:'100 Chassis', fut5_t:'100 nummerierte|Chassis',
+  fut5_p:'Eine streng begrenzte Produktion von 100 nummerierten Chassis, nicht als Wegwerf-Supersportwagen konzipiert, sondern als mathematische Erbstücke für die anspruchsvollsten Sammler der Welt.'
+});
+Object.assign(T.it, {
+  cookie_t:'Utilizziamo solo l’archiviazione essenziale (la tua scelta della lingua) e Google Fonts. Nessun cookie pubblicitario o di tracciamento.',
+  cookie_ok:'Accetta', cookie_no:'Rifiuta', cookie_set:'Impostazioni cookie',
+  o_loi:'Lettera di intenti (LOI)', o_queue:'Prenota un posto nella lista d’attesa per l’acquisto', o_press:'Stampa e media',
+  allocation_t:'Accogliamo partner, investitori e futuri proprietari che condividono la nostra passione per l’ingegneria. Raccontaci di te e risponderemo personalmente.',
+  past_tag:'Capitolo I · La triade della disciplina ereditata',
+  past1_l:'Matematica', past1_t:'L’eredità|matematica',
+  past1_p:'Le fondamenta del marchio Sharafutdinov non sono nate in un ufficio marketing. Sono state forgiate in tre generazioni di disciplina fisica, rigore scientifico e pratica meccanica. Dal nonno di Ilyas il marchio ha ereditato un principio fondamentale: l’universo non è caotico. È strutturato da equazioni matematiche immutabili che aspettano di essere scoperte.',
+  past1_q:'L’ingegneria non è la creazione arbitraria di una forma, ma l’allineamento deliberato della materia fisica alle leggi della natura.',
+  past2_l:'Fluidodinamica', past2_t:'Le lezioni|dell’acqua',
+  past2_p:'Crescere in un’azienda di famiglia che imbottiglia acqua ha dato fin da subito una padronanza intuitiva del comportamento dei liquidi, del moto laminare e della purezza strutturale. L’acqua ha insegnato una verità senza tempo dell’ingegneria.',
+  past2_q:'Ogni disturbo del flusso crea turbolenza indesiderata e perdita di energia.',
+  past3_l:'Aviazione', past3_t:'Istinto aeronautico|e filosofia analogica',
+  past3_p:'Un’infanzia accanto a un padre pilota ha instillato un secondo istinto chiave: come si comporta l’aria sotto pressione e velocità estreme. Osservare la totale automazione dell’aviazione moderna, dove sistemi complessi sostituiscono la sensibilità umana, ha portato a una convinzione di fondo.',
+  past3_q:'I veicoli Sharafutdinov non saranno piattaforme software su ruote. Sono strumenti analogici progettati per il massimo feedback tra uomo e macchina.',
+  past4_l:'Officina', past4_t:'Trent’anni|in officina',
+  past4_p:'A completare queste basi teoriche e aerodinamiche ci sono trent’anni di storia di un’officina automobilistica di famiglia. Decenni trascorsi nella meccanica dei motori a combustione interna, nella fatica strutturale e nella trasmissione della potenza garantiscono che ogni concetto estetico del marchio sia ancorato a una fattibilità meccanica assoluta.',
+  present_tag:'Capitoli II e III · Architettura e identità',
+  pres1_l:'La domanda', pres1_t:'La domanda|sulle proporzioni',
+  pres1_p:'Il percorso verso la piattaforma Aretē non è iniziato con miglioramenti incrementali delle sportive esistenti, ma con una domanda fondamentale.',
+  pres1_q:'Perché le hypercar moderne hanno compromesso le proprie proporzioni per paura della resistenza aerodinamica?',
+  pres2_l:'5,55 m', pres2_t:'Un inizio|monumentale',
+  pres2_p:'I primi studi di design hanno spinto al limite la scala automobilistica, partendo da un profilo monumentale lungo 5,55 metri e largo 2,22 metri. Alcuni canali d’aria e sagome della cupola sono nati nei sogni: lampi subconsci di flusso attorno a una struttura centrale a goccia. Ma nella metodologia Sharafutdinov il romanticismo è sempre sottoposto alla fredda fisica computazionale.',
+  pres2_q:'5,55 m × 2,22 m',
+  pres3_l:'CFD', pres3_t:'Plasmata|dal calcolo',
+  pres3_p:'Attraverso instancabili iterazioni di fluidodinamica computazionale (CFD), il concept è stato ottimizzato con decisione. Ogni millimetro superfluo di superficie frontale è stato eliminato, riducendo il pacchetto a un’area frontale chirurgica di 1,80 m². Il risultato è la caratteristica cupola a goccia: un parabrezza di 135 cm alla base che si restringe in modo deciso per minimizzare la scia turbolenta dell’emisfero superiore. Garantisce stabilità a 500 km/h senza ali attive che generano resistenza né pesanti assistenze elettroniche.',
+  pres3_q:'1,80 m² di area frontale · parabrezza da 135 cm',
+  pres4_l:'Tatarstan', pres4_t:'Il ponte|eurasiatico',
+  pres4_p:'L’identità Sharafutdinov occupa una posizione unica nell’iper-ingegneria globale. Radicato in Tatarstan, storicamente riconosciuto come centro eurasiatico della cultura islamica e della scienza accademica, il marchio funge da ponte culturale strategico.',
+  pres5_l:'Il nome', pres5_t:'Un nome|con un significato',
+  pres5_p:'Il nome Sharafutdinov rappresenta una sintesi di valori tradizionali: onore, integrità strutturale e scopo (ottimismo teleologico). Collega il rigoroso patrimonio matematico dell’Eurasia con le esigenze di iper-lusso esclusivo dei mercati del Consiglio di cooperazione del Golfo (GCC).',
+  pres6_l:'Autenticità', pres6_t:'Un cognome|come garanzia',
+  pres6_p:'Per i collezionisti di Dubai, Riyadh e Doha, Sharafutdinov non è un marchio aziendale artificiale creato da fondi di investimento. È un’autentica eredità ingegneristica: un marchio in cui il cognome del fondatore è impresso sulla monoscocca come garanzia personale di eccellenza fisica.',
+  future_tag:'Capitolo IV · Il manifesto Aretē',
+  fut1_l:'Aretē', fut1_t:'Il manifesto|Aretē',
+  fut1_p:'Derivato dall’antico concetto greco di Aretē, il raggiungimento del massimo potenziale e dell’eccellenza morale, l’obiettivo finale della piattaforma è un manufatto fisico che sfida la complessità ibrida moderna. Mentre il settore si orienta verso pesanti pacchi batterie, suoni sintetici artificiali e limitatori digitali, Sharafutdinov torna alla purezza meccanica assoluta.',
+  fut2_l:'Massa', fut2_t:'Architettura di|ottimizzazione della massa',
+  fut2_p:'Efficienza strutturale assoluta e integrazione di compositi in carbonio per rapporti peso-potenza al vertice della categoria, senza sacrificare l’affidabilità meccanica e la durata del motore.',
+  fut3_l:'Propulsore', fut3_t:'Sovranità|del propulsore',
+  fut3_p:'Ricerca e sviluppo avanzati su un motore a combustione interna ad alti regimi alimentato con biocarburante E85 a neutralità carbonica, calibrato per suono, risposta e durata nel tempo.',
+  fut4_l:'Aerodinamica', fut4_t:'Purezza|aerodinamica',
+  fut4_p:'Aerodinamica passiva senza DRS: tunnel Venturi e canali laterali strutturali generano deportanza con pura geometria anziché con pesante idraulica.',
+  fut5_l:'100 telai', fut5_t:'100 telai|numerati',
+  fut5_p:'Una produzione rigorosamente limitata a 100 telai numerati, concepiti non come supercar usa e getta, ma come cimeli matematici per i collezionisti più esigenti al mondo.'
+});
+
+/* ---------- Контакты: без телефона, новая почта ---------- */
+const cd = document.querySelector('.cdata');
+cd.lastElementChild.remove();
+document.querySelectorAll('a[href^="mailto:"]').forEach(a => {
+  if (a.textContent.trim() === OLD) { a.href = 'mailto:' + MAIL; a.textContent = MAIL; }
+});
+
+/* ---------- Форма: новые пункты + отправка на новую почту ---------- */
+document.querySelector('#allocForm select').innerHTML = [
+  ['Partnership', 'o_partner'], ['Investment', 'o_invest'], ['Letter of Intent (LOI)', 'o_loi'],
+  ['Reserve a place in the purchase queue', 'o_queue'], ['Press and media', 'o_press'], ['Other', 'o_other']
+].map(([v, k]) => `<option value="${v}" data-i18n="${k}"></option>`).join('');
+document.addEventListener('submit', e => {
+  if (e.target !== form || FORM_ENDPOINT) return;
+  e.stopImmediatePropagation(); e.preventDefault();
+  const d = Object.fromEntries(new FormData(form)); if (d.company) return;
+  const text = ['Name: ' + d.name, 'Email: ' + d.email, 'Phone: ' + (d.phone || '-'), 'Country and city: ' + (d.country || '-'), 'Interested in: ' + d.interest, '', d.message || ''].join('\n');
+  location.href = 'mailto:' + MAIL + '?subject=' + encodeURIComponent('Sharafutdinov inquiry: ' + d.interest) + '&body=' + encodeURIComponent(text);
+  note.textContent = tr('f_mail');
+}, true);
+
+/* ---------- Privacy: раздел про cookies ---------- */
+const why = [...document.querySelectorAll('#privacy h3')].find(h => h.textContent === 'Why we use it');
+why.insertAdjacentHTML('beforebegin', '<h3>Cookies and local storage</h3><p>We do not use advertising, analytics or tracking cookies. Your browser’s local storage holds only your language choice and your answer to the cookie notice. You can change that answer at any time via “Cookie settings” in the footer of the Contact page.</p>');
+document.querySelector('#privacy .upd').textContent = 'Last updated: November 21, 2026';
+
+/* ---------- Cookie-баннер ---------- */
+document.body.insertAdjacentHTML('beforeend', '<div class="cookie" id="cookie" role="dialog" aria-label="Cookies" hidden><p><span data-i18n="cookie_t"></span> <a href="#privacy" data-i18n="privacy"></a></p><div><button class="cut" type="button" id="ckNo"><span data-i18n="cookie_no"></span></button><button class="cut" type="button" id="ckOk"><span data-i18n="cookie_ok"></span></button></div></div>');
+document.querySelector('.cfoot span:last-child a').insertAdjacentHTML('afterend', ' · <button type="button" id="ckSet" data-i18n="cookie_set"></button>');
+const ck = document.getElementById('cookie'), KEY = 'cookie-consent';
+const read = () => { try { return localStorage.getItem(KEY); } catch (e) { return null; } };
+const choose = v => {
+  try { localStorage.setItem(KEY, v); } catch (e) {}
+  ck.hidden = true; window.cookieConsent = v;   // 'all' | 'essential' — сюда можно привязать аналитику
+  dispatchEvent(new CustomEvent('consentchange', { detail: v }));
+};
+window.cookieConsent = read();
+if (!read()) setTimeout(() => { ck.hidden = false; }, 700);
+document.getElementById('ckOk').onclick = () => choose('all');
+document.getElementById('ckNo').onclick = () => choose('essential');
+document.getElementById('ckSet').onclick = () => { ck.hidden = false; };
+
+/* ---------- Heritage: картинки подхватываются сами ---------- */
+order.forEach(c => CH[c].forEach((k, i) => {
+  if (IMG[k]) return;
+  ['jpg', 'webp'].forEach(x => {
+    const im = new Image();
+    im.onload = () => {
+      const m = document.querySelectorAll('#' + c + ' .step')[i].querySelector('.media');
+      m.classList.add('has-img'); m.style.setProperty('--img', `url('${k}.${x}')`); m.innerHTML = '';
+    };
+    im.src = k + '.' + x;
+  });
+}));
+document.querySelector('.hero-media img').alt = 'Sharafutdinov Aretē';
+
+setLang(document.documentElement.lang);
+})();
+  
 <script>
 /* ---- menu ---- */
 const body = document.body, btn = document.getElementById('menuBtn');
